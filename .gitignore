@@ -1,0 +1,21 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Next.js / builds
+.next/
+out/
+.turbo/
+.vercel/
+dist/
+
+# Env
+.env
+.env.*
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
