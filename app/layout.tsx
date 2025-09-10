@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+// app/layout.tsx
 import "./globals.css";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Pao Academy — Formación práctica",
-  description: "Landing de cursos: ventas, marca personal, liderazgo y rutas de datos (Power BI, Analytics, Data Science).",
+  title: "GLOBALMIND360",
+  description: "Formación práctica para líderes y equipos",
 };
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
