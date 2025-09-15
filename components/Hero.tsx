@@ -19,6 +19,18 @@ export default function Hero({
 
   return (
     <section id="inicio" className="section-academic relative hero-wrap overflow-hidden">
+      {/* Imagen de fondo hero.jpg con overlay académico */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/hero.jpg')",
+          filter: "brightness(0.4) saturate(0.8)",
+        }}
+      />
+      
+      {/* Overlay académico para integrar con la paleta de colores */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--academic-gray-900)]/90 via-[color:var(--academic-primary)]/30 to-[color:var(--academic-secondary)]/40" />
+      
       {/* fondo gradiente + patrón suave */}
       <div
         className="absolute inset-0 opacity-5"
