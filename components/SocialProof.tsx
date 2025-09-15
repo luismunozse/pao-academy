@@ -42,7 +42,7 @@ export default function SocialProof({
 
             <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-4">
               {Array.from({length:6}).map((_,i)=>(
-                <div className="aspect-[3/1] rounded-xl border border-[color:var(--neon-border)] bg-white/[.03] flex items-center justify-center text-white/70 logo-box-neon">
+                <div key={i} className="aspect-[3/1] rounded-xl border border-[color:var(--neon-border)] bg-white/[.03] flex items-center justify-center text-white/70 logo-box-neon">
                   LOGO
                 </div>
               ))}

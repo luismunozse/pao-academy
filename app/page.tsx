@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import Catalog from '../components/Catalog';
+import LiveCourses from '../components/LiveCourses';
 import Featured from '../components/Featured';
 import Paths from '../components/Paths';
 import SocialProof from '../components/SocialProof';
@@ -11,7 +11,7 @@ import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
-import { copy, cursosBase, translateTag, type Lang } from '../lib/i18n';
+import { copy, cursosBase, type Lang } from '../lib/i18n';
 import './globals.css';
 
 export default function Page(){
@@ -20,8 +20,6 @@ export default function Page(){
 
   const [modalOpen,setModalOpen] = useState(false);
   const [interes,setInteres] = useState('');
-  const [query,setQuery] = useState('');
-  const [tag,setTag] = useState<string>('Todos');
   const [lang,setLang] = useState<Lang>('es');
   const [reducedMotion,setReducedMotion] = useState(false);
 
@@ -33,7 +31,6 @@ export default function Page(){
     return ()=>mq.removeEventListener?.('change',listener);
   },[]);
 
-  useEffect(()=>{ setTag(copy[lang].all); },[lang]);
   const t = (k:string)=> copy[lang][k] || k;
 
   const whatsappUrl = useMemo(()=>{
@@ -50,21 +47,13 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
   const [idxTestimonio,setIdxTestimonio] = useState(0);
   useEffect(()=>{ const id=setInterval(()=>setIdxTestimonio(i=>(i+1)%testimonios.length),4500); return ()=>clearInterval(id); },[]);
 
-  const cursos = cursosBase.map(c => ({ ...c[lang as 'es'|'en'], tag: lang==='es'? c.tag : translateTag(c.tag) }));
-  const cursosFiltrados = cursos.filter(c=>{
-    const matchTag = tag===t('all') || c.tag===tag;
-    const q = query.trim().toLowerCase();
-    const matchQuery = !q || c.titulo.toLowerCase().includes(q) || c.modalidad.toLowerCase().includes(q);
-    return matchTag && matchQuery;
-  });
+  const cursos = cursosBase.map(c => ({ ...c[lang as 'es'|'en'], tag: c.tag }));
 
   useEffect(()=>{
     const tests:{name:string;pass:boolean;info?:string}[] = [];
-    tests.push({ name:'Tag All/Todos presente', pass: !!copy[lang].all });
-    tests.push({ name:'Cursos filtrados no vacíos con All', pass: cursosFiltrados.length>0, info: `count=${cursosFiltrados.length}` });
     tests.push({ name:'WhatsApp URL construida', pass: typeof whatsappUrl==='string' && whatsappUrl.includes('wa.me') });
     if(tests.some(t=>!t.pass)) console.warn('Self-tests failing:', tests.filter(t=>!t.pass));
-  },[lang,cursosFiltrados.length,whatsappUrl]);
+  },[whatsappUrl]);
 
   return (
     <div data-theme="euro">
@@ -73,30 +62,35 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         brandName={brandName}
         t={t}
         onClickCTA={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+        lang={lang}
+        setLang={setLang}
       />
 
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="hero-euro absolute inset-0 -z-10"/>
-        <Hero brandName={brandName} t={t} cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }} reducedMotion={reducedMotion}/>
+        <Hero 
+          brandName={brandName} 
+          t={t} 
+          cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }} 
+          reducedMotion={reducedMotion}
+          whatsappUrl={whatsappUrl}
+        />
       </section>
 
       <LazyMotion features={domAnimation} strict>
-        {/* Catálogo / Beneficios */}
-        <Catalog
+        {/* Cursos en Vivo - Sección Principal */}
+        <LiveCourses
           t={t}
           lang={lang}
-          query={query}
-          setQuery={setQuery}
-          tag={tag}
-          setTag={setTag}
-          onClickCard={(title)=>{ setInteres(title); setModalOpen(true); }}
+          onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
+          onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
         />
 
         {/* Cursos destacados */}
         <Featured
           t={t}
-          cursos={cursosFiltrados}
+          cursos={cursos}
           onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
         />
 

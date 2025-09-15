@@ -4,13 +4,13 @@ export type Theme = typeof THEMES[number];
 
 export const copy: Record<Lang, Record<string, string>> = {
   es: {
-    brandTagline: "Formación práctica para líderes y equipos",
-    heroDesc: "combina experiencia real en negocios y datos para acelerar resultados en ventas, marca personal, motivación, liderazgo y analítica.",
-    knowMore: "Quiero saber más",
-    viewCatalog: "Ver catálogo",
-    bullet1: "Mentores con experiencia real",
-    bullet2: "Proyectos y playbooks aplicables",
-    bullet3: "En vivo + on‑demand",
+    brandTagline: "Formación en vivo y online para transformar tu futuro",
+    heroDesc: "Clases en vivo y cursos asincrónicos que convierten el aprendizaje en resultados: más experiencia, más confianza, más oportunidades.",
+    knowMore: "Explorar cursos en vivo",
+    viewCatalog: "Ver catálogo completo",
+    bullet1: "Mentores que aplican lo que enseñan",
+    bullet2: "Proyectos reales y metodologías prácticas",
+    bullet3: "Certificación que potencia tu perfil profesional",
     sectionPrograms: "Programas que transforman equipos y carreras",
     sectionProgramsDesc: "Formación práctica, mentores expertos y proyectos reales. Sin teorías vacías.",
     filterLabel: "Filtrar:",
@@ -57,15 +57,52 @@ export const copy: Record<Lang, Record<string, string>> = {
     rights: "Todos los derechos reservados.",
     all: "Todos",
     learnMoreAbout: "Saber más sobre",
+    // Header menu
+    home: "Inicio",
+    liveCourses: "Cursos en vivo",
+    asyncCourses: "Cursos asincrónicos",
+    areas: "Áreas",
+    aboutUs: "Sobre nosotros",
+    enrollNow: "Inscribite ahora",
+    // Hero additional content
+    whatsappCTA: "Hablar por WhatsApp",
+    urgencyText: "Próxima cohorte de Ventas inicia el 15/10 – Cupos limitados",
+    octoberStarts: "Inicios Octubre",
+    microCopy: "Becas disponibles · Sin costo de inscripción inicial",
+    microCopyDate: "Solo hasta fecha definida",
+    // Live Courses Section
+    liveCoursesTitle: "Programas en vivo que transforman tu carrera",
+    liveCoursesDesc: "Aprendé junto a mentores que aplican lo que enseñan y llevá cada concepto directo a tu trabajo real.",
+    seeFullCatalog: "Ver catálogo completo de cursos en vivo",
+    wantToKnowMore: "Quiero saber más",
+    // Course categories
+    productivity: "Productividad",
+    // Course details
+    salesConsultativeTitle: "Ventas Consultivas",
+    salesConsultativeDesc: "Aprendé a detectar oportunidades y cerrar con técnicas modernas de prospección y discovery.",
+    agileLeadershipTitle: "Liderazgo Ágil",
+    agileLeadershipDesc: "Potenciá equipos de alto rendimiento con dinámicas ágiles, feedback constante y prácticas efectivas.",
+    motivationHabitsTitle: "Motivación y Hábitos",
+    motivationHabitsDesc: "Diseñá rutinas y sistemas que sostengan tu productividad y eleven tu mentalidad a otro nivel.",
+    personalBrandTitle: "Marca Personal",
+    personalBrandDesc: "Construí tu narrativa, aumentá tu visibilidad y diferenciá tu perfil en el mercado profesional.",
+    powerBITitle: "Power BI desde Cero",
+    powerBIDesc: "Transformá datos en decisiones con dashboards, métricas y reportes que generan impacto real.",
+    dataAnalyticsTitle: "Data Analytics Bootcamp",
+    dataAnalyticsDesc: "Domina SQL, ETL y métricas de negocio end-to-end para resolver problemas con analítica aplicada.",
+    // Course recommendations
+    alsoInterested: "También te puede interesar",
+    relatedCourses: "Cursos relacionados en",
+    topRecommended: "Top recomendados por estudiantes de",
   },
   en: {
-    brandTagline: "Hands‑on training for leaders and teams",
-    heroDesc: "combines real‑world experience in business and data to accelerate results in sales, personal brand, motivation, leadership and analytics.",
-    knowMore: "Tell me more",
-    viewCatalog: "View catalog",
-    bullet1: "Mentors with real experience",
-    bullet2: "Projects & actionable playbooks",
-    bullet3: "Live + on‑demand",
+    brandTagline: "Live and online training to transform your future",
+    heroDesc: "Live classes and asynchronous courses that turn learning into results: more experience, more confidence, more opportunities.",
+    knowMore: "Explore live courses",
+    viewCatalog: "View complete catalog",
+    bullet1: "Mentors who apply what they teach",
+    bullet2: "Real projects and practical methodologies",
+    bullet3: "Certification that boosts your professional profile",
     sectionPrograms: "Programs that transform teams and careers",
     sectionProgramsDesc: "Practical training, expert mentors and real projects. No fluff.",
     filterLabel: "Filter:",
@@ -112,6 +149,43 @@ export const copy: Record<Lang, Record<string, string>> = {
     rights: "All rights reserved.",
     all: "All",
     learnMoreAbout: "Learn more about",
+    // Header menu
+    home: "Home",
+    liveCourses: "Live courses",
+    asyncCourses: "Asynchronous courses",
+    areas: "Areas",
+    aboutUs: "About us",
+    enrollNow: "Enroll now",
+    // Hero additional content
+    whatsappCTA: "Talk on WhatsApp",
+    urgencyText: "Next Sales cohort starts 15/10 – Limited spots",
+    octoberStarts: "October starts",
+    microCopy: "Scholarships available · No initial enrollment fee",
+    microCopyDate: "Only until defined date",
+    // Live Courses Section
+    liveCoursesTitle: "Live programs that transform your career",
+    liveCoursesDesc: "Learn alongside mentors who apply what they teach and take every concept directly to your real work.",
+    seeFullCatalog: "View complete live courses catalog",
+    wantToKnowMore: "I want to know more",
+    // Course categories
+    productivity: "Productivity",
+    // Course details
+    salesConsultativeTitle: "Consultative Sales",
+    salesConsultativeDesc: "Learn to detect opportunities and close with modern prospecting and discovery techniques.",
+    agileLeadershipTitle: "Agile Leadership",
+    agileLeadershipDesc: "Empower high-performance teams with agile dynamics, constant feedback and effective practices.",
+    motivationHabitsTitle: "Motivation & Habits",
+    motivationHabitsDesc: "Design routines and systems that sustain your productivity and elevate your mindset to another level.",
+    personalBrandTitle: "Personal Branding",
+    personalBrandDesc: "Build your narrative, increase your visibility and differentiate your profile in the professional market.",
+    powerBITitle: "Power BI from Zero",
+    powerBIDesc: "Transform data into decisions with dashboards, metrics and reports that generate real impact.",
+    dataAnalyticsTitle: "Data Analytics Bootcamp",
+    dataAnalyticsDesc: "Master SQL, ETL and end-to-end business metrics to solve problems with applied analytics.",
+    // Course recommendations
+    alsoInterested: "You might also be interested in",
+    relatedCourses: "Related courses in",
+    topRecommended: "Top recommended by students of",
   },
 };
 
@@ -120,18 +194,20 @@ export function translateTag(tag: string){
     case "Comercial": return "Commercial";
     case "Liderazgo": return "Leadership";
     case "Datos": return "Data";
+    case "Mindset": return "Mindset";
+    case "Branding": return "Branding";
+    case "Productividad": return "Productivity";
     default: return tag;
   }
 }
 
 export const cursosBase = [
-  { id: "ventas360", tag: "Comercial", es: { titulo: "Ventas Consultivas 360°", duracion: "6 semanas", modalidad: "En vivo + mentoría", inicio: "Octubre 2025" }, en: { titulo: "Consultative Sales 360°", duracion: "6 weeks", modalidad: "Live + mentorship", inicio: "October 2025" } },
-  { id: "marcaPro", tag: "Branding", es: { titulo: "Marca Personal Pro", duracion: "4 semanas", modalidad: "En vivo + proyecto", inicio: "Octubre 2025" }, en: { titulo: "Personal Branding Pro", duracion: "4 weeks", modalidad: "Live + project", inicio: "October 2025" } },
-  { id: "habitos", tag: "Mindset", es: { titulo: "Motivación, Hábitos y Enfoque", duracion: "3 semanas", modalidad: "On-demand + sesiones", inicio: "Continuo" }, en: { titulo: "Motivation, Habits & Focus", duracion: "3 weeks", modalidad: "On-demand + sessions", inicio: "Ongoing" } },
-  { id: "liderazgo", tag: "Liderazgo", es: { titulo: "Liderazgo Ágil para Managers", duracion: "5 semanas", modalidad: "En vivo", inicio: "Noviembre 2025" }, en: { titulo: "Agile Leadership for Managers", duracion: "5 weeks", modalidad: "Live", inicio: "November 2025" } },
+  { id: "ventas360", tag: "Comercial", es: { titulo: "Ventas Consultivas", duracion: "6 semanas", modalidad: "En vivo + mentoría", inicio: "Octubre 2025" }, en: { titulo: "Consultative Sales", duracion: "6 weeks", modalidad: "Live + mentorship", inicio: "October 2025" } },
+  { id: "liderazgo", tag: "Liderazgo", es: { titulo: "Liderazgo Ágil", duracion: "5 semanas", modalidad: "En vivo", inicio: "Noviembre 2025" }, en: { titulo: "Agile Leadership", duracion: "5 weeks", modalidad: "Live", inicio: "November 2025" } },
+  { id: "habitos", tag: "Mindset", es: { titulo: "Motivación y Hábitos", duracion: "3 semanas", modalidad: "En vivo + sesiones", inicio: "Continuo" }, en: { titulo: "Motivation & Habits", duracion: "3 weeks", modalidad: "Live + sessions", inicio: "Ongoing" } },
+  { id: "marcaPro", tag: "Branding", es: { titulo: "Marca Personal", duracion: "4 semanas", modalidad: "En vivo + proyecto", inicio: "Octubre 2025" }, en: { titulo: "Personal Branding", duracion: "4 weeks", modalidad: "Live + project", inicio: "October 2025" } },
   { id: "powerbi", tag: "Datos", es: { titulo: "Power BI desde Cero", duracion: "6 semanas", modalidad: "En vivo + práctica", inicio: "Octubre 2025" }, en: { titulo: "Power BI from Zero", duracion: "6 weeks", modalidad: "Live + practice", inicio: "October 2025" } },
-  { id: "analytics", tag: "Datos", es: { titulo: "Data Analytics Bootcamp", duracion: "8 semanas", modalidad: "Intensivo", inicio: "Enero 2026" }, en: { titulo: "Data Analytics Bootcamp", duracion: "8 weeks", modalidad: "Intensive", inicio: "January 2026" } },
-  { id: "datasci", tag: "Datos", es: { titulo: "Introducción a Data Science", duracion: "6 semanas", modalidad: "On-demand + mentoría", inicio: "Continuo" }, en: { titulo: "Introduction to Data Science", duracion: "6 weeks", modalidad: "On-demand + mentorship", inicio: "Ongoing" } },
+  { id: "analytics", tag: "Datos", es: { titulo: "Data Analytics Bootcamp", duracion: "8 semanas", modalidad: "En vivo intensivo", inicio: "Enero 2026" }, en: { titulo: "Data Analytics Bootcamp", duracion: "8 weeks", modalidad: "Live intensive", inicio: "January 2026" } },
 ] as const;
 
 export const featureText = {
