@@ -19,13 +19,37 @@ export default function Hero({
 
   return (
     <section id="inicio" className="section-academic hero-wrap overflow-hidden">
-      {/* Imagen de fondo hero.jpg con overlay académico */}
+      {/* Imagen de fondo hero.jpg con overlay académico - Desktop */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="hero-bg-desktop absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/hero.jpg')",
           filter: "brightness(0.4) saturate(0.8)",
           backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      />
+      
+      {/* Imagen responsive para móviles */}
+      <div 
+        className="hero-bg-mobile absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/hero.jpg')",
+          filter: "brightness(0.4) saturate(0.8)",
+          backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      />
+      
+      {/* Imagen para tablets */}
+      <div 
+        className="hero-bg-tablet absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block lg:hidden"
+        style={{
+          backgroundImage: "url('/hero.jpg')",
+          filter: "brightness(0.4) saturate(0.8)",
+          backgroundAttachment: "scroll",
           backgroundSize: "cover",
           backgroundPosition: "center center",
         }}
