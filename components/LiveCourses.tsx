@@ -158,19 +158,22 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[color:var(--academic-secondary)]/20 border border-[color:var(--academic-secondary)]/30 mb-8"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[color:var(--academic-secondary)]/20 to-[color:var(--academic-accent)]/20 border border-[color:var(--academic-secondary)]/30 mb-8 backdrop-blur-sm"
           >
-            <GraduationCap className="size-5 text-[color:var(--academic-secondary)]" />
-            <span className="text-sm font-academic-heading text-[color:var(--academic-secondary)]">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[color:var(--academic-secondary)] to-[color:var(--academic-accent)] flex items-center justify-center">
+              <GraduationCap className="size-4 text-white" />
+            </div>
+            <span className="text-base font-academic-heading text-white">
               Cursos en Vivo
             </span>
+            <div className="w-3 h-3 bg-[color:var(--academic-accent)] rounded-full animate-pulse"></div>
           </m.div>
           
           <m.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-academic-heading text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-academic-heading text-white mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent"
           >
             {t('liveCoursesTitle')}
           </m.h2>
@@ -179,7 +182,7 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-white/80 max-w-3xl mx-auto font-academic"
+            className="text-xl text-white/80 max-w-4xl mx-auto font-academic leading-relaxed"
           >
             {t('liveCoursesDesc')}
           </m.p>
@@ -191,16 +194,16 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-16"
         >
           {tags.map((tag) => (
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`badge-academic px-6 py-3 rounded-full font-academic-heading transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-academic-heading transition-all duration-500 transform hover:scale-105 ${
                 selectedTag === tag
-                  ? 'bg-[color:var(--academic-secondary)] text-white'
-                  : 'bg-white/10 text-white/80 hover:bg-white/20 hover:text-white'
+                  ? 'bg-gradient-to-r from-[color:var(--academic-secondary)] to-[color:var(--academic-accent)] text-white shadow-lg shadow-[color:var(--academic-secondary)]/25'
+                  : 'bg-white/10 text-white/80 hover:bg-white/20 hover:text-white backdrop-blur-sm border border-white/20'
               }`}
               aria-pressed={selectedTag === tag}
             >
@@ -218,22 +221,32 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
             return (
               <m.div
                 key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="course-card-academic group cursor-pointer"
+                transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
+                className="course-card-academic group cursor-pointer relative overflow-hidden"
                 onClick={() => handleCourseClick(course.id, course.title)}
               >
+                {/* Background gradient effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--academic-secondary)]/5 via-transparent to-[color:var(--academic-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
                 {/* Header de la tarjeta */}
-                <div className="flex items-start justify-between mb-6">
+                <div className="relative z-10 flex items-start justify-between mb-6">
+                  {/* Live indicator */}
+                  <div className="absolute -top-2 -right-2 flex items-center gap-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg z-20">
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    EN VIVO
+                  </div>
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-[color:var(--academic-secondary)]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      {courseIcons[course.tag as keyof typeof courseIcons]}
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[color:var(--academic-secondary)]/20 to-[color:var(--academic-accent)]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                      <div className="text-[color:var(--academic-secondary)]">
+                        {courseIcons[course.tag as keyof typeof courseIcons]}
+                      </div>
                     </div>
                     <div>
                       <button
-                        className="badge-academic text-xs font-academic-heading uppercase tracking-wider"
+                        className="px-4 py-2 rounded-full bg-gradient-to-r from-[color:var(--academic-secondary)]/20 to-[color:var(--academic-accent)]/20 text-[color:var(--academic-secondary)] text-xs font-academic-heading uppercase tracking-wider border border-[color:var(--academic-secondary)]/30 hover:scale-105 transition-transform duration-300"
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedTag(course.tag);
@@ -241,55 +254,59 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
                       >
                         {course.tag}
                       </button>
-                      <div className="flex items-center gap-2 mt-2">
+                      <div className="flex items-center gap-3 mt-3">
                         <div className="flex items-center gap-1">
                           <Star className="size-4 text-yellow-400 fill-current" />
                           <span className="text-sm font-academic-heading text-white">4.9</span>
                         </div>
                         <div className="w-1 h-1 bg-white/30 rounded-full"></div>
-                        <span className="text-sm text-white/70 font-academic">150+</span>
+                        <span className="text-sm text-white/70 font-academic">150+ estudiantes</span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-white/60">
+                  <div className="flex items-center gap-2 text-white/60 group-hover:text-[color:var(--academic-secondary)] transition-colors duration-300">
                     <Play className="size-4" />
                     <ChevronRight className="size-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>
 
                 {/* Título del curso */}
-                <h3 className="text-2xl font-academic-heading mb-4 group-hover:text-[color:var(--academic-secondary)] transition-colors text-white">
-                  {course.title}
-                </h3>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-academic-heading mb-4 group-hover:text-[color:var(--academic-secondary)] transition-colors text-white">
+                    {course.title}
+                  </h3>
 
-                {/* Descripción */}
-                <p className="text-white/80 mb-6 leading-relaxed font-academic">
-                  {course.description}
-                </p>
+                  {/* Descripción */}
+                  <p className="text-white/80 mb-6 leading-relaxed font-academic">
+                    {course.description}
+                  </p>
 
-                {/* Course Stats */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="flex items-center gap-2 text-white/70">
-                    <Clock className="size-4 text-[color:var(--academic-accent)]" />
-                    <span className="text-sm font-academic">6 semanas</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-white/70">
-                    <UserCheck className="size-4 text-[color:var(--academic-accent)]" />
-                    <span className="text-sm font-academic">Intermedio</span>
+                  {/* Course Stats */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="flex items-center gap-2 text-white/70 bg-white/5 rounded-lg p-3">
+                      <Clock className="size-4 text-[color:var(--academic-accent)]" />
+                      <span className="text-sm font-academic">6 semanas</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/70 bg-white/5 rounded-lg p-3">
+                      <UserCheck className="size-4 text-[color:var(--academic-accent)]" />
+                      <span className="text-sm font-academic">Intermedio</span>
+                    </div>
                   </div>
                 </div>
 
                 {/* CTA */}
-                <button
-                  className="btn-primary btn-full flex items-center justify-center gap-2 group"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCourseClick(course.id, course.title);
-                  }}
-                >
-                  {t('wantToKnowMore')}
-                  <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                <div className="relative z-10 flex justify-center">
+                  <button
+                    className="btn-primary flex items-center justify-center gap-2 group px-8"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCourseClick(course.id, course.title);
+                    }}
+                  >
+                    {t('wantToKnowMore')}
+                    <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
 
                 {/* Sección de recomendaciones expandible */}
                 {isExpanded && recommendedCourses.length > 0 && (
@@ -314,7 +331,9 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
                           }}
                         >
                           <div className="flex items-center gap-2 mb-1">
-                            {courseIcons[recCourse.tag as keyof typeof courseIcons]}
+                            <div className="text-[color:var(--academic-secondary)]">
+                              {courseIcons[recCourse.tag as keyof typeof courseIcons]}
+                            </div>
                             <span className="text-sm font-medium text-white">{recCourse.title}</span>
                           </div>
                           <p className="text-xs text-white/70 line-clamp-2">{recCourse.description}</p>
@@ -340,26 +359,36 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
 
         {/* CTA final */}
         <m.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center"
         >
-          <div className="card-academic max-w-2xl mx-auto text-center">
-            <GraduationCap className="size-12 text-[color:var(--academic-secondary)] mx-auto mb-4" />
-            <h3 className="text-2xl font-academic-heading text-white mb-4">
-              ¿Listo para transformar tu carrera?
-            </h3>
-            <p className="text-white/80 mb-6 font-academic">
-              Únete a miles de profesionales que ya están desarrollando las habilidades del futuro.
-            </p>
-            <button 
-              onClick={onCatalogClick}
-              className="btn-primary btn-lg flex items-center gap-2 mx-auto group"
-            >
-              {t('seeFullCatalog')}
-              <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+          <div className="relative max-w-4xl mx-auto text-center p-12 rounded-3xl bg-gradient-to-br from-[color:var(--academic-secondary)]/10 via-[color:var(--academic-accent)]/5 to-[color:var(--academic-secondary)]/10 border border-[color:var(--academic-secondary)]/20 backdrop-blur-sm">
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E\")",
+            }} />
+            
+            <div className="relative z-10">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-[color:var(--academic-secondary)] to-[color:var(--academic-accent)] flex items-center justify-center shadow-lg">
+                <GraduationCap className="size-10 text-white" />
+              </div>
+              <h3 className="text-3xl md:text-4xl font-academic-heading text-white mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                ¿Listo para transformar tu carrera?
+              </h3>
+              <p className="text-xl text-white/80 mb-8 font-academic max-w-2xl mx-auto leading-relaxed">
+                Únete a miles de profesionales que ya están desarrollando las habilidades del futuro.
+              </p>
+              <button 
+                onClick={onCatalogClick}
+                className="btn-primary btn-lg flex items-center gap-3 mx-auto group shadow-2xl hover:shadow-[color:var(--academic-secondary)]/25"
+              >
+                {t('seeFullCatalog')}
+                <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
           </div>
         </m.div>
       </div>

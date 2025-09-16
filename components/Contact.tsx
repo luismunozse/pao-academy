@@ -80,7 +80,7 @@ export default function Contact({
   };
 
   return (
-    <section id="contacto" className="section-neon">
+    <section id="contacto" className="section-academic">
       <div className="full-width-content py-16">
         <div className="max-w-6xl mx-auto">
           <LazyMotion features={domAnimation} strict>

@@ -117,10 +117,7 @@
 ========================================= */
 .section-neon{
   color:var(--neon-fg);
-  background:
-    radial-gradient(900px 400px at 15% -10%, rgba(0,247,239,.30), transparent 60%),
-    radial-gradient(800px 420px at 85% -20%, rgba(123,92,255,.22), transparent 65%),
-    linear-gradient(180deg, #0B1220 0%, var(--neon-bg) 100%);
+  background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%);
 }
 
 .hero-neon{

@@ -6,7 +6,7 @@ export default function Footer({
   brandName, t, lang, setLang
 }:{ brandName:string; t:(k:string)=>string; lang:Lang; setLang:(l:Lang)=>void; }){
   return (
-    <footer className="section-neon">
+    <footer className="section-academic">
       <div className="full-width-content">
         {/* Línea superior con gradiente */}
         <div className="footer-gradient-line mb-12"></div>

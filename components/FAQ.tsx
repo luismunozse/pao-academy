@@ -5,7 +5,7 @@ export default function FAQ({ t }:{ t:(k:string)=>string }){
   const items = [[t('q1'),t('a1')],[t('q2'),t('a2')],[t('q3'),t('a3')]];
 
   return (
-    <section id="faq" className="section-neon">
+    <section id="faq" className="section-academic">
       <div className="relative full-width-content py-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-white text-center mb-8">{t('faq')}</h2>
