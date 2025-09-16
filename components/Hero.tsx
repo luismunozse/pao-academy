@@ -90,7 +90,7 @@ export default function Hero({
             </m.p>
           </LazyMotion>
 
-          {/* CTAs (apiladas en XS) */}
+          {/* CTA Principal - Inscríbete Ahora */}
           <LazyMotion features={domAnimation} strict>
             <m.div
               initial={reducedMotion ? false : { opacity:0, y:24 }}
@@ -98,16 +98,13 @@ export default function Hero({
               transition={{ delay:.45, duration:.5 }}
               className="hero-ctas mb-8 sm:mb-10 px-2"
             >
-              <button className="btn-academic-primary px-5 sm:px-6 py-3 flex items-center justify-center gap-2 group" onClick={cta}>
-                {t('knowMore')}
-                <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform"/>
-              </button>
-              <button
-                className="btn-academic-secondary px-5 sm:px-6 py-3 flex items-center justify-center gap-2 group"
-                onClick={() => document.querySelector('#catalogo')?.scrollIntoView({behavior:'smooth'})}
+              <button 
+                className="btn-academic-primary px-8 sm:px-10 py-4 sm:py-5 flex items-center justify-center gap-3 group text-lg sm:text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+                onClick={cta}
               >
-                {t('viewCatalog')}
-                <BookOpen className="size-5 group-hover:scale-110 transition-transform"/>
+                <GraduationCap className="size-6 group-hover:scale-110 transition-transform"/>
+                Inscríbete Ahora
+                <ArrowRight className="size-6 group-hover:translate-x-1 transition-transform"/>
               </button>
             </m.div>
           </LazyMotion>
