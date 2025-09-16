@@ -523,6 +523,30 @@
   transition: all 0.3s ease;
 }
 
+/* Announcement Bar */
+.announcement-bar {
+  background: linear-gradient(135deg, var(--neon-accent) 0%, var(--neon-cyan) 100%);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.announcement-bar-close {
+  transition: all 0.2s ease;
+}
+
+.announcement-bar-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
 .icon-academic:hover {
   color: var(--academic-accent);
   transform: scale(1.1);

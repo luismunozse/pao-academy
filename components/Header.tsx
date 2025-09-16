@@ -8,15 +8,22 @@ export default function Header({
   t,
   lang,
   setLang,        // si no lo pasás, no se muestra el selector (queda solo en footer)
+  promoMessage = "40% OFF en cursos y formaciones",
+  promoSubMessage = "¡Aprovecha esta oferta limitada!",
+  showPromoBar = true,
 }: {
   brandName: string;
   onClickCTA: () => void;
   t: (k: string) => string;
   lang?: 'es' | 'en';
   setLang?: (lang: 'es' | 'en') => void;
+  promoMessage?: string;
+  promoSubMessage?: string;
+  showPromoBar?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [elevated, setElevated] = useState(false);
+  const [showPromo, setShowPromo] = useState(showPromoBar);
 
   useEffect(() => {
     const onScroll = () => setElevated(window.scrollY > 6);
@@ -43,8 +50,29 @@ export default function Header({
 
   return (
     <>
+      {/* Barra de Promoción */}
+      {showPromo && (
+        <div className="fixed top-0 left-0 right-0 z-[1001] announcement-bar text-black">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 py-2">
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm sm:text-base">🎉 {promoMessage}</span>
+                <span className="hidden sm:inline text-sm">{promoSubMessage}</span>
+              </div>
+              <button
+                onClick={() => setShowPromo(false)}
+                className="announcement-bar-close p-1 rounded-full"
+                aria-label="Cerrar promoción"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <header
-        className={`fixed top-0 left-0 right-0 z-[1000] header-glass ${elevated ? 'header-elevated' : ''}`}
+        className={`fixed ${showPromo ? 'top-10' : 'top-0'} left-0 right-0 z-[1000] header-glass ${elevated ? 'header-elevated' : ''}`}
         role="banner"
       >
         <a
@@ -191,7 +219,7 @@ export default function Header({
       {/* Overlay */}
       {open && <div className="fixed inset-0 bg-black/50 z-[998] lg:hidden" onClick={() => setOpen(false)} />}
       {/* Spacer para evitar solapar contenido con header fijo */}
-      <div aria-hidden className="h-[64px] sm:h-[72px]" />
+      <div aria-hidden className={`${showPromo ? 'h-[104px] sm:h-[112px]' : 'h-[64px] sm:h-[72px]'}`} />
     </>
   );
 }
