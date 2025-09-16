@@ -527,6 +527,15 @@
 .announcement-bar {
   background: linear-gradient(135deg, var(--neon-accent) 0%, var(--neon-cyan) 100%);
   animation: slideDown 0.3s ease-out;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-bar.elevated {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 @keyframes slideDown {
@@ -540,11 +549,52 @@
 
 .announcement-bar-close {
   transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .announcement-bar-close:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.15);
   transform: scale(1.1);
+}
+
+/* Estilos para el botón cuando está en modo elevado (texto blanco) */
+.announcement-bar.elevated .announcement-bar-close {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.announcement-bar.elevated .announcement-bar-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mejorar legibilidad del texto en la barra de promoción */
+.announcement-bar span {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.announcement-bar .font-bold {
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+/* Estilos para texto negro (estado normal) */
+.announcement-bar:not(.elevated) span {
+  color: #000;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.announcement-bar:not(.elevated) .font-bold {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para texto blanco (estado elevado) */
+.announcement-bar.elevated span {
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.announcement-bar.elevated .font-bold {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .icon-academic:hover {

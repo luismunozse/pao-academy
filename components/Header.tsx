@@ -52,16 +52,16 @@ export default function Header({
     <>
       {/* Barra de Promoción */}
       {showPromo && (
-        <div className="fixed top-0 left-0 right-0 z-[1001] announcement-bar text-black">
+        <div className={`fixed top-0 left-0 right-0 z-[1001] announcement-bar transition-all duration-300 ${elevated ? 'elevated text-white' : 'text-black'}`}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 py-2">
             <div className="flex items-center justify-center gap-4">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-sm sm:text-base">🎉 {promoMessage}</span>
-                <span className="hidden sm:inline text-sm">{promoSubMessage}</span>
+                <span className={`font-bold text-sm sm:text-base drop-shadow-sm ${elevated ? 'text-white' : 'text-black'}`}>🎉 {promoMessage}</span>
+                <span className={`hidden sm:inline text-sm drop-shadow-sm ${elevated ? 'text-white' : 'text-black'}`}>{promoSubMessage}</span>
               </div>
               <button
                 onClick={() => setShowPromo(false)}
-                className="announcement-bar-close p-1 rounded-full"
+                className={`announcement-bar-close p-1 rounded-full ${elevated ? 'text-white hover:bg-white/20' : 'text-black hover:bg-black/10'}`}
                 aria-label="Cerrar promoción"
               >
                 <X className="w-4 h-4" />
