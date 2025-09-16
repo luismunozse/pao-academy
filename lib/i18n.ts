@@ -11,6 +11,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     bullet1: "Mentores que aplican lo que enseñan",
     bullet2: "Proyectos reales y metodologías prácticas",
     bullet3: "Certificación que potencia tu perfil profesional",
+
     sectionPrograms: "Programas que transforman equipos y carreras",
     sectionProgramsDesc: "Formación práctica, mentores expertos y proyectos reales. Sin teorías vacías.",
     filterLabel: "Filtrar:",
@@ -18,18 +19,22 @@ export const copy: Record<Lang, Record<string, string>> = {
     featured: "Cursos destacados",
     featuredDesc: "Sin precios — pedí el programa que mejor se adapte a tus objetivos.",
     nextCohort: "Próx. cohorte",
+
     whatTheySay: "Lo que dicen nuestros alumnos",
     companiesTrust: "Empresas que confían",
     satisfaction: "Satisfacción",
     students: "Alumnos",
     companies: "Empresas",
+
     faq: "Preguntas frecuentes",
     q1: "¿Las clases son en vivo o grabadas?",
-    a1: "Trabajamos con modalidad mixta: encuentros en vivo + contenido on‑demand para reforzar y practicar.",
+    a1: "Trabajamos con modalidad mixta: encuentros en vivo + contenido on-demand para reforzar y practicar.",
     q2: "¿Entregan certificación?",
     a2: "Sí, al completar los requisitos de cada programa emitimos un certificado digital verificable.",
     q3: "¿Ofrecen planes para empresas?",
-    a3: "Sí, armamos cohortes in‑company con objetivos y contenidos personalizados por área.",
+    a3: "Sí, armamos cohortes in-company con objetivos y contenidos personalizados por área.",
+
+    // Contact (clásico)
     contactTitle: "Conversemos tu objetivo",
     contactDesc: "Contanos qué querés lograr y te proponemos el programa ideal para vos o tu equipo.",
     name: "Nombre",
@@ -42,9 +47,20 @@ export const copy: Record<Lang, Record<string, string>> = {
     callMe: "Quiero que me llamen",
     speak: "¡Hablemos!",
     contactLead: "Dejanos tus datos y te contactamos con más info sobre",
+
+    // Contact (pro – formulario nuevo)
+    contactTitlePro: "Imoulsa tu carrera con programas avalados",
+    contactDescPro: "Dejanos tu consulta y te proponemos el programa ideal para vos o tu equipo.",
+    privacy: "Datos protegidos y soporte humano.",
+    responseTime: "Respondemos en menos de 24 horas.",
+    phonePH: "Teléfono",
+    send: "Enviar",
+    consentNote: "Al enviar, aceptás ser contactad@ para coordinar la mejor propuesta.",
+
     notFound: "No encontramos cursos para esa búsqueda. Probá con otro término o quitá el filtro.",
     catalog: "Catálogo",
     contact: "Contacto",
+    paths: "Rutas",
     langLabel: "Idioma",
     themeLabel: "Tema",
     skip: "Saltar al contenido",
@@ -53,6 +69,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     rights: "Todos los derechos reservados.",
     all: "Todos",
     learnMoreAbout: "Saber más sobre",
+
     // Header menu
     home: "Inicio",
     liveCourses: "Cursos en vivo",
@@ -60,19 +77,28 @@ export const copy: Record<Lang, Record<string, string>> = {
     areas: "Áreas",
     aboutUs: "Sobre nosotros",
     enrollNow: "Inscribite ahora",
+
     // Hero additional content
     whatsappCTA: "Hablar por WhatsApp",
     urgencyText: "Próxima cohorte de Ventas inicia el 15/10 – Cupos limitados",
     octoberStarts: "Inicios Octubre",
     microCopy: "Becas disponibles · Sin costo de inscripción inicial",
     microCopyDate: "Solo hasta fecha definida",
+
     // Live Courses Section
     liveCoursesTitle: "Programas en vivo que transforman tu carrera",
     liveCoursesDesc: "Aprendé junto a mentores que aplican lo que enseñan y llevá cada concepto directo a tu trabajo real.",
     seeFullCatalog: "Ver catálogo completo de cursos en vivo",
     wantToKnowMore: "Quiero saber más",
+
+    // Paths (rutas)
+    learningPaths: "Rutas de aprendizaje (Formación continua)",
+    learningPathsDesc: "Diseñadas para avanzar por etapas y asegurar adopción real en el día a día.",
+    wantThisPath: "Quiero esta ruta",
+
     // Course categories
     productivity: "Productividad",
+
     // Course details
     salesConsultativeTitle: "Ventas Consultivas",
     salesConsultativeDesc: "Aprendé a detectar oportunidades y cerrar con técnicas modernas de prospección y discovery.",
@@ -86,11 +112,13 @@ export const copy: Record<Lang, Record<string, string>> = {
     powerBIDesc: "Transformá datos en decisiones con dashboards, métricas y reportes que generan impacto real.",
     dataAnalyticsTitle: "Data Analytics Bootcamp",
     dataAnalyticsDesc: "Domina SQL, ETL y métricas de negocio end-to-end para resolver problemas con analítica aplicada.",
+
     // Course recommendations
     alsoInterested: "También te puede interesar",
     relatedCourses: "Cursos relacionados en",
     topRecommended: "Top recomendados por estudiantes de",
   },
+
   en: {
     brandTagline: "Live and online training to transform your future",
     heroDesc: "Live classes and asynchronous courses that turn learning into results: more experience, more confidence, more opportunities.",
@@ -99,6 +127,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     bullet1: "Mentors who apply what they teach",
     bullet2: "Real projects and practical methodologies",
     bullet3: "Certification that boosts your professional profile",
+
     sectionPrograms: "Programs that transform teams and careers",
     sectionProgramsDesc: "Practical training, expert mentors and real projects. No fluff.",
     filterLabel: "Filter:",
@@ -106,18 +135,22 @@ export const copy: Record<Lang, Record<string, string>> = {
     featured: "Featured courses",
     featuredDesc: "No prices — request the program that fits your goals.",
     nextCohort: "Next cohort",
+
     whatTheySay: "What our students say",
     companiesTrust: "Trusted by companies",
     satisfaction: "Satisfaction",
     students: "Students",
     companies: "Companies",
+
     faq: "FAQ",
     q1: "Are classes live or recorded?",
-    a1: "We use a mixed format: live sessions + on‑demand content to reinforce and practice.",
+    a1: "We use a mixed format: live sessions + on-demand content to reinforce and practice.",
     q2: "Do you provide certification?",
     a2: "Yes, upon completing the program requirements we issue a verifiable digital certificate.",
     q3: "Do you offer plans for companies?",
-    a3: "Yes, we run in‑company cohorts with objectives and content tailored to each area.",
+    a3: "Yes, we run in-company cohorts with objectives and content tailored to each area.",
+
+    // Contact (classic)
     contactTitle: "Let’s talk about your goal",
     contactDesc: "Tell us what you want to achieve and we’ll propose the ideal program for you or your team.",
     name: "Name",
@@ -130,9 +163,20 @@ export const copy: Record<Lang, Record<string, string>> = {
     callMe: "Call me",
     speak: "Let’s talk!",
     contactLead: "Leave your details and we’ll reach out with more info about",
+
+    // Contact (pro – new form)
+    contactTitlePro: "Boost your career with endorsed programs",
+    contactDescPro: "Share your context and we’ll recommend the best program for you or your team.",
+    privacy: "Data protected and human support.",
+    responseTime: "We reply within 24 hours.",
+    phonePH: "Phone",
+    send: "Send",
+    consentNote: "By submitting, you agree to be contacted to coordinate the best proposal.",
+
     notFound: "No courses match your search. Try another term or remove the filter.",
     catalog: "Catalog",
     contact: "Contact",
+    paths: "Paths",
     langLabel: "Language",
     themeLabel: "Theme",
     skip: "Skip to content",
@@ -141,6 +185,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     rights: "All rights reserved.",
     all: "All",
     learnMoreAbout: "Learn more about",
+
     // Header menu
     home: "Home",
     liveCourses: "Live courses",
@@ -148,19 +193,28 @@ export const copy: Record<Lang, Record<string, string>> = {
     areas: "Areas",
     aboutUs: "About us",
     enrollNow: "Enroll now",
+
     // Hero additional content
     whatsappCTA: "Talk on WhatsApp",
     urgencyText: "Next Sales cohort starts 15/10 – Limited spots",
     octoberStarts: "October starts",
     microCopy: "Scholarships available · No initial enrollment fee",
     microCopyDate: "Only until defined date",
+
     // Live Courses Section
     liveCoursesTitle: "Live programs that transform your career",
     liveCoursesDesc: "Learn alongside mentors who apply what they teach and take every concept directly to your real work.",
     seeFullCatalog: "View complete live courses catalog",
     wantToKnowMore: "I want to know more",
+
+    // Paths (routes)
+    learningPaths: "Learning paths (Continuous training)",
+    learningPathsDesc: "Designed to progress in stages and ensure real adoption day-to-day.",
+    wantThisPath: "I want this path",
+
     // Course categories
     productivity: "Productivity",
+
     // Course details
     salesConsultativeTitle: "Consultative Sales",
     salesConsultativeDesc: "Learn to detect opportunities and close with modern prospecting and discovery techniques.",
@@ -174,6 +228,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     powerBIDesc: "Transform data into decisions with dashboards, metrics and reports that generate real impact.",
     dataAnalyticsTitle: "Data Analytics Bootcamp",
     dataAnalyticsDesc: "Master SQL, ETL and end-to-end business metrics to solve problems with applied analytics.",
+
     // Course recommendations
     alsoInterested: "You might also be interested in",
     relatedCourses: "Related courses in",
@@ -216,9 +271,9 @@ export const featureText = {
     ventas: { title: "Consultative Sales", desc: "Prospecting, discovery and closing with actionable playbooks.", tag: "Commercial" },
     marca: { title: "Personal Branding", desc: "Narrative, content and visibility to generate demand.", tag: "Branding" },
     habitos: { title: "Motivation & Habits", desc: "Productivity, mindset and systems that sustain results.", tag: "Mindset" },
-    liderazgo: { title: "Agile Leadership", desc: "High‑performance teams, feedback and effective rituals.", tag: "Leadership" },
+    liderazgo: { title: "Agile Leadership", desc: "High-performance teams, feedback and effective rituals.", tag: "Leadership" },
     powerbi: { title: "Power BI from Zero", desc: "Modeling, DAX and dashboards that drive decisions.", tag: "Data" },
-    analytics: { title: "Data Analytics Bootcamp", desc: "SQL, ETL, metrics and end‑to‑end business analytics.", tag: "Data" },
-    datasci: { title: "Intro to Data Science", desc: "Python, notebooks y modelos básicos para casos reales.", tag: "Data" },
+    analytics: { title: "Data Analytics Bootcamp", desc: "SQL, ETL, metrics and end-to-end business analytics.", tag: "Data" },
+    datasci: { title: "Intro to Data Science", desc: "Python, notebooks and basic models for real cases.", tag: "Data" },
   },
 } as const;

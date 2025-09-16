@@ -43,7 +43,7 @@ export default function Header({
     { href: '#inicio',            label: t('home'),          icon: GraduationCap },
     { href: '#cursos-en-vivo',    label: t('liveCourses'),   icon: BookOpen },
     { href: '#cursos-asincronos', label: t('asyncCourses'),  icon: BookOpen },
-    { href: '#areas',             label: t('areas'),         icon: Target },
+    { href: '#corporate-training', label: 'Corporate Training', icon: Target },
     { href: '#sobre-nosotros',    label: t('aboutUs'),       icon: Info },
     { href: '#contacto',          label: t('contact'),       icon: Phone },
   ];
