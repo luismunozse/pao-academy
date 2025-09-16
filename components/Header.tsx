@@ -66,7 +66,7 @@ export default function Header({
                 <span className="text-white font-academic-heading text-lg leading-none block">
                   {brandName}
                 </span>
-                <span className="text-white/60 text-xs font-academic leading-none">{t('brandTagline')}</span>
+                <span className="text-white/60 text-xs font-academic leading-none lg:hidden">{t('brandTagline')}</span>
               </div>
             </a>
 

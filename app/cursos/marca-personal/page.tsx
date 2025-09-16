@@ -286,7 +286,7 @@ export default function MarcaPersonalPage() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl font-bold text-center mb-12">Lo que dicen nuestros alumnos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
             {course.testimonials.map((testimonial, index) => (
               <m.div
                 key={index}

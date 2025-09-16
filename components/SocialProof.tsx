@@ -10,16 +10,16 @@ export default function SocialProof({
   return (
     <section className="section-neon">
       <div className="relative mx-auto max-w-7xl px-6 py-16">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="flex justify-center">
           {/* Testimonio */}
-          <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
-            <div className="flex items-center gap-2 text-sm text-white/70">
+          <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl w-full">
+            <div className="flex items-center justify-center gap-2 text-sm text-white/70 mb-4">
               <Quote className="size-4" /> {t('whatTheySay')}
             </div>
 
-            <div className="card-neon p-6 mt-3">
+            <div className="card-neon p-6 mt-3 text-center">
               <p className="text-lg leading-relaxed text-white">
-                “{test.frase}”
+                "{test.frase}"
               </p>
               <p className="mt-3 text-white/80">
                 {test.autor} — {test.rol}

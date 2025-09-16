@@ -286,7 +286,7 @@ export default function VentasConsultivasPage() {
           viewport={{ once: true }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Lo que dicen nuestros alumnos</h2>
-          <div className="course-testimonials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="course-testimonials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
             {course.testimonials.map((testimonial, index) => (
               <m.div
                 key={index}
