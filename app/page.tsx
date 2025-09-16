@@ -40,9 +40,48 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
   },[interes,lang]);
 
   const testimonios = [
-    { es:{ frase:'Duplicamos la tasa de cierre en 90 días aplicando el método de Ventas Consultivas.', autor:'Mariana Pérez', rol:'Líder Comercial, Grupo Andino' }, en:{ frase:'We doubled the close rate in 90 days applying the Consultative Sales method.', autor:'Mariana Pérez', rol:'Head of Sales, Grupo Andino' } },
-    { es:{ frase:'La ruta de Power BI nos permitió estandarizar reportes y tomar decisiones en tiempo real.', autor:'Julián Coria', rol:'Gerente de Operaciones, LogiSur' }, en:{ frase:'The Power BI path helped us standardize reports and make real-time decisions.', autor:'Julián Coria', rol:'Operations Manager, LogiSur' } },
-    { es:{ frase:'El programa de Marca Personal nos dio posicionamiento y clientes inbound en semanas.', autor:'Belén Díaz', rol:'Consultora Independiente' }, en:{ frase:'Personal Branding gave us positioning and inbound clients within weeks.', autor:'Belén Díaz', rol:'Independent Consultant' } },
+    { 
+      es:{ 
+        frase:'Duplicamos la tasa de cierre en 90 días aplicando el método de Ventas Consultivas.', 
+        autor:'Mariana Pérez', 
+        rol:'Líder Comercial, Grupo Andino',
+        imagen:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face&auto=format&q=80'
+      }, 
+      en:{ 
+        frase:'We doubled the close rate in 90 days applying the Consultative Sales method.', 
+        autor:'Mariana Pérez', 
+        rol:'Head of Sales, Grupo Andino',
+        imagen:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face&auto=format&q=80'
+      } 
+    },
+    { 
+      es:{ 
+        frase:'La ruta de Power BI nos permitió estandarizar reportes y tomar decisiones en tiempo real.', 
+        autor:'Julián Coria', 
+        rol:'Gerente de Operaciones, LogiSur',
+        imagen:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format&q=80'
+      }, 
+      en:{ 
+        frase:'The Power BI path helped us standardize reports and make real-time decisions.', 
+        autor:'Julián Coria', 
+        rol:'Operations Manager, LogiSur',
+        imagen:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format&q=80'
+      } 
+    },
+    { 
+      es:{ 
+        frase:'El programa de Marca Personal nos dio posicionamiento y clientes inbound en semanas.', 
+        autor:'Belén Díaz', 
+        rol:'Consultora Independiente',
+        imagen:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format&q=80'
+      }, 
+      en:{ 
+        frase:'Personal Branding gave us positioning and inbound clients within weeks.', 
+        autor:'Belén Díaz', 
+        rol:'Independent Consultant',
+        imagen:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format&q=80'
+      } 
+    },
   ];
   const [idxTestimonio,setIdxTestimonio] = useState(0);
   useEffect(()=>{ const id=setInterval(()=>setIdxTestimonio(i=>(i+1)%testimonios.length),4500); return ()=>clearInterval(id); },[]);

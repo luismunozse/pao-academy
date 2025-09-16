@@ -18,12 +18,32 @@ export default function SocialProof({
             </div>
 
             <div className="card-neon p-6 mt-3 text-center">
-              <p className="text-lg leading-relaxed text-white">
+              <p className="text-lg leading-relaxed text-white mb-6">
                 "{test.frase}"
               </p>
-              <p className="mt-3 text-white/80">
-                {test.autor} — {test.rol}
-              </p>
+              
+              {/* Información del autor con imagen */}
+              <div className="flex items-center justify-center gap-4">
+                <div className="relative">
+                  <img 
+                    src={test.imagen} 
+                    alt={test.autor}
+                    className="testimonial-image"
+                    onError={(e) => {
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(test.autor)}&background=6366f1&color=fff&size=150`;
+                    }}
+                  />
+                  <div className="testimonial-online-indicator"></div>
+                </div>
+                <div className="testimonial-author-info">
+                  <p className="testimonial-author-name">
+                    {test.autor}
+                  </p>
+                  <p className="testimonial-author-role">
+                    {test.rol}
+                  </p>
+                </div>
+              </div>
             </div>
           </m.div>
 
