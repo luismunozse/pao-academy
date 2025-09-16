@@ -65,16 +65,29 @@ export default function Featured({
 
         {/* Desktop Grid - 3 cursos */}
         <div className="mt-8 hidden lg:block">
-          <div className="relative">
-            <div className="grid grid-cols-3 gap-6">
-              {cursos.slice(currentIndex, currentIndex + 3).map((c, i) => (
-            <m.article
-              key={c.titulo}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="card-neon group p-6 relative overflow-hidden"
-            >
+          <div className="relative featured-grid-container">
+            {/* Contenedor con padding para las flechas */}
+            <div className="px-16">
+              <m.div 
+                className="grid grid-cols-3 gap-6"
+                key={currentIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
+                {cursos.slice(currentIndex, currentIndex + 3).map((c, i) => (
+                  <m.article
+                    key={`${c.titulo}-${currentIndex}-${i}`}
+                    initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: i * 0.15,
+                      ease: "easeOut"
+                    }}
+                    className="card-neon featured-card group p-6 relative overflow-hidden"
+                  >
               {/* Background gradient effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--neon-blue)]/10 via-transparent to-[color:var(--neon-cyan)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
@@ -140,27 +153,28 @@ export default function Featured({
                   </button>
                 </div>
               </div>
-            </m.article>
-              ))}
+                  </m.article>
+                ))}
+              </m.div>
             </div>
 
-            {/* Desktop Navigation Buttons */}
+            {/* Desktop Navigation Buttons - Mejorados */}
             <button 
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/10 transition-all duration-300 group"
+              className="featured-nav-button absolute left-2 top-1/2 -translate-y-1/2 p-4 rounded-full group shadow-2xl z-10"
             >
-              <ChevronLeft className="size-5 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
+              <ChevronLeft className="size-6 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
             </button>
             
             <button 
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/10 transition-all duration-300 group"
+              className="featured-nav-button absolute right-2 top-1/2 -translate-y-1/2 p-4 rounded-full group shadow-2xl z-10"
             >
-              <ChevronRight className="size-5 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
+              <ChevronRight className="size-6 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
             </button>
 
-            {/* Desktop Dots Indicator */}
-            <div className="flex justify-center mt-6 gap-2">
+            {/* Desktop Dots Indicator - Mejorado */}
+            <div className="flex justify-center mt-8 gap-3">
               {Array.from({ length: Math.ceil(cursos.length / 3) }).map((_, index) => {
                 const groupStart = index * 3;
                 const isActive = currentIndex >= groupStart && currentIndex < groupStart + 3;
@@ -168,12 +182,14 @@ export default function Featured({
                   <button
                     key={index}
                     onClick={() => goToSlide(groupStart)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      isActive
-                        ? 'bg-[color:var(--neon-cyan)] scale-125' 
-                        : 'bg-white/30 hover:bg-white/50'
+                    className={`featured-dot w-4 h-4 rounded-full ${
+                      isActive ? 'active' : ''
                     }`}
-                  />
+                  >
+                    {isActive && (
+                      <div className="absolute inset-0 rounded-full bg-[color:var(--neon-cyan)] animate-ping opacity-30" />
+                    )}
+                  </button>
                 );
               })}
             </div>
