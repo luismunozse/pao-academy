@@ -7,7 +7,7 @@ export default function Footer({
 }:{ brandName:string; t:(k:string)=>string; lang:Lang; setLang:(l:Lang)=>void; }){
   return (
     <footer className="section-neon">
-      <div className="mx-auto max-w-7xl px-6 pt-16 pb-10 flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
+      <div className="full-width-content pt-16 pb-10 flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
         <div className="flex items-center gap-2">
           <div className="size-5 rounded-md bg-[color:var(--neon-blue)]/90" />
           <span className="text-white/90">{brandName}</span>

@@ -54,7 +54,7 @@ export default function Featured({
 
   return (
     <section id="featured" className="section-neon">
-      <div className="relative mx-auto max-w-7xl px-6 py-16 md:py-20">
+      <div className="relative full-width-content py-16 md:py-20">
         <div className="flex items-end justify-between gap-4">
           <div>
             <h2 className="text-white text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>

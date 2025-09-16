@@ -151,7 +151,7 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
 
   return (
     <section id="cursos-en-vivo" className="section-academic">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-16">
+      <div className="relative full-width-content py-16">
         {/* Título y subtítulo */}
         <div className="text-center mb-16">
           <m.div

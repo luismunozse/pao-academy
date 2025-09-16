@@ -81,7 +81,7 @@ export default function Contact({
 
   return (
     <section id="contacto" className="section-neon">
-      <div className="mx-auto max-w-5xl px-6 py-16">
+      <div className="full-width-content py-16">
         <LazyMotion features={domAnimation} strict>
           <m.div
             initial={{opacity:0, y:12}}

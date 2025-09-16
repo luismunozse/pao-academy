@@ -6,7 +6,7 @@ export default function FAQ({ t }:{ t:(k:string)=>string }){
 
   return (
     <section id="faq" className="section-neon">
-      <div className="relative mx-auto max-w-5xl px-6 py-16">
+      <div className="relative full-width-content py-16">
         <h2 className="text-2xl md:text-3xl font-semibold text-white">{t('faq')}</h2>
 
         <div className="mt-6 space-y-3">

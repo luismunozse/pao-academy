@@ -49,7 +49,7 @@ export default function Hero({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] rounded-full bg-[color:var(--academic-primary)]/10 md:block"/>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 safe-bottom">
+      <div className="relative z-10 full-width-content py-10 sm:py-16 safe-bottom">
         <div className="text-center hero-mobile w-full">
           {/* badge */}
           <LazyMotion features={domAnimation} strict>

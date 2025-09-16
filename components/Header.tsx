@@ -53,7 +53,7 @@ export default function Header({
       {/* Barra de Promoción */}
       {showPromo && (
         <div className={`fixed top-0 left-0 right-0 z-[1001] announcement-bar transition-all duration-300 ${elevated ? 'elevated text-white' : 'text-black'}`}>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 py-2">
+          <div className="full-width-content py-2">
             <div className="flex items-center justify-center gap-4">
               <div className="flex items-center gap-2">
                 <span className={`font-bold text-sm sm:text-base drop-shadow-sm ${elevated ? 'text-white' : 'text-black'}`}>🎉 {promoMessage}</span>
@@ -82,7 +82,7 @@ export default function Header({
           {t('skip')}
         </a>
 
-        <div className={`mx-auto max-w-7xl px-4 sm:px-6 header-size ${elevated ? 'py-2' : 'py-3'}`}>
+        <div className={`full-width-content header-size ${elevated ? 'py-2' : 'py-3'}`}>
           <div className="flex items-center justify-between">
             {/* Logo group */}
             <a href="#inicio" className="flex items-center gap-3 group">

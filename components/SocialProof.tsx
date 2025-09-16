@@ -9,7 +9,7 @@ export default function SocialProof({
 
   return (
     <section className="section-neon">
-      <div className="relative mx-auto max-w-7xl px-6 py-16">
+      <div className="relative full-width-content py-16">
         <div className="flex justify-center">
           {/* Testimonio */}
           <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl w-full">
