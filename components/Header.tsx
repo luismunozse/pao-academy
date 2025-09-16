@@ -117,14 +117,14 @@ export default function Header({
               {setLang && (
                 <button
                   onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-white/8 hover:bg-white/15 transition-all duration-200"
+                  className="header-lang-button flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-gradient-to-r from-white/10 to-white/15 hover:from-white/20 hover:to-white/25 transition-all duration-200 border border-white/20 hover:border-white/30"
                   aria-label="Change language"
                 >
-                  <Globe className="w-3.5 h-3.5" />
-                  <span className="text-white text-sm font-medium">{lang?.toUpperCase()}</span>
+                  <Globe className="w-3.5 h-3.5 text-[color:var(--neon-cyan)]" />
+                  <span className="text-white text-sm font-semibold">{lang?.toUpperCase()}</span>
                 </button>
               )}
-              <button onClick={onClickCTA} className="header-cta-button px-4 py-1.5 bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-black font-semibold text-sm rounded-md hover:scale-105 transition-all duration-200 shadow-lg">
+              <button onClick={onClickCTA} className="header-cta-button px-4 py-1.5 bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-white font-bold text-sm rounded-md hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                 {t('enrollNow')}
               </button>
             </div>
@@ -134,7 +134,7 @@ export default function Header({
               {/* CTA reducido en mobile (opcional) */}
               <button
                 onClick={onClickCTA}
-                className="hidden xs:inline-flex px-3 py-1.5 rounded-lg bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-black font-semibold text-sm hover:scale-105 transition-all duration-200"
+                className="hidden xs:inline-flex px-3 py-1.5 rounded-lg bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-white font-bold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 {t('knowMore')}
               </button>
