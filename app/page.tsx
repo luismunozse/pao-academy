@@ -5,12 +5,12 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import LiveCourses from '../components/LiveCourses';
 import Featured from '../components/Featured';
-import Paths from '../components/Paths';
 import SocialProof from '../components/SocialProof';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
+import WhatsAppFloat from '../components/WhatsAppFloat';
 import { copy, cursosBase, type Lang } from '../lib/i18n';
 import './globals.css';
 
@@ -94,12 +94,6 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
         />
 
-        {/* Rutas */}
-        <Paths
-          t={t}
-          lang={lang}
-          onSelect={(name)=>{ setInteres(name); setModalOpen(true); }}
-        />
 
         {/* Social proof */}
         <SocialProof
@@ -137,16 +131,14 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           </Modal>
         )}
 
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="WhatsApp"
-          className="fixed bottom-4 right-4 z-[60] inline-flex items-center gap-2 rounded-full bg-[color:var(--acc1)] px-4 py-2 font-semibold text-white shadow-xl hover:opacity-95"
-        >
-          WhatsApp
-        </a>
       </LazyMotion>
+
+      {/* WhatsApp Floating Button */}
+      <WhatsAppFloat
+        phoneNumber={phoneAR}
+        message={`¡Hola! Me interesa recibir más información sobre los cursos de ${brandName}. Vengo desde la web.`}
+        brandName={brandName}
+      />
     </div>
   );
 }

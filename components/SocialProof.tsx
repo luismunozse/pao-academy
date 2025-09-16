@@ -28,7 +28,7 @@ export default function SocialProof({
           </m.div>
 
           {/* Métricas + logos */}
-          <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
+          {/* <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}}>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {[{k:'+4.9/5',v:t('satisfaction')},{k:'+3,000',v:t('students')},{k:'120+',v:t('companies')}].map(met => (
                 <div key={met.v} className="card-neon p-5 text-center">
@@ -47,7 +47,7 @@ export default function SocialProof({
                 </div>
               ))}
             </div>
-          </m.div>
+          </m.div> */}
         </div>
       </div>
     </section>

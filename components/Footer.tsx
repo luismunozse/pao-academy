@@ -15,7 +15,6 @@ export default function Footer({
 
         <div className="flex gap-4">
           <a href="#catalogo" className="text-white/80 hover:text-white">{t('catalog')}</a>
-          <a href="#rutas"    className="text-white/80 hover:text-white">{t('paths')}</a>
           <a href="#contacto" className="text-white/80 hover:text-white">{t('contact')}</a>
         </div>
 

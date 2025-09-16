@@ -18,13 +18,16 @@ export default function Hero({
   ];
 
   return (
-    <section id="inicio" className="section-academic relative hero-wrap overflow-hidden">
+    <section id="inicio" className="section-academic hero-wrap overflow-hidden">
       {/* Imagen de fondo hero.jpg con overlay académico */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/hero.jpg')",
           filter: "brightness(0.4) saturate(0.8)",
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
         }}
       />
       
