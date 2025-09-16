@@ -1,10 +1,10 @@
 'use client';
 import { m, LazyMotion, domAnimation } from 'framer-motion';
-import { BookOpen, Users, Award, Star, Clock, GraduationCap, ArrowRight, Megaphone, Shield } from 'lucide-react';
+import { BookOpen, Users, Award, Star, GraduationCap, ArrowRight, Shield } from 'lucide-react';
 
 export default function Hero({
-  brandName, t, cta, reducedMotion, whatsappUrl
-}:{ brandName:string; t:(k:string)=>string; cta:()=>void; reducedMotion:boolean; whatsappUrl:string; }){
+  brandName, t, cta, reducedMotion
+}:{ brandName:string; t:(k:string)=>string; cta:()=>void; reducedMotion:boolean; }){
   const stats = [
     { number: '500+', label: 'Estudiantes', icon: Users },
     { number: '95%',  label: 'Satisfacción', icon: Star },
@@ -99,7 +99,7 @@ export default function Hero({
               className="hero-ctas mb-8 sm:mb-10 px-2"
             >
               <button 
-                className="btn-academic-primary px-8 sm:px-10 py-4 sm:py-5 flex items-center justify-center gap-3 group text-lg sm:text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+                className="btn-primary btn-lg flex items-center justify-center gap-3 group"
                 onClick={cta}
               >
                 <GraduationCap className="size-6 group-hover:scale-110 transition-transform"/>
@@ -147,26 +147,6 @@ export default function Hero({
             </m.div>
           </LazyMotion>
 
-          {/* CTA WhatsApp (full width en XS) */}
-          <LazyMotion features={domAnimation} strict>
-            <m.div
-              initial={reducedMotion ? false : { opacity:0, y:24 }}
-              animate={reducedMotion ? undefined : { opacity:1, y:0 }}
-              transition={{ delay:.9, duration:.5 }}
-              className="mt-10 px-2"
-            >
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-3 px-6 py-3 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-academic-heading transition-all duration-300 group shadow-lg hover:shadow-xl"
-              >
-                <Megaphone className="size-5 group-hover:scale-110 transition-transform"/>
-                {t('whatsappCTA')}
-                <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform"/>
-              </a>
-            </m.div>
-          </LazyMotion>
         </div>
       </div>
     </section>

@@ -6,7 +6,7 @@ export const copy: Record<Lang, Record<string, string>> = {
   es: {
     brandTagline: "Formación en vivo y online para transformar tu futuro",
     heroDesc: "Clases en vivo y cursos asincrónicos que convierten el aprendizaje en resultados: más experiencia, más confianza, más oportunidades.",
-    knowMore: "Explorar cursos en vivo",
+    knowMore: "Ver curso",
     viewCatalog: "Ver catálogo completo",
     bullet1: "Mentores que aplican lo que enseñan",
     bullet2: "Proyectos reales y metodologías prácticas",
@@ -17,7 +17,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     filterLabel: "Filtrar:",
     searchPlaceholder: "Buscar cursos (ej.: liderazgo, Power BI)",
     featured: "Cursos destacados",
-    featuredDesc: "Sin precios — pedí el programa que mejor se adapte a tus objetivos.",
+    featuredDesc: "Descubrí los programas que mejor se adapten a tus objetivos profesionales.",
     nextCohort: "Próx. cohorte",
 
     whatTheySay: "Lo que dicen nuestros alumnos",
@@ -122,7 +122,7 @@ export const copy: Record<Lang, Record<string, string>> = {
   en: {
     brandTagline: "Live and online training to transform your future",
     heroDesc: "Live classes and asynchronous courses that turn learning into results: more experience, more confidence, more opportunities.",
-    knowMore: "Explore live courses",
+    knowMore: "View course",
     viewCatalog: "View complete catalog",
     bullet1: "Mentors who apply what they teach",
     bullet2: "Real projects and practical methodologies",
@@ -133,7 +133,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     filterLabel: "Filter:",
     searchPlaceholder: "Search courses (e.g., leadership, Power BI)",
     featured: "Featured courses",
-    featuredDesc: "No prices — request the program that fits your goals.",
+    featuredDesc: "Discover the programs that best fit your professional goals.",
     nextCohort: "Next cohort",
 
     whatTheySay: "What our students say",

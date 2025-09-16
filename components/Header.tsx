@@ -124,7 +124,7 @@ export default function Header({
                   <span className="text-white text-sm font-semibold">{lang?.toUpperCase()}</span>
                 </button>
               )}
-              <button onClick={onClickCTA} className="header-cta-button px-4 py-1.5 bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-white font-bold text-sm rounded-md hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+              <button onClick={onClickCTA} className="btn-primary btn-sm">
                 {t('enrollNow')}
               </button>
             </div>
@@ -210,7 +210,7 @@ export default function Header({
               </span>
             </button>
           )}
-          <button onClick={onClickCTA} className="w-full btn-academic-primary">
+          <button onClick={onClickCTA} className="btn-primary btn-full">
             {t('enrollNow')}
           </button>
         </div>

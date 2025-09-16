@@ -71,7 +71,7 @@ export default function Contact({
     phone:      t('phone')             || 'Teléfono',
     phonePH:    t('phonePH')           || 'Número sin el 0 ni el 15',
     message:    t('message')           || 'Mensaje',
-    messagePH:  t('messagePH')         || 'Contanos brevemente tu necesidad o el programa de interés…',
+    messagePH:  t('messagePH')         || '¿Qué programa te interesa? ¿Cuál es tu objetivo profesional?',
     send:       t('send')              || 'Enviar',
     privacy:    t('privacy')           || 'Tus datos se almacenan de forma segura. No compartimos información con terceros.',
     response:   t('responseTime')      || 'Respondemos en menos de 24 horas hábiles.',
@@ -82,13 +82,14 @@ export default function Contact({
   return (
     <section id="contacto" className="section-neon">
       <div className="full-width-content py-16">
-        <LazyMotion features={domAnimation} strict>
-          <m.div
-            initial={{opacity:0, y:12}}
-            whileInView={{opacity:1, y:0}}
-            viewport={{once:true}}
-            className="card-neon overflow-hidden p-0"
-          >
+        <div className="max-w-6xl mx-auto">
+          <LazyMotion features={domAnimation} strict>
+            <m.div
+              initial={{opacity:0, y:12}}
+              whileInView={{opacity:1, y:0}}
+              viewport={{once:true}}
+              className="card-neon overflow-hidden p-0"
+            >
             <div className="h-1 w-full bg-gradient-to-r from-[color:var(--neon-blue)] via-[color:var(--neon-cyan)] to-[color:var(--neon-purple)]" />
 
             <div className="p-8 md:p-10 grid gap-8 md:grid-cols-5">
@@ -168,7 +169,7 @@ export default function Contact({
                 <div className="mt-2 flex flex-wrap gap-3">
                   <button
                     type="submit"
-                    className="btn-neon inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="btn-primary inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                     disabled={loading}
                   >
                     {loading ? (t('sending') || 'Enviando…') : txt.send}
@@ -186,8 +187,9 @@ export default function Contact({
                 )}
               </form>
             </div>
-          </m.div>
-        </LazyMotion>
+            </m.div>
+          </LazyMotion>
+        </div>
       </div>
     </section>
   );

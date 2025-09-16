@@ -113,7 +113,6 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           t={t} 
           cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }} 
           reducedMotion={reducedMotion}
-          whatsappUrl={whatsappUrl}
         />
       </section>
 

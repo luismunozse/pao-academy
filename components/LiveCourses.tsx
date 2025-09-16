@@ -281,7 +281,7 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
 
                 {/* CTA */}
                 <button
-                  className="btn-academic-primary w-full flex items-center justify-center gap-2 group"
+                  className="btn-primary btn-full flex items-center justify-center gap-2 group"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleCourseClick(course.id, course.title);
@@ -355,7 +355,7 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
             </p>
             <button 
               onClick={onCatalogClick}
-              className="btn-academic-primary text-lg px-8 py-4 flex items-center gap-2 mx-auto group"
+              className="btn-primary btn-lg flex items-center gap-2 mx-auto group"
             >
               {t('seeFullCatalog')}
               <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />

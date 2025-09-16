@@ -55,12 +55,9 @@ export default function Featured({
   return (
     <section id="featured" className="section-neon">
       <div className="relative full-width-content py-16 md:py-20">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-white text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
-            <p className="mt-2 text-white/80">{lead}</p>
-          </div>
-          <a href="#contacto" className="hidden md:inline-flex btn-ghost">{t('contact')}</a>
+        <div>
+          <h2 className="text-white text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+          <p className="mt-2 text-white/80">{lead}</p>
         </div>
 
         {/* Desktop Grid - 3 cursos */}
@@ -97,13 +94,9 @@ export default function Featured({
                 Destacado
               </div>
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
+              <div className="relative z-10 text-center">
+                <div className="mb-4">
                   {c.tag && <span className="badge-neon">{c.tag}</span>}
-                  <div className="flex items-center gap-2">
-                    <Award className="size-5 text-[color:var(--neon-cyan)]" />
-                    <span className="text-sm text-white/70">Certificado</span>
-                  </div>
                 </div>
 
                 <h3 className="text-xl font-bold tracking-tight text-white mb-4">
@@ -113,24 +106,24 @@ export default function Featured({
                 <div className="space-y-3 mb-6">
                   <ul className="space-y-2 text-sm text-white/80">
                     {c.duracion && (
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <Clock className="size-4 text-[color:var(--neon-cyan)]" /> 
                         {c.duracion}
                       </li>
                     )}
-                    <li className="flex items-center gap-2">
+                    <li className="flex items-center justify-center gap-2">
                       <Users className="size-4 text-[color:var(--neon-cyan)]" /> 
                       {c.modalidad}
                     </li>
                     {c.inicio && (
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <MapPin className="size-4 text-[color:var(--neon-cyan)]" /> 
                         {t('nextCohort')}: {c.inicio}
                       </li>
                     )}
                   </ul>
                   
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 items-center">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="size-4 text-[color:var(--neon-accent)] fill-current" />
@@ -144,11 +137,11 @@ export default function Featured({
                 <div className="flex gap-3">
                   <button 
                     onClick={()=>onClickCourse(c.titulo)} 
-                    className="btn-neon flex-1 group-hover:scale-105 transition-transform duration-300"
+                    className="btn-primary btn-full group-hover:scale-105 transition-transform duration-300"
                   >
                     {t('knowMore')} <ChevronRight className="size-4" />
                   </button>
-                  <button className="p-3 border border-[color:var(--neon-border)] rounded-lg hover:bg-white/10 transition-colors">
+                  <button className="btn-icon">
                     <PlayCircle className="size-5 text-[color:var(--neon-cyan)]" />
                   </button>
                 </div>
@@ -221,40 +214,36 @@ export default function Featured({
                       Destacado
                     </div>
 
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-4">
+                    <div className="relative z-10 text-center">
+                      <div className="mb-4">
                         {c.tag && <span className="badge-neon">{c.tag}</span>}
-                        <div className="flex items-center gap-2">
-                          <Award className="size-5 text-[color:var(--neon-cyan)]" />
-                          <span className="text-sm text-white/70">Certificado</span>
-                        </div>
                       </div>
 
                       <h3 className="text-2xl font-bold tracking-tight text-white mb-4">
                         {c.titulo}
                       </h3>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                      <div className="space-y-3 mb-6">
                         <ul className="space-y-2 text-sm text-white/80">
                           {c.duracion && (
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <Clock className="size-4 text-[color:var(--neon-cyan)]" /> 
                               {c.duracion}
                             </li>
                           )}
-                          <li className="flex items-center gap-2">
+                          <li className="flex items-center justify-center gap-2">
                             <Users className="size-4 text-[color:var(--neon-cyan)]" /> 
                             {c.modalidad}
                           </li>
                           {c.inicio && (
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center justify-center gap-2">
                               <MapPin className="size-4 text-[color:var(--neon-cyan)]" /> 
                               {t('nextCohort')}: {c.inicio}
                             </li>
                           )}
                         </ul>
                         
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 items-center">
                           <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (
                               <Star key={i} className="size-4 text-[color:var(--neon-accent)] fill-current" />
@@ -268,11 +257,11 @@ export default function Featured({
                       <div className="flex gap-3">
                         <button 
                           onClick={()=>onClickCourse(c.titulo)} 
-                          className="btn-neon flex-1 group-hover:scale-105 transition-transform duration-300"
+                          className="btn-primary btn-full group-hover:scale-105 transition-transform duration-300"
                         >
                           {t('knowMore')} <ChevronRight className="size-4" />
                         </button>
-                        <button className="p-3 border border-[color:var(--neon-border)] rounded-lg hover:bg-white/10 transition-colors">
+                        <button className="btn-icon">
                           <PlayCircle className="size-5 text-[color:var(--neon-cyan)]" />
                         </button>
                       </div>
