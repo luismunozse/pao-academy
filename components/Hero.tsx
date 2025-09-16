@@ -57,11 +57,12 @@ export default function Hero({
               initial={reducedMotion ? false : { opacity:0, y:20 }}
               animate={reducedMotion ? undefined : { opacity:1, y:0 }}
               transition={{ duration:.5 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[color:var(--academic-secondary)]/20 border border-[color:var(--academic-secondary)]/30 mb-6"
+              className="hero-certification-badge inline-flex items-center gap-3 px-6 py-3 rounded-full mb-6"
             >
-              <GraduationCap className="size-5 text-[color:var(--academic-secondary)]"/>
-              <span className="text-sm font-academic-heading text-[color:var(--academic-secondary)]">{t('urgencyText')}</span>
-              <Clock className="size-4 text-[color:var(--academic-accent)]"/>
+              <GraduationCap className="size-6 text-[color:var(--neon-accent)]"/>
+              <span className="hero-certification-text text-base text-white tracking-wide">
+                CURSOS Y DIPLOMATURAS CON <span className="hero-certification-highlight">CERTIFICACIÓN UNIVERSITARIA</span>
+              </span>
             </m.div>
           </LazyMotion>
 

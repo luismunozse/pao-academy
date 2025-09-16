@@ -126,7 +126,6 @@ export default function Contact({
                 </div>
 
                 {/* Email */}
-                {/* Email */}
                 <div className="input-group">
                   <Mail className="input-icon" />
                   <input
@@ -164,7 +163,6 @@ export default function Contact({
                     name="message"
                   />
                 </div>
-
 
                 {/* Acciones */}
                 <div className="mt-2 flex flex-wrap gap-3">

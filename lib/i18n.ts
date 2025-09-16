@@ -49,13 +49,13 @@ export const copy: Record<Lang, Record<string, string>> = {
     contactLead: "Dejanos tus datos y te contactamos con más info sobre",
 
     // Contact (pro – formulario nuevo)
-    contactTitlePro: "Imoulsa tu carrera con programas avalados",
+    contactTitlePro: "Impulsa tu carrera con programas avalados",
     contactDescPro: "Dejanos tu consulta y te proponemos el programa ideal para vos o tu equipo.",
     privacy: "Datos protegidos y soporte humano.",
     responseTime: "Respondemos en menos de 24 horas.",
     phonePH: "Teléfono",
     send: "Enviar",
-    consentNote: "Al enviar, aceptás ser contactad@ para coordinar la mejor propuesta.",
+    consentNote: "Al enviar, aceptás ser contactado para coordinar la mejor propuesta.",
 
     notFound: "No encontramos cursos para esa búsqueda. Probá con otro término o quitá el filtro.",
     catalog: "Catálogo",
@@ -80,7 +80,7 @@ export const copy: Record<Lang, Record<string, string>> = {
 
     // Hero additional content
     whatsappCTA: "Hablar por WhatsApp",
-    urgencyText: "Próxima cohorte de Ventas inicia el 15/10 – Cupos limitados",
+    urgencyText: "CURSOS Y DIPLOMATURAS CON CERTIFICACIÓN UNIVERSITARIA",
     octoberStarts: "Inicios Octubre",
     microCopy: "Becas disponibles · Sin costo de inscripción inicial",
     microCopyDate: "Solo hasta fecha definida",
@@ -196,7 +196,7 @@ export const copy: Record<Lang, Record<string, string>> = {
 
     // Hero additional content
     whatsappCTA: "Talk on WhatsApp",
-    urgencyText: "Next Sales cohort starts 15/10 – Limited spots",
+    urgencyText: "COURSES AND DIPLOMAS WITH UNIVERSITY CERTIFICATION",
     octoberStarts: "October starts",
     microCopy: "Scholarships available · No initial enrollment fee",
     microCopyDate: "Only until defined date",
