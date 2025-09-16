@@ -104,27 +104,27 @@ export default function Header({
                 <a
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all font-academic"
+                  className="header-nav-link flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/8 transition-all duration-200 text-sm font-medium"
                 >
-                  <item.icon className="w-4 h-4" />
+                  <item.icon className="w-3.5 h-3.5" />
                   <span>{item.label}</span>
                 </a>
               ))}
             </nav>
 
             {/* Desktop actions */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
               {setLang && (
                 <button
                   onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-white/8 hover:bg-white/15 transition-all duration-200"
                   aria-label="Change language"
                 >
-                  <Globe className="w-4 h-4" />
-                  <span className="text-white font-academic font-medium">{lang?.toUpperCase()}</span>
+                  <Globe className="w-3.5 h-3.5" />
+                  <span className="text-white text-sm font-medium">{lang?.toUpperCase()}</span>
                 </button>
               )}
-              <button onClick={onClickCTA} className="btn-academic-primary">
+              <button onClick={onClickCTA} className="header-cta-button px-4 py-1.5 bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-black font-semibold text-sm rounded-md hover:scale-105 transition-all duration-200 shadow-lg">
                 {t('enrollNow')}
               </button>
             </div>
@@ -134,7 +134,7 @@ export default function Header({
               {/* CTA reducido en mobile (opcional) */}
               <button
                 onClick={onClickCTA}
-                className="hidden xs:inline-flex px-3 py-2 rounded-xl bg-[color:var(--academic-accent)] text-black font-semibold"
+                className="hidden xs:inline-flex px-3 py-1.5 rounded-lg bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-black font-semibold text-sm hover:scale-105 transition-all duration-200"
               >
                 {t('knowMore')}
               </button>
