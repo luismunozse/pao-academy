@@ -102,7 +102,7 @@ export default function AsyncCourses({
                 <div key={categoria} className="w-full flex-shrink-0 px-2">
                   {/* Grid de cursos de la categoría - centrado cuando hay pocos elementos */}
                   <div className={`grid gap-3 ${getGridClasses()}`}>
-                    {cursosPorCategoria[categoria].map((curso, cursoIndex) => (
+                    {cursosPorCategoria[categoria].map((curso: any, cursoIndex: number) => (
                       <m.article
                         key={curso.id}
                         initial={{ opacity: 0, scale: 0.95 }}
