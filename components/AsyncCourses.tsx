@@ -82,10 +82,10 @@ export default function AsyncCourses({
 
           {/* Contenedor del carrusel */}
           <div className="overflow-hidden rounded-xl">
-            <m.div 
-              className="flex transition-transform duration-500 ease-in-out"
-              animate={{ x: `-${currentSlide * 100}%` }}
-            >
+                  <m.div 
+                    className="flex transition-transform duration-500 ease-in-out"
+                    animate={{ x: `-${currentSlide * 100}%` }}
+                  >
               {categorias.map((categoria, categoriaIndex) => {
                 const cursosEnCategoria = cursosPorCategoria[categoria];
                 const cantidadCursos = cursosEnCategoria.length;
@@ -103,17 +103,17 @@ export default function AsyncCourses({
                   {/* Grid de cursos de la categoría - centrado cuando hay pocos elementos */}
                   <div className={`grid gap-3 ${getGridClasses()}`}>
                     {cursosPorCategoria[categoria].map((curso: any, cursoIndex: number) => (
-                      <m.article
-                        key={curso.id}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ 
-                          duration: 0.4, 
-                          delay: cursoIndex * 0.05,
-                          ease: "easeOut"
-                        }}
-                        className="async-course-card-compact group relative overflow-hidden flex flex-col"
-                      >
+                        <m.article
+                          key={curso.id}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ 
+                            duration: 0.4, 
+                            delay: cursoIndex * 0.05,
+                            ease: "easeOut"
+                          }}
+                          className="async-course-card-compact group relative overflow-hidden flex flex-col"
+                        >
                         {/* AI Badge */}
                         {curso.conIA && (
                           <div className="absolute top-2 right-2 flex items-center gap-1 bg-[color:var(--neon-accent)] text-black px-1.5 py-0.5 rounded-full text-xs font-semibold z-10">
@@ -143,7 +143,7 @@ export default function AsyncCourses({
                             </button>
                           </div>
                         </div>
-                      </m.article>
+                        </m.article>
                     ))}
                   </div>
                 </div>

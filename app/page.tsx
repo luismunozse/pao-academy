@@ -37,7 +37,7 @@ export default function Page(){
     return ()=>mq.removeEventListener?.('change',listener);
   },[]);
 
-  // Newsletter modal - show after 3 seconds
+  // Newsletter modal - show after 3 seconds (only on client side)
   useEffect(() => {
     const timer = setTimeout(() => {
       setNewsletterOpen(true);
@@ -45,6 +45,25 @@ export default function Page(){
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Also show newsletter on first interaction (fallback for SSG)
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!newsletterOpen) {
+        setNewsletterOpen(true);
+      }
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('scroll', handleFirstInteraction);
+    };
+
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('scroll', handleFirstInteraction);
+
+    return () => {
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('scroll', handleFirstInteraction);
+    };
+  }, [newsletterOpen]);
 
   const t = (k:string)=> copy[lang][k] || k;
 
@@ -210,12 +229,13 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
 
       </LazyMotion>
 
-      {/* WhatsApp Floating Button */}
-      <WhatsAppFloat
-        phoneNumber={phoneAR}
-        message={`¡Hola! Me interesa recibir más información sobre los cursos de ${brandName}. Vengo desde la web.`}
-        brandName={brandName}
-      />
+              {/* WhatsApp Floating Button */}
+              <WhatsAppFloat
+                phoneNumber={phoneAR}
+                message={`¡Hola! Me interesa recibir más información sobre los cursos de ${brandName}. Vengo desde la web.`}
+                brandName={brandName}
+              />
+
 
       {/* Newsletter Modal */}
       <NewsletterModal

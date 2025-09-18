@@ -172,6 +172,16 @@ export const copy: Record<Lang, Record<string, string>> = {
     newsletterPlaceholder: "Tu email",
     newsletterButton: "Suscribirme",
     newsletterSuccess: "¡Gracias! Te mantendremos al tanto de las novedades.",
+
+    // Footer sections
+    footerContact: "Contacto",
+    footerContactEmail: "contacto@glomind360.com",
+    footerContactWhatsApp: "WhatsApp: (+54) 351-760-1441",
+    footerSocialMedia: "Redes sociales: LinkedIn · Instagram · YouTube",
+    footerLegal: "Legales",
+    footerPrivacyPolicy: "Políticas de privacidad",
+    footerTermsConditions: "Términos y condiciones",
+    footerWithdrawalButton: "Botón de arrepentimiento",
     newsletterClose: "Cerrar",
   },
 
@@ -344,6 +354,16 @@ export const copy: Record<Lang, Record<string, string>> = {
     newsletterPlaceholder: "Your email",
     newsletterButton: "Subscribe",
     newsletterSuccess: "Thank you! We'll keep you updated with the latest news.",
+
+    // Footer sections
+    footerContact: "Contact",
+    footerContactEmail: "contacto@glomind360.com",
+    footerContactWhatsApp: "WhatsApp: (+54) 351-760-1441",
+    footerSocialMedia: "Social media: LinkedIn · Instagram · YouTube",
+    footerLegal: "Legal",
+    footerPrivacyPolicy: "Privacy policy",
+    footerTermsConditions: "Terms and conditions",
+    footerWithdrawalButton: "Withdrawal button",
     newsletterClose: "Close",
   },
 };

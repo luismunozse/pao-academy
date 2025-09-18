@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { X, Mail, CheckCircle, Gift } from 'lucide-react';
 
 export default function NewsletterModal({
@@ -14,16 +14,6 @@ export default function NewsletterModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Auto-show modal after 3 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isOpen) {
-        // This will be controlled by parent component
-      }
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,11 +44,12 @@ export default function NewsletterModal({
   if (!isOpen) return null;
 
   return (
-    <m.div
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ zIndex: 9999 }}
     >
       {/* Backdrop */}
       <div 
@@ -67,7 +58,7 @@ export default function NewsletterModal({
       />
       
       {/* Modal */}
-      <m.div
+      <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
@@ -149,7 +140,7 @@ export default function NewsletterModal({
             </p>
           </div>
         )}
-      </m.div>
-    </m.div>
+      </motion.div>
+    </motion.div>
   );
 }

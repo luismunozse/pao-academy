@@ -1,5 +1,5 @@
 'use client';
-import { Globe, GraduationCap, Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
+import { Globe, GraduationCap, Mail, ArrowRight, MessageCircle, Linkedin, Instagram, Youtube } from 'lucide-react';
 import type { Lang } from '../lib/i18n';
 
 export default function Footer({
@@ -14,7 +14,7 @@ export default function Footer({
         {/* Contenido principal */}
         <div className="footer-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Brand */}
-          <div className="footer-brand-section sm:col-span-2 lg:col-span-2">
+          <div className="footer-brand-section">
             <div className="flex items-center gap-3 mb-4">
               <div className="footer-brand-logo w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center">
                 <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -24,7 +24,7 @@ export default function Footer({
                 <p className="text-xs sm:text-sm text-white/70">Academia Profesional</p>
               </div>
             </div>
-            <p className="text-white/80 text-xs sm:text-sm leading-relaxed max-w-md">
+            <p className="text-white/80 text-xs sm:text-sm leading-relaxed">
               Formación práctica para líderes y equipos. Desarrollamos las habilidades del futuro con mentores expertos y proyectos reales.
             </p>
           </div>
@@ -46,9 +46,9 @@ export default function Footer({
                 </a>
               </li>
               <li>
-                <a href="#featured" className="footer-link text-white/70 hover:text-[color:var(--neon-cyan)] flex items-center gap-2 group text-xs sm:text-sm">
+                <a href="#cursos-asincronos" className="footer-link text-white/70 hover:text-[color:var(--neon-cyan)] flex items-center gap-2 group text-xs sm:text-sm">
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                  Cursos Destacados
+                  Cursos Asincrónicos
                 </a>
               </li>
               <li>
@@ -62,19 +62,48 @@ export default function Footer({
 
           {/* Contacto */}
           <div className="footer-contact-section">
-            <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Contacto</h4>
+            <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">{t('footerContact')}</h4>
             <ul className="space-y-2 sm:space-y-3">
               <li className="footer-contact-item flex items-center gap-2 sm:gap-3 text-white/70">
                 <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)] flex-shrink-0" />
-                <span className="text-xs sm:text-sm break-all">info@glomind360.com</span>
+                <span className="text-xs sm:text-sm break-all">{t('footerContactEmail')}</span>
               </li>
               <li className="footer-contact-item flex items-center gap-2 sm:gap-3 text-white/70">
-                <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)] flex-shrink-0" />
-                <span className="text-xs sm:text-sm">+54 351 760-1441</span>
+                <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)] flex-shrink-0" />
+                <span className="text-xs sm:text-sm">{t('footerContactWhatsApp')}</span>
               </li>
               <li className="footer-contact-item flex items-center gap-2 sm:gap-3 text-white/70">
-                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)] flex-shrink-0" />
-                <span className="text-xs sm:text-sm">Córdoba, Argentina</span>
+                <div className="flex items-center gap-2">
+                  <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)]" />
+                  <Instagram className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)]" />
+                  <Youtube className="w-3 h-3 sm:w-4 sm:h-4 text-[color:var(--neon-cyan)]" />
+                </div>
+                <span className="text-xs sm:text-sm">{t('footerSocialMedia')}</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legales */}
+          <div className="footer-legal-section">
+            <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">{t('footerLegal')}</h4>
+            <ul className="space-y-2 sm:space-y-3">
+              <li>
+                <a href="/politicas-privacidad" className="footer-link text-white/70 hover:text-[color:var(--neon-cyan)] flex items-center gap-2 group text-xs sm:text-sm">
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  {t('footerPrivacyPolicy')}
+                </a>
+              </li>
+              <li>
+                <a href="/terminos-condiciones" className="footer-link text-white/70 hover:text-[color:var(--neon-cyan)] flex items-center gap-2 group text-xs sm:text-sm">
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  {t('footerTermsConditions')}
+                </a>
+              </li>
+              <li>
+                <a href="/arrepentimiento" className="footer-link text-white/70 hover:text-[color:var(--neon-cyan)] flex items-center gap-2 group text-xs sm:text-sm">
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  {t('footerWithdrawalButton')}
+                </a>
               </li>
             </ul>
           </div>
