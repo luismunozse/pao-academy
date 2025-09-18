@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { m } from 'framer-motion';
 import { 
   Target, 
@@ -95,8 +95,8 @@ export default function Benefits({
             </h2>
           </div>
 
-          {/* Grid de beneficios centrado */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+          {/* Grid de beneficios centrado: 2 filas x 5 columnas en desktop; en mobile mostramos 4 y opción de ver más */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
             {benefits.map((benefit, index) => (
               <m.div
                 key={benefit.title}
@@ -108,7 +108,7 @@ export default function Benefits({
                   ease: "easeOut"
                 }}
                 viewport={{ once: true }}
-                className="benefit-card group relative overflow-hidden w-full max-w-sm"
+                className={`benefit-card group relative overflow-hidden w-full max-w-sm ${index >= 4 ? 'hidden sm:block' : ''}`}
               >
                 {/* Background gradient effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--neon-blue)]/5 via-transparent to-[color:var(--neon-cyan)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -140,8 +140,31 @@ export default function Benefits({
               </m.div>
             ))}
           </div>
+
+          {/* Botón Ver más/menos solo en mobile */}
+          <div className="mt-6 flex justify-center sm:hidden">
+            <ToggleMore />
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ToggleMore(){
+  const [expanded, setExpanded] = useState(false);
+  React.useEffect(() => {
+    const hiddenCards = document.querySelectorAll('.benefit-card.hidden');
+    hiddenCards.forEach((el) => {
+      (el as HTMLElement).style.display = expanded ? 'block' : '';
+    });
+  }, [expanded]);
+  return (
+    <button
+      onClick={() => setExpanded(v => !v)}
+      className="btn-primary px-4 py-2 text-sm"
+    >
+      {expanded ? 'Ver menos' : 'Ver más'}
+    </button>
   );
 }

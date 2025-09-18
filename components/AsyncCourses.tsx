@@ -1,7 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { m } from 'framer-motion';
-import { PlayCircle, Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export default function AsyncCourses({
   t, microcursos, onClickCourse
@@ -13,12 +13,6 @@ export default function AsyncCourses({
   const title = t('asyncCoursesTitle');
   const desc = t('asyncCoursesDesc');
   const ctaText = t('exploreAsyncCourses');
-  const priceText = t('price');
-  const aiText = t('aiPowered');
-
-  // Estados para el carrusel
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Agrupar microcursos por categoría
   const cursosPorCategoria = microcursos.reduce((acc, curso) => {
@@ -30,33 +24,45 @@ export default function AsyncCourses({
   }, {} as Record<string, any[]>);
 
   const categorias = Object.keys(cursosPorCategoria);
-  const totalSlides = categorias.length;
 
-  // Auto-play functionality
-  React.useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
-    }, 5000);
+  function slugify(input: string){
+    const base = (input || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{M}+/gu, ''); // quita acentos/diacríticos
+    return base
+      .replace(/[^\p{L}\p{N}]+/gu, '-')
+      .replace(/[-_]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
 
-    return () => clearInterval(interval);
-  }, [totalSlides, isAutoPlaying]);
+  function getCategoryFallback(categoria: string){
+    const c = categoria.toLowerCase();
+    if (c.includes('datos') || c.includes('data')) return 'https://images.unsplash.com/photo-1551281044-8e3f9b35afe5?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('marketing')) return 'https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('diseño') || c.includes('ux') || c.includes('ui')) return 'https://images.unsplash.com/photo-1557264337-e8a93017fe92?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('inteligencia') || c.includes('ia') || c.includes('ai')) return 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('tech') || c.includes('program') || c.includes('python')) return 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('negocios') || c.includes('finanzas')) return 'https://images.unsplash.com/photo-1554224155-3a589877462f?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('producto')) return 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('procesos')) return 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?q=80&w=1400&auto=format&fit=crop';
+    if (c.includes('mindset') || c.includes('desarrollo personal')) return 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1400&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1400&auto=format&fit=crop';
+  }
 
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
-    setIsAutoPlaying(false);
-  };
+  function getCategoryImageSlug(categoria: string){
+    const withoutLeadingSymbols = (categoria || '')
+      .replace(/^[^\p{L}\p{N}]+/u, '')
+      .trim();
+    return slugify(withoutLeadingSymbols);
+  }
 
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide - 1 + totalSlides) % totalSlides);
-    setIsAutoPlaying(false);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false);
-  };
+  function getCategoryEmoji(categoria: string){
+    const first = categoria?.[0];
+    // Si la categoría ya trae emoji al inicio lo usamos, sino fallback
+    const hasEmoji = /\p{Extended_Pictographic}/u.test(first || '');
+    return hasEmoji ? first : '📚';
+  }
 
   return (
     <section id="cursos-asincronos" className="section-academic">
@@ -71,135 +77,68 @@ export default function AsyncCourses({
           </p>
         </div>
 
-        {/* Carrusel de categorías compacto */}
-        <div className="relative max-w-6xl mx-auto">
-          {/* Título de categoría actual */}
-          <div className="text-center mb-6">
-            <h3 className="text-white text-xl md:text-2xl font-semibold">
-              {categorias[currentSlide]}
-            </h3>
-          </div>
-
-          {/* Contenedor del carrusel */}
-          <div className="overflow-hidden rounded-xl">
-                  <m.div 
-                    className="flex transition-transform duration-500 ease-in-out"
-                    animate={{ x: `-${currentSlide * 100}%` }}
-                  >
-              {categorias.map((categoria, categoriaIndex) => {
-                const cursosEnCategoria = cursosPorCategoria[categoria];
-                const cantidadCursos = cursosEnCategoria.length;
-                
-                // Determinar el grid apropiado basado en la cantidad de cursos
-                const getGridClasses = () => {
-                  if (cantidadCursos === 1) return 'grid-cols-1 max-w-xs mx-auto';
-                  if (cantidadCursos === 2) return 'grid-cols-2 max-w-md mx-auto';
-                  if (cantidadCursos === 3) return 'grid-cols-3 max-w-2xl mx-auto';
-                  return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
-                };
-
-                return (
-                <div key={categoria} className="w-full flex-shrink-0 px-2">
-                  {/* Grid de cursos de la categoría - centrado cuando hay pocos elementos */}
-                  <div className={`grid gap-3 ${getGridClasses()}`}>
-                    {cursosPorCategoria[categoria].map((curso: any, cursoIndex: number) => (
-                        <m.article
-                          key={curso.id}
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ 
-                            duration: 0.4, 
-                            delay: cursoIndex * 0.05,
-                            ease: "easeOut"
-                          }}
-                          className="async-course-card-compact group relative overflow-hidden flex flex-col"
-                        >
-                        {/* AI Badge */}
-                        {curso.conIA && (
-                          <div className="absolute top-2 right-2 flex items-center gap-1 bg-[color:var(--neon-accent)] text-black px-1.5 py-0.5 rounded-full text-xs font-semibold z-10">
-                            <Sparkles className="size-2.5" />
-                            {aiText}
-                          </div>
-                        )}
-
-                        <div className="relative z-10 flex flex-col h-full p-3">
-                          {/* Título del curso */}
-                          <h4 className="text-white text-sm font-semibold mb-2 line-clamp-2 leading-tight">
-                            {curso.titulo}
-                          </h4>
-
-                          {/* Descripción */}
-                          <p className="text-white/70 text-xs mb-3 flex-grow line-clamp-2 leading-relaxed">
-                            {curso.desc}
-                          </p>
-
-                          {/* Footer con botón compacto */}
-                          <div className="mt-auto">
-                            <button 
-                              onClick={() => onClickCourse(curso.titulo)}
-                              className="w-full btn-primary-compact text-xs px-3 py-1.5 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-1"
-                            >
-                              Ver planes <ChevronRight className="size-3" />
-                            </button>
-                          </div>
-                        </div>
-                        </m.article>
-                    ))}
+        {/* Cards de categorías */}
+        <div className="max-w-7xl mx-auto px-2 md:px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            {categorias.map((categoria, i) => (
+              <m.article
+                key={categoria}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="group relative overflow-hidden flex flex-col rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+              >
+                {/* Media */}
+                <div className="relative w-full aspect-[16/10] overflow-hidden">
+                  {/* Fallback visual en caso de que no cargue la imagen local ni remota */}
+                  <div className="absolute inset-0 bg-white/10 flex items-center justify-center">
+                    <span className="text-5xl opacity-70 select-none">
+                      {getCategoryEmoji(categoria)}
+                    </span>
+                  </div>
+                  <img
+                    src={`/async/${getCategoryImageSlug(categoria)}.jpg`}
+                    alt={categoria}
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                    onError={(e) => {
+                      const img = e.currentTarget as HTMLImageElement;
+                      const src = img.getAttribute('src') || '';
+                      const base = `/async/${getCategoryImageSlug(categoria)}`;
+                      if (src.endsWith('.jpg')) {
+                        img.src = `${base}.png`;
+                      } else if (src.endsWith('.png')) {
+                        img.onerror = null;
+                        img.src = getCategoryFallback(categoria);
+                      } else {
+                        img.onerror = null;
+                        img.src = getCategoryFallback(categoria);
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-2 left-2 text-2xl">
+                    {getCategoryEmoji(categoria)}
                   </div>
                 </div>
-                );
-              })}
-            </m.div>
-          </div>
-
-          {/* Botones de navegación compactos */}
-          <button 
-            onClick={prevSlide}
-            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/40 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/10 transition-all duration-300 group z-10"
-          >
-            <ChevronLeft className="size-4 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
-          </button>
-          
-          <button 
-            onClick={nextSlide}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/40 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/10 transition-all duration-300 group z-10"
-          >
-            <ChevronRight className="size-4 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
-          </button>
-
-          {/* Indicadores de slides compactos */}
-          <div className="flex justify-center mt-6 gap-1.5">
-            {categorias.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide 
-                    ? 'bg-[color:var(--neon-cyan)] scale-125' 
-                    : 'bg-white/30 hover:bg-white/50'
-                }`}
-              />
+                {/* Body */}
+                <div className="p-4 flex flex-col gap-3">
+                  <h4 className="text-white text-base font-semibold leading-tight">
+                    {categoria}
+                  </h4>
+                  <div className="mt-auto">
+                    <button
+                      onClick={() => onClickCourse(categoria)}
+                      className="w-full btn-primary-compact text-sm px-3 py-2 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-1"
+                    >
+                      Ver cursos <ChevronRight className="size-4" />
+                    </button>
+                  </div>
+                </div>
+              </m.article>
             ))}
           </div>
         </div>
-
-        {/* CTA Final */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-center mt-8"
-        >
-          <button 
-            onClick={() => onClickCourse('cursos asincrónicos')}
-            className="btn-accent px-8 py-3 text-sm md:text-base font-semibold group"
-          >
-            <PlayCircle className="size-5 mr-2" />
-            {ctaText}
-            <ChevronRight className="size-4 ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </m.div>
 
         <div className="neon-divider mt-8" />
       </div>

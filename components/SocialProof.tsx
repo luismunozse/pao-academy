@@ -1,13 +1,13 @@
 'use client';
 import { m } from 'framer-motion';
 import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export default function SocialProof({
   t, lang, testimonios, idx
 }:{ t:(k:string)=>string; lang:'es'|'en'; testimonios:any[]; idx:number; }){
   const test = testimonios[idx][lang];
-  const [currentCompanyIndex, setCurrentCompanyIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   // Logos de empresas importantes
   const companies = [
@@ -23,13 +23,24 @@ export default function SocialProof({
     { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Deloitte_Logo.svg' }
   ];
 
-  // Auto-rotate del carrusel
+  // Paginar logos en grupos de 5
+  const logosPerPage = 5;
+  const companyPages = useMemo(() => {
+    const pages: typeof companies[] = [] as any;
+    for (let i = 0; i < companies.length; i += logosPerPage) {
+      pages.push(companies.slice(i, i + logosPerPage));
+    }
+    return pages;
+  }, [companies]);
+
+  // Auto-rotación por página
   useEffect(() => {
+    if (companyPages.length <= 1) return;
     const interval = setInterval(() => {
-      setCurrentCompanyIndex((prev) => (prev + 1) % companies.length);
-    }, 5000);
+      setCurrentPage((prev) => (prev + 1) % companyPages.length);
+    }, 4500);
     return () => clearInterval(interval);
-  }, [companies.length]);
+  }, [companyPages.length]);
 
   return (
     <section className="section-academic">
@@ -94,24 +105,22 @@ export default function SocialProof({
             <div className="overflow-hidden rounded-2xl">
               <m.div 
                 className="flex transition-transform duration-1000 ease-in-out"
-                animate={{ x: `-${currentCompanyIndex * 100}%` }}
+                animate={{ x: `-${currentPage * 100}%` }}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
               >
-                {companies.map((company, index) => (
-                  <div key={company.name} className="w-full flex-shrink-0">
+                {companyPages.map((page, pageIndex) => (
+                  <div key={pageIndex} className="w-full flex-shrink-0">
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-8 px-8 py-6">
-                      {companies.slice(index, index + 5).map((comp, i) => (
-                        <div key={comp.name} className="flex items-center justify-center p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-500 group">
+                      {page.map((comp) => (
+                        <div key={comp.name} className="flex items-center justify-center p-4 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group bg-transparent">
                           <img 
-                            src={comp.logo} 
+                            src={comp.logo}
                             alt={comp.name}
-                            className="h-8 w-auto object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                            className="h-8 w-auto object-contain brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
                             onError={(e) => {
                               e.currentTarget.style.display = 'none';
                               const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                              if (fallback) {
-                                fallback.style.display = 'flex';
-                              }
+                              if (fallback) fallback.style.display = 'flex';
                             }}
                           />
                           <div className="hidden items-center justify-center text-white/70 font-semibold text-sm">
@@ -127,14 +136,14 @@ export default function SocialProof({
 
             {/* Navigation buttons */}
             <button 
-              onClick={() => setCurrentCompanyIndex((prev) => prev === 0 ? companies.length - 1 : prev - 1)}
+              onClick={() => setCurrentPage((prev) => prev === 0 ? companyPages.length - 1 : prev - 1)}
               className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/10 transition-all duration-300 group"
             >
               <ChevronLeft className="size-5 text-white group-hover:text-[color:var(--academic-secondary)] transition-colors" />
             </button>
             
             <button 
-              onClick={() => setCurrentCompanyIndex((prev) => (prev + 1) % companies.length)}
+              onClick={() => setCurrentPage((prev) => (prev + 1) % companyPages.length)}
               className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/10 transition-all duration-300 group"
             >
               <ChevronRight className="size-5 text-white group-hover:text-[color:var(--academic-secondary)] transition-colors" />
@@ -142,12 +151,12 @@ export default function SocialProof({
 
             {/* Dots indicator */}
             <div className="flex justify-center mt-6 gap-2">
-              {companies.slice(0, Math.ceil(companies.length / 5)).map((_, index) => (
+              {companyPages.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentCompanyIndex(index)}
+                  onClick={() => setCurrentPage(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === Math.floor(currentCompanyIndex / 5)
+                    index === currentPage
                       ? 'bg-[color:var(--academic-secondary)] scale-125' 
                       : 'bg-white/30 hover:bg-white/50'
                   }`}

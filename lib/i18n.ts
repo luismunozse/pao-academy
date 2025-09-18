@@ -42,7 +42,7 @@ export const copy: Record<Lang, Record<string, string>> = {
     interest: "Interés",
     interestPH: "Ej.: Ventas Consultivas, Ruta Power BI, etc.",
     message: "Mensaje",
-    messagePH: "Contanos tu contexto",
+    messagePH: "Dejanos tu consulta",
     writeOnWhatsApp: "Escribir por WhatsApp",
     callMe: "Quiero que me llamen",
     speak: "¡Hablemos!",

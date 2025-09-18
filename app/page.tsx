@@ -29,6 +29,17 @@ export default function Page(){
   const [lang,setLang] = useState<Lang>('es');
   const [reducedMotion,setReducedMotion] = useState(false);
 
+  const NEWSLETTER_SESSION_KEY = 'newsletter_shown_session';
+
+  const openNewsletterOnce = () => {
+    if (typeof window === 'undefined') return;
+    try {
+      if (sessionStorage.getItem(NEWSLETTER_SESSION_KEY) === '1') return;
+      sessionStorage.setItem(NEWSLETTER_SESSION_KEY, '1');
+    } catch {}
+    setNewsletterOpen(true);
+  };
+
   useEffect(()=>{
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mq.matches);
@@ -39,8 +50,12 @@ export default function Page(){
 
   // Newsletter modal - show after 3 seconds (only on client side)
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      if (sessionStorage.getItem(NEWSLETTER_SESSION_KEY) === '1') return;
+    } catch {}
     const timer = setTimeout(() => {
-      setNewsletterOpen(true);
+      openNewsletterOnce();
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -48,10 +63,12 @@ export default function Page(){
 
   // Also show newsletter on first interaction (fallback for SSG)
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      if (sessionStorage.getItem(NEWSLETTER_SESSION_KEY) === '1') return;
+    } catch {}
     const handleFirstInteraction = () => {
-      if (!newsletterOpen) {
-        setNewsletterOpen(true);
-      }
+      openNewsletterOnce();
       document.removeEventListener('click', handleFirstInteraction);
       document.removeEventListener('scroll', handleFirstInteraction);
     };
@@ -63,7 +80,7 @@ export default function Page(){
       document.removeEventListener('click', handleFirstInteraction);
       document.removeEventListener('scroll', handleFirstInteraction);
     };
-  }, [newsletterOpen]);
+  }, []);
 
   const t = (k:string)=> copy[lang][k] || k;
 
@@ -241,7 +258,7 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
       <NewsletterModal
         t={t}
         isOpen={newsletterOpen}
-        onClose={() => setNewsletterOpen(false)}
+        onClose={() => { try { if (typeof window !== 'undefined') sessionStorage.setItem(NEWSLETTER_SESSION_KEY, '1'); } catch {} setNewsletterOpen(false); }}
       />
     </div>
   );
