@@ -117,6 +117,64 @@ export const copy: Record<Lang, Record<string, string>> = {
     alsoInterested: "También te puede interesar",
     relatedCourses: "Cursos relacionados en",
     topRecommended: "Top recomendados por estudiantes de",
+
+    // Async Courses Section
+    asyncCoursesTitle: "Cursos a tu ritmo, cuando quieras",
+    asyncCoursesDesc: "Formación práctica grabada para avanzar de forma flexible y potenciar tu perfil.",
+    exploreAsyncCourses: "Explorar cursos a tu ritmo",
+    price: "Precio",
+    aiPowered: "Con IA",
+
+    // Corporate Training Section
+    corporateTitle: "Formación a medida para empresas",
+    corporateDesc: "Programas in-company diseñados para potenciar a tus equipos en ventas, liderazgo, datos y más.",
+    corporateBullet1: "Diagnóstico inicial de necesidades",
+    corporateBullet2: "Capacitación personalizada con mentores expertos",
+    corporateBullet3: "Resultados medibles en el desempeño de los equipos",
+    corporateCTA: "Solicitar propuesta para mi empresa",
+
+    // Training Options Section
+    optionsTitle: "Elegí la mejor opción para potenciar tu vida profesional",
+    liveProgramsTitle: "Programas en Vivo",
+    liveProgramsDesc: "Aprendé junto a mentores, con cohortes y proyectos reales.",
+    liveProgramsCTA: "Ver todos los programas en vivo",
+    asyncCoursesTitle: "Cursos Asincrónicos",
+    asyncCoursesDesc: "Formación flexible, a tu ritmo, con acceso inmediato.",
+    asyncCoursesCTA: "Explorar cursos asincrónicos",
+    corporateTrainingTitle: "Formación In-Company",
+    corporateTrainingDesc: "Capacitaciones diseñadas a medida para empresas y equipos.",
+    corporateTrainingCTA: "Solicitar propuesta corporativa",
+
+    // Benefits Section
+    benefitsTitle: "¿Por qué estudiar con nosotros?",
+    benefit1Title: "Clases dinámicas y aplicables",
+    benefit1Desc: "Aprendizaje conectado al mundo real y a tus desafíos profesionales.",
+    benefit2Title: "Certificaciones con impacto",
+    benefit2Desc: "Sumá avales que fortalecen tu perfil y abren puertas laborales.",
+    benefit3Title: "Comunidad internacional",
+    benefit3Desc: "Conectá con mentores y alumnos de distintos países y sectores.",
+    benefit4Title: "Acceso desde cualquier dispositivo",
+    benefit4Desc: "Formate en vivo o a tu ritmo, desde donde quieras.",
+    benefit5Title: "Mentores expertos en la industria",
+    benefit5Desc: "Aprendé de profesionales que aplican lo que enseñan en empresas reales.",
+    benefit6Title: "Proyectos aplicables a tu trabajo",
+    benefit6Desc: "No solo teoría: trabajás con casos reales y salís con experiencia práctica.",
+    benefit7Title: "Enfoque en empleabilidad",
+    benefit7Desc: "Todo lo que aprendas está orientado a mejorar tu perfil y oportunidades laborales.",
+    benefit8Title: "Acompañamiento personalizado",
+    benefit8Desc: "Soporte humano real para resolver dudas y guiarte en tu proceso.",
+    benefit9Title: "Metodología ágil y flexible",
+    benefit9Desc: "Estudiá en vivo, on-demand o en formato mixto, según tu disponibilidad.",
+    benefit10Title: "Programas avalados por instituciones y empresas",
+    benefit10Desc: "Reforzá tu credibilidad con formación reconocida.",
+
+    // Newsletter Section
+    newsletterTitle: "Suscribite para recibir becas y novedades",
+    newsletterDesc: "Accedé a ofertas exclusivas, becas disponibles y las últimas actualizaciones de nuestros programas.",
+    newsletterPlaceholder: "Tu email",
+    newsletterButton: "Suscribirme",
+    newsletterSuccess: "¡Gracias! Te mantendremos al tanto de las novedades.",
+    newsletterClose: "Cerrar",
   },
 
   en: {
@@ -233,6 +291,64 @@ export const copy: Record<Lang, Record<string, string>> = {
     alsoInterested: "You might also be interested in",
     relatedCourses: "Related courses in",
     topRecommended: "Top recommended by students of",
+
+    // Async Courses Section
+    asyncCoursesTitle: "Courses at your own pace, whenever you want",
+    asyncCoursesDesc: "Practical recorded training to advance flexibly and boost your profile.",
+    exploreAsyncCourses: "Explore courses at your own pace",
+    price: "Price",
+    aiPowered: "With AI",
+
+    // Corporate Training Section
+    corporateTitle: "Custom training for companies",
+    corporateDesc: "In-company programs designed to empower your teams in sales, leadership, data and more.",
+    corporateBullet1: "Initial needs assessment",
+    corporateBullet2: "Personalized training with expert mentors",
+    corporateBullet3: "Measurable results in team performance",
+    corporateCTA: "Request proposal for my company",
+
+    // Training Options Section
+    optionsTitle: "Choose the best option to boost your professional life",
+    liveProgramsTitle: "Live Programs",
+    liveProgramsDesc: "Learn with mentors, with cohorts and real projects.",
+    liveProgramsCTA: "See all live programs",
+    asyncCoursesTitle: "Asynchronous Courses",
+    asyncCoursesDesc: "Flexible training, at your pace, with immediate access.",
+    asyncCoursesCTA: "Explore asynchronous courses",
+    corporateTrainingTitle: "In-Company Training",
+    corporateTrainingDesc: "Custom training designed for companies and teams.",
+    corporateTrainingCTA: "Request corporate proposal",
+
+    // Benefits Section
+    benefitsTitle: "Why study with us?",
+    benefit1Title: "Dynamic and applicable classes",
+    benefit1Desc: "Learning connected to the real world and your professional challenges.",
+    benefit2Title: "Impactful certifications",
+    benefit2Desc: "Add credentials that strengthen your profile and open job opportunities.",
+    benefit3Title: "International community",
+    benefit3Desc: "Connect with mentors and students from different countries and sectors.",
+    benefit4Title: "Access from any device",
+    benefit4Desc: "Train live or at your own pace, from anywhere.",
+    benefit5Title: "Industry expert mentors",
+    benefit5Desc: "Learn from professionals who apply what they teach in real companies.",
+    benefit6Title: "Projects applicable to your work",
+    benefit6Desc: "Not just theory: work with real cases and come out with practical experience.",
+    benefit7Title: "Focus on employability",
+    benefit7Desc: "Everything you learn is oriented to improve your profile and job opportunities.",
+    benefit8Title: "Personalized support",
+    benefit8Desc: "Real human support to resolve doubts and guide you in your process.",
+    benefit9Title: "Agile and flexible methodology",
+    benefit9Desc: "Study live, on-demand or in mixed format, according to your availability.",
+    benefit10Title: "Programs endorsed by institutions and companies",
+    benefit10Desc: "Strengthen your credibility with recognized training.",
+
+    // Newsletter Section
+    newsletterTitle: "Subscribe to receive scholarships and news",
+    newsletterDesc: "Access exclusive offers, available scholarships and the latest updates on our programs.",
+    newsletterPlaceholder: "Your email",
+    newsletterButton: "Subscribe",
+    newsletterSuccess: "Thank you! We'll keep you updated with the latest news.",
+    newsletterClose: "Close",
   },
 };
 
@@ -277,3 +393,258 @@ export const featureText = {
     datasci: { title: "Intro to Data Science", desc: "Python, notebooks and basic models for real cases.", tag: "Data" },
   },
 } as const;
+
+// Microcursos asincrónicos
+export const microcursos = [
+  // Datos y Analítica
+  { 
+    id: "excel-pro", 
+    categoria: "📊 Datos y Analítica", 
+    precio: 29, 
+    conIA: false,
+    es: { titulo: "Excel Pro desde Cero", desc: "La herramienta esencial para cualquier empleo administrativo o analítico." },
+    en: { titulo: "Excel Pro from Zero", desc: "The essential tool for any administrative or analytical job." }
+  },
+  { 
+    id: "powerbi-express", 
+    categoria: "📊 Datos y Analítica", 
+    precio: 39, 
+    conIA: false,
+    es: { titulo: "Power BI Express", desc: "Crea dashboards en minutos y convertí datos en decisiones." },
+    en: { titulo: "Power BI Express", desc: "Create dashboards in minutes and turn data into decisions." }
+  },
+
+  // Gestión de Procesos
+  { 
+    id: "notion-productividad", 
+    categoria: "⚙️ Gestión de Procesos", 
+    precio: 24, 
+    conIA: false,
+    es: { titulo: "Notion para la Productividad", desc: "Organizá proyectos y tu vida laboral en un solo espacio." },
+    en: { titulo: "Notion for Productivity", desc: "Organize projects and your work life in one space." }
+  },
+  { 
+    id: "trello-asana", 
+    categoria: "⚙️ Gestión de Procesos", 
+    precio: 27, 
+    conIA: false,
+    es: { titulo: "Trello & Asana Ágil", desc: "Gestioná equipos y tareas con metodologías modernas." },
+    en: { titulo: "Agile Trello & Asana", desc: "Manage teams and tasks with modern methodologies." }
+  },
+
+  // Negocios y Finanzas
+  { 
+    id: "finanzas-smart", 
+    categoria: "💼 Negocios y Finanzas", 
+    precio: 32, 
+    conIA: false,
+    es: { titulo: "Finanzas Smart", desc: "Organizá tus ingresos y gastos con técnicas simples." },
+    en: { titulo: "Smart Finance", desc: "Organize your income and expenses with simple techniques." }
+  },
+  { 
+    id: "excel-finanzas", 
+    categoria: "💼 Negocios y Finanzas", 
+    precio: 29, 
+    conIA: false,
+    es: { titulo: "Excel para Finanzas", desc: "Controlá presupuestos y números como un profesional." },
+    en: { titulo: "Excel for Finance", desc: "Control budgets and numbers like a professional." }
+  },
+  { 
+    id: "inversiones-principiantes", 
+    categoria: "💼 Negocios y Finanzas", 
+    precio: 35, 
+    conIA: false,
+    es: { titulo: "Inversiones para Principiantes", desc: "Dá tus primeros pasos en el mundo de la inversión." },
+    en: { titulo: "Investments for Beginners", desc: "Take your first steps in the world of investment." }
+  },
+  { 
+    id: "contabilidad-sin-complicaciones", 
+    categoria: "💼 Negocios y Finanzas", 
+    precio: 28, 
+    conIA: false,
+    es: { titulo: "Contabilidad Sin Complicaciones", desc: "Entendé balances y conceptos clave sin ser contador." },
+    en: { titulo: "Accounting Without Complications", desc: "Understand balance sheets and key concepts without being an accountant." }
+  },
+
+  // Mindset y Desarrollo Personal
+  { 
+    id: "productividad-10x", 
+    categoria: "🧠 Mindset y Desarrollo Personal", 
+    precio: 34, 
+    conIA: false,
+    es: { titulo: "Productividad 10X", desc: "Diseñá rutinas que multipliquen tus resultados diarios." },
+    en: { titulo: "10X Productivity", desc: "Design routines that multiply your daily results." }
+  },
+  { 
+    id: "comunicacion-asertiva", 
+    categoria: "🧠 Mindset y Desarrollo Personal", 
+    precio: 31, 
+    conIA: false,
+    es: { titulo: "Comunicación Asertiva", desc: "Mejorá cómo transmitís tus ideas y generá impacto." },
+    en: { titulo: "Assertive Communication", desc: "Improve how you convey your ideas and generate impact." }
+  },
+
+  // Tech
+  { 
+    id: "python-desde-cero", 
+    categoria: "💻 Tech", 
+    precio: 45, 
+    conIA: false,
+    es: { titulo: "Python desde Cero", desc: "Aprendé el lenguaje más popular del mercado laboral." },
+    en: { titulo: "Python from Zero", desc: "Learn the most popular language in the job market." }
+  },
+  { 
+    id: "ia-generativa", 
+    categoria: "💻 Tech", 
+    precio: 38, 
+    conIA: true,
+    es: { titulo: "IA Generativa para Todos", desc: "Aplicá inteligencia artificial en tu trabajo sin programar." },
+    en: { titulo: "Generative AI for Everyone", desc: "Apply artificial intelligence in your work without programming." }
+  },
+
+  // Marketing Digital y Comunicación
+  { 
+    id: "marketing-digital-express", 
+    categoria: "📢 Marketing Digital y Comunicación", 
+    precio: 33, 
+    conIA: false,
+    es: { titulo: "Marketing Digital Express", desc: "Conocé las bases del marketing que usan las empresas." },
+    en: { titulo: "Digital Marketing Express", desc: "Learn the marketing foundations that companies use." }
+  },
+  { 
+    id: "redes-sociales-pro", 
+    categoria: "📢 Marketing Digital y Comunicación", 
+    precio: 36, 
+    conIA: false,
+    es: { titulo: "Redes Sociales Pro", desc: "Hacé crecer un negocio con estrategias en Instagram y Facebook." },
+    en: { titulo: "Social Media Pro", desc: "Grow a business with Instagram and Facebook strategies." }
+  },
+  { 
+    id: "email-marketing-ia", 
+    categoria: "📢 Marketing Digital y Comunicación", 
+    precio: 29, 
+    conIA: true,
+    es: { titulo: "Email Marketing con IA", desc: "Campañas efectivas en minutos con Mailchimp + Inteligencia Artificial." },
+    en: { titulo: "Email Marketing with AI", desc: "Effective campaigns in minutes with Mailchimp + Artificial Intelligence." }
+  },
+
+  // Diseño y Creatividad
+  { 
+    id: "diseno-canva", 
+    categoria: "🎨 Diseño y Creatividad", 
+    precio: 25, 
+    conIA: false,
+    es: { titulo: "Diseño con Canva", desc: "Creá piezas atractivas sin ser diseñador." },
+    en: { titulo: "Design with Canva", desc: "Create attractive pieces without being a designer." }
+  },
+  { 
+    id: "ux-ui-fundamentals", 
+    categoria: "🎨 Diseño y Creatividad", 
+    precio: 42, 
+    conIA: false,
+    es: { titulo: "UX/UI Fundamentals", desc: "Los secretos del diseño digital centrado en el usuario." },
+    en: { titulo: "UX/UI Fundamentals", desc: "The secrets of user-centered digital design." }
+  },
+  { 
+    id: "photoshop-start", 
+    categoria: "🎨 Diseño y Creatividad", 
+    precio: 37, 
+    conIA: false,
+    es: { titulo: "Photoshop Start", desc: "Domina la edición de imágenes desde cero." },
+    en: { titulo: "Photoshop Start", desc: "Master image editing from scratch." }
+  },
+
+  // Ventas y Customer Experience
+  { 
+    id: "ventas-101", 
+    categoria: "🤝 Ventas y Customer Experience", 
+    precio: 30, 
+    conIA: false,
+    es: { titulo: "Ventas 101", desc: "Aprendé las técnicas básicas para cerrar más negocios." },
+    en: { titulo: "Sales 101", desc: "Learn the basic techniques to close more deals." }
+  },
+  { 
+    id: "atencion-cliente-5star", 
+    categoria: "🤝 Ventas y Customer Experience", 
+    precio: 26, 
+    conIA: false,
+    es: { titulo: "Atención al Cliente 5⭐", desc: "Ofrecé experiencias memorables que fidelizan." },
+    en: { titulo: "5⭐ Customer Service", desc: "Offer memorable experiences that build loyalty." }
+  },
+  { 
+    id: "objeciones-bajo-control", 
+    categoria: "🤝 Ventas y Customer Experience", 
+    precio: 28, 
+    conIA: false,
+    es: { titulo: "Objeciones bajo Control", desc: "Responde con seguridad y convertí un \"no\" en oportunidad." },
+    en: { titulo: "Objections Under Control", desc: "Respond with confidence and turn a \"no\" into an opportunity." }
+  },
+
+  // Soft Skills Profesionales
+  { 
+    id: "comunicacion-efectiva-pro", 
+    categoria: "👩‍💻 Soft Skills Profesionales", 
+    precio: 32, 
+    conIA: false,
+    es: { titulo: "Comunicación Efectiva Pro", desc: "Hablá con claridad y convencé en cualquier contexto." },
+    en: { titulo: "Effective Communication Pro", desc: "Speak clearly and convince in any context." }
+  },
+  { 
+    id: "presentaciones-impacto", 
+    categoria: "👩‍💻 Soft Skills Profesionales", 
+    precio: 29, 
+    conIA: false,
+    es: { titulo: "Presentaciones de Impacto", desc: "Creá exposiciones que cautiven y convenzan." },
+    en: { titulo: "Impact Presentations", desc: "Create presentations that captivate and convince." }
+  },
+  { 
+    id: "trabajo-equipo-remoto", 
+    categoria: "👩‍💻 Soft Skills Profesionales", 
+    precio: 27, 
+    conIA: false,
+    es: { titulo: "Trabajo en Equipo Remoto", desc: "Colaborá eficazmente desde cualquier lugar del mundo." },
+    en: { titulo: "Remote Teamwork", desc: "Collaborate effectively from anywhere in the world." }
+  },
+
+  // Marca Personal y Creación de Contenido con IA
+  { 
+    id: "marca-personal-360", 
+    categoria: "🌟 Marca Personal y Creación de Contenido con IA", 
+    precio: 40, 
+    conIA: true,
+    es: { titulo: "Tu Marca Personal 360", desc: "Definí tu identidad profesional y diferenciá tu perfil." },
+    en: { titulo: "Your 360 Personal Brand", desc: "Define your professional identity and differentiate your profile." }
+  },
+  { 
+    id: "contenido-redes-ia", 
+    categoria: "🌟 Marca Personal y Creación de Contenido con IA", 
+    precio: 35, 
+    conIA: true,
+    es: { titulo: "Contenido para Redes con IA", desc: "Generá copies, guiones y diseños con Inteligencia Artificial." },
+    en: { titulo: "Social Media Content with AI", desc: "Generate copies, scripts and designs with Artificial Intelligence." }
+  },
+  { 
+    id: "linkedin-pro-ia", 
+    categoria: "🌟 Marca Personal y Creación de Contenido con IA", 
+    precio: 31, 
+    conIA: true,
+    es: { titulo: "LinkedIn Pro con IA", desc: "Optimizá tu perfil y publicaciones para empleabilidad." },
+    en: { titulo: "LinkedIn Pro with AI", desc: "Optimize your profile and posts for employability." }
+  },
+  { 
+    id: "reels-shorts-ia", 
+    categoria: "🌟 Marca Personal y Creación de Contenido con IA", 
+    precio: 33, 
+    conIA: true,
+    es: { titulo: "Reels y Shorts con IA", desc: "Crea videos virales con guiones y edición inteligente." },
+    en: { titulo: "Reels and Shorts with AI", desc: "Create viral videos with intelligent scripts and editing." }
+  },
+  { 
+    id: "edicion-visual-ia", 
+    categoria: "🌟 Marca Personal y Creación de Contenido con IA", 
+    precio: 28, 
+    conIA: true,
+    es: { titulo: "Edición Visual con IA", desc: "Transformá imágenes y videos en piezas profesionales." },
+    en: { titulo: "Visual Editing with AI", desc: "Transform images and videos into professional pieces." }
+  },
+] as const;

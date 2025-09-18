@@ -1,16 +1,16 @@
 'use client';
 import { m, LazyMotion, domAnimation } from 'framer-motion';
-import { BookOpen, Users, Award, Star, GraduationCap, ArrowRight, Shield } from 'lucide-react';
+import { Award, Star, GraduationCap, ArrowRight } from 'lucide-react';
 
 export default function Hero({
   brandName, t, cta, reducedMotion
 }:{ brandName:string; t:(k:string)=>string; cta:()=>void; reducedMotion:boolean; }){
-  const stats = [
-    { number: '500+', label: 'Estudiantes', icon: Users },
-    { number: '95%',  label: 'Satisfacción', icon: Star },
-    { number: '50+',  label: 'Cursos',      icon: BookOpen },
-    { number: '24/7', label: 'Soporte',     icon: Shield },
-  ];
+  // const stats = [
+  //   { number: '500+', label: 'Estudiantes', icon: Users },
+  //   { number: '95%',  label: 'Satisfacción', icon: Star },
+  //   { number: '50+',  label: 'Cursos',      icon: BookOpen },
+  //   { number: '24/7', label: 'Soporte',     icon: Shield },
+  // ];
   const features = [
     { icon: GraduationCap, title: t('bullet1'), desc: 'Mentores expertos' },
     { icon: Award,         title: t('bullet2'), desc: 'Proyectos reales' },
@@ -133,8 +133,8 @@ export default function Hero({
             </m.div>
           </LazyMotion>
 
-          {/* stats */}
-          <LazyMotion features={domAnimation} strict>
+          {/* stats - OCULTO */}
+          {/* <LazyMotion features={domAnimation} strict>
             <m.div
               initial={reducedMotion ? false : { opacity:0, y:24 }}
               animate={reducedMotion ? undefined : { opacity:1, y:0 }}
@@ -149,7 +149,7 @@ export default function Hero({
                 </div>
               ))}
             </m.div>
-          </LazyMotion>
+          </LazyMotion> */}
 
           {/* beneficios */}
           <LazyMotion features={domAnimation} strict>

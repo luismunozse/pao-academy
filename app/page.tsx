@@ -5,13 +5,18 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import LiveCourses from '../components/LiveCourses';
 import Featured from '../components/Featured';
+import AsyncCourses from '../components/AsyncCourses';
+import CorporateTraining from '../components/CorporateTraining';
+import TrainingOptions from '../components/TrainingOptions';
+import Benefits from '../components/Benefits';
 import SocialProof from '../components/SocialProof';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
+import NewsletterModal from '../components/NewsletterModal';
 import WhatsAppFloat from '../components/WhatsAppFloat';
-import { copy, cursosBase, type Lang } from '../lib/i18n';
+import { copy, cursosBase, microcursos, type Lang } from '../lib/i18n';
 import './globals.css';
 
 export default function Page(){
@@ -19,6 +24,7 @@ export default function Page(){
   const phoneAR = '5493517601441';
 
   const [modalOpen,setModalOpen] = useState(false);
+  const [newsletterOpen,setNewsletterOpen] = useState(false);
   const [interes,setInteres] = useState('');
   const [lang,setLang] = useState<Lang>('es');
   const [reducedMotion,setReducedMotion] = useState(false);
@@ -30,6 +36,15 @@ export default function Page(){
     mq.addEventListener?.('change',listener);
     return ()=>mq.removeEventListener?.('change',listener);
   },[]);
+
+  // Newsletter modal - show after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNewsletterOpen(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const t = (k:string)=> copy[lang][k] || k;
 
@@ -87,6 +102,7 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
   useEffect(()=>{ const id=setInterval(()=>setIdxTestimonio(i=>(i+1)%testimonios.length),4500); return ()=>clearInterval(id); },[]);
 
   const cursos = cursosBase.map(c => ({ ...c[lang as 'es'|'en'], tag: c.tag }));
+  const microcursosData = microcursos.map(c => ({ ...c[lang as 'es'|'en'], id: c.id, categoria: c.categoria, precio: c.precio, conIA: c.conIA }));
 
   useEffect(()=>{
     const tests:{name:string;pass:boolean;info?:string}[] = [];
@@ -125,13 +141,36 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
         />
 
-        {/* Cursos destacados */}
-        <Featured
+        {/* Cursos destacados - OCULTO */}
+        {/* <Featured
           t={t}
           cursos={cursos}
           onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
+        /> */}
+
+        {/* Cursos asincrónicos */}
+        <AsyncCourses
+          t={t}
+          microcursos={microcursosData}
+          onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
         />
 
+        {/* Formación corporativa */}
+        <CorporateTraining
+          t={t}
+          onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
+        />
+
+        {/* Opciones de formación */}
+        <TrainingOptions
+          t={t}
+          onLiveClick={()=>{ setInteres('programas en vivo'); setModalOpen(true); }}
+          onAsyncClick={()=>{ setInteres('cursos asincrónicos'); setModalOpen(true); }}
+          onCorporateClick={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
+        />
+
+        {/* Beneficios diferenciales */}
+        <Benefits t={t} />
 
         {/* Social proof */}
         <SocialProof
@@ -176,6 +215,13 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         phoneNumber={phoneAR}
         message={`¡Hola! Me interesa recibir más información sobre los cursos de ${brandName}. Vengo desde la web.`}
         brandName={brandName}
+      />
+
+      {/* Newsletter Modal */}
+      <NewsletterModal
+        t={t}
+        isOpen={newsletterOpen}
+        onClose={() => setNewsletterOpen(false)}
       />
     </div>
   );
