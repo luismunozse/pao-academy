@@ -412,10 +412,10 @@ export const featureText = {
 
 // Microcursos asincrónicos
 export const microcursos = [
-  // Datos y Analítica
+  // Análisis de Datos
   { 
     id: "excel-pro", 
-    categoria: "📊 Datos y Analítica", 
+    categoria: "📊 Análisis de Datos", 
     precio: 29, 
     conIA: false,
     es: { titulo: "Excel Pro desde Cero", desc: "La herramienta esencial para cualquier empleo administrativo o analítico." },
@@ -423,7 +423,7 @@ export const microcursos = [
   },
   { 
     id: "powerbi-express", 
-    categoria: "📊 Datos y Analítica", 
+    categoria: "📊 Análisis de Datos",
     precio: 39, 
     conIA: false,
     es: { titulo: "Power BI Express", desc: "Crea dashboards en minutos y convertí datos en decisiones." },

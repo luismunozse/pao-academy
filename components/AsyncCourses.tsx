@@ -25,36 +25,43 @@ export default function AsyncCourses({
 
   const categorias = Object.keys(cursosPorCategoria);
 
-  function slugify(input: string){
-    const base = (input || '')
+  function normalize(input: string){
+    return (input || '')
       .toLowerCase()
       .normalize('NFD')
-      .replace(/\p{M}+/gu, ''); // quita acentos/diacríticos
-    return base
-      .replace(/[^\p{L}\p{N}]+/gu, '-')
-      .replace(/[-_]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+      .replace(/\p{M}+/gu, '')
+      .trim();
+  }
+
+  function getCategoryImage(categoria: string){
+    const c = normalize(categoria);
+    // Imágenes fijas por categoría (URLs externas)
+    if (c.includes('datos') || c.includes('analitica') || c.includes('analisis') || c.includes('data'))
+      return 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('gestion de procesos') || c.includes('procesos'))
+      return 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('negocios') || c.includes('finanzas'))
+      return 'https://images.unsplash.com/photo-1556157382-97eda2f9e69b?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('mindset') || c.includes('desarrollo personal'))
+      return 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('tech') || c.includes('program'))
+      return 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('marketing digital'))
+      return 'https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('diseño') || c.includes('creatividad') || c.includes('ux') || c.includes('ui'))
+      return 'https://images.unsplash.com/photo-1557264337-e8a93017fe92?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('ventas') || c.includes('customer'))
+      return 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1600&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1600&auto=format&fit=crop';
   }
 
   function getCategoryFallback(categoria: string){
-    const c = categoria.toLowerCase();
-    if (c.includes('datos') || c.includes('data')) return 'https://images.unsplash.com/photo-1551281044-8e3f9b35afe5?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('marketing')) return 'https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('diseño') || c.includes('ux') || c.includes('ui')) return 'https://images.unsplash.com/photo-1557264337-e8a93017fe92?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('inteligencia') || c.includes('ia') || c.includes('ai')) return 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('tech') || c.includes('program') || c.includes('python')) return 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('negocios') || c.includes('finanzas')) return 'https://images.unsplash.com/photo-1554224155-3a589877462f?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('producto')) return 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('procesos')) return 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?q=80&w=1400&auto=format&fit=crop';
-    if (c.includes('mindset') || c.includes('desarrollo personal')) return 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1400&auto=format&fit=crop';
-    return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1400&auto=format&fit=crop';
-  }
-
-  function getCategoryImageSlug(categoria: string){
-    const withoutLeadingSymbols = (categoria || '')
-      .replace(/^[^\p{L}\p{N}]+/u, '')
-      .trim();
-    return slugify(withoutLeadingSymbols);
+    const c = normalize(categoria);
+    if (c.includes('datos') || c.includes('analitica') || c.includes('analisis') || c.includes('data'))
+      return 'https://images.unsplash.com/photo-1551281044-8e3f9b35afe5?q=80&w=1600&auto=format&fit=crop';
+    if (c.includes('negocios') || c.includes('finanzas'))
+      return 'https://images.unsplash.com/photo-1554224155-3a589877462f?q=80&w=1600&auto=format&fit=crop';
+    return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1600&auto=format&fit=crop';
   }
 
   function getCategoryEmoji(categoria: string){
@@ -92,32 +99,23 @@ export default function AsyncCourses({
                 {/* Media */}
                 <div className="relative w-full aspect-[16/10] overflow-hidden">
                   {/* Fallback visual en caso de que no cargue la imagen local ni remota */}
-                  <div className="absolute inset-0 bg-white/10 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-white/10 flex items-center justify-center z-0">
                     <span className="text-5xl opacity-70 select-none">
                       {getCategoryEmoji(categoria)}
                     </span>
                   </div>
                   <img
-                    src={`/async/${getCategoryImageSlug(categoria)}.jpg`}
+                    src={getCategoryImage(categoria)}
                     alt={categoria}
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                    className="relative z-10 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                     onError={(e) => {
                       const img = e.currentTarget as HTMLImageElement;
-                      const src = img.getAttribute('src') || '';
-                      const base = `/async/${getCategoryImageSlug(categoria)}`;
-                      if (src.endsWith('.jpg')) {
-                        img.src = `${base}.png`;
-                      } else if (src.endsWith('.png')) {
-                        img.onerror = null;
-                        img.src = getCategoryFallback(categoria);
-                      } else {
-                        img.onerror = null;
-                        img.src = getCategoryFallback(categoria);
-                      }
+                      img.onerror = null;
+                      img.src = getCategoryFallback(categoria);
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-2 left-2 text-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-20" />
+                  <div className="absolute bottom-2 left-2 text-2xl z-30">
                     {getCategoryEmoji(categoria)}
                   </div>
                 </div>
