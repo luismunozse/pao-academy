@@ -1,6 +1,6 @@
 'use client';
 import { m } from 'framer-motion';
-import { Building2, CheckCircle, ArrowRight, Users, Target, BarChart3, TrendingUp, Award, Clock, Star } from 'lucide-react';
+import { Building2, CheckCircle, ArrowRight, Users, Target, BarChart, TrendingUp, Award, Clock, Star } from 'lucide-react';
 
 export default function CorporateTraining({
   t, onClickCTA
@@ -15,7 +15,7 @@ export default function CorporateTraining({
   const bullets = [
     { text: t('corporateBullet1'), icon: Target },
     { text: t('corporateBullet2'), icon: Users },
-    { text: t('corporateBullet3'), icon: BarChart3 },
+    { text: t('corporateBullet3'), icon: BarChart },
   ];
 
   // Casos de éxito y métricas

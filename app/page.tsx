@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import Header from '../components/Header';
-import HeroOptimized from '../components/HeroOptimized';
+import HeroFixed from '../components/HeroFixed';
 import UrgencyPopup from '../components/UrgencyPopup';
 import AdvancedForm from '../components/forms/AdvancedForm';
 import LiveCourses from '../components/LiveCourses';
@@ -152,11 +152,11 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         {/* HERO OPTIMIZADO CON A/B TESTING */}
         <section className="relative overflow-hidden">
           <div className="hero-euro absolute inset-0 -z-10"/>
-          <HeroOptimized
-            brandName={brandName}
-            t={t}
-            cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
-          />
+            <HeroFixed
+              brandName={brandName}
+              t={t}
+              cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+            />
         </section>
 
       <LazyMotion features={domAnimation} strict>
