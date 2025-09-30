@@ -257,6 +257,12 @@
   background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%); 
 }
 
+/* Sección sin padding superior para conectar con hero */
+.section-academic-no-top{ 
+  padding: 0 0 5rem 0; /* Solo padding inferior */
+  background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%); 
+}
+
 .section-academic-light{ 
   background: linear-gradient(135deg, var(--academic-gray-50) 0%, var(--academic-gray-100) 100%); 
   color: var(--academic-gray-900); 
@@ -373,30 +379,54 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Botón corporativo - Estilo empresarial con acentos de la paleta */
 .btn-corporate {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(0, 119, 255, 0.1) 0%, rgba(0, 247, 239, 0.05) 100%);
+  border: 1px solid rgba(0, 119, 255, 0.3);
   border-radius: 12px;
   color: white;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-corporate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 247, 239, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-corporate:hover {
-  background: linear-gradient(135deg, #475569 0%, #334155 100%);
-  border-color: rgba(0, 119, 255, 0.3);
-  box-shadow: 0 6px 20px rgba(0, 119, 255, 0.15);
+  background: linear-gradient(135deg, rgba(0, 119, 255, 0.2) 0%, rgba(0, 247, 239, 0.1) 100%);
+  border-color: rgba(0, 119, 255, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 119, 255, 0.2);
   transform: translateY(-2px);
+}
+
+.btn-corporate:hover::before {
+  left: 100%;
 }
 
 .btn-corporate:active {
   transform: translateY(0);
+}
+
+.btn-corporate:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 247, 239, 0.3);
 }
 
 /* =========================================
@@ -423,12 +453,14 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Botón de opciones - Botones de selección con paleta consistente */
 .btn-option {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2rem;
   background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+  border: 1px solid rgba(0, 119, 255, 0.3);
   border-radius: 12px;
   color: white;
   font-weight: 600;
@@ -437,11 +469,34 @@
   box-shadow: 0 8px 20px rgba(0, 119, 255, 0.3);
   width: 100%;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-option:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 25px rgba(0, 119, 255, 0.4);
+  border-color: rgba(0, 119, 255, 0.5);
+}
+
+.btn-option:hover::before {
+  left: 100%;
+}
+
+.btn-option:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 247, 239, 0.5);
 }
 
 /* =========================================
@@ -509,8 +564,7 @@
 
 .hero-wrap{
   position:relative;
-  min-height: calc(100svh - var(--header-h));
-  padding-top: var(--header-h);
+  min-height: 100svh;
   display:flex; align-items:center; justify-content:center;
 }
 
@@ -531,7 +585,7 @@
 @media (max-width:768px){ 
   .hero-wrap{ 
     background-attachment: scroll !important; 
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
   } 
   .hero-wrap .hero-bg-desktop {
     display: none;
@@ -545,7 +599,7 @@
 @media (min-width:769px) and (max-width:1024px){ 
   .hero-wrap{ 
     background-attachment: scroll; 
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
   } 
   .hero-wrap .hero-bg-desktop {
     display: none;
@@ -562,7 +616,7 @@
 @media (min-width:1025px){ 
   .hero-wrap{ 
     background-attachment: fixed; 
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
   } 
   .hero-wrap .hero-bg-desktop {
     display: block;
@@ -578,29 +632,29 @@
 /* Extra small devices (0-480px) */
 @media (max-width:480px) {
   .hero-wrap {
-    min-height: calc(100vh - var(--header-h));
-    padding-top: calc(var(--header-h) + 1rem);
+    min-height: 100vh;
+    padding-top: 1rem;
   }
 }
 
 /* Small devices (481px-640px) */
 @media (min-width:481px) and (max-width:640px) {
   .hero-wrap {
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
   }
 }
 
 /* Large devices (1025px-1280px) */
 @media (min-width:1025px) and (max-width:1280px) {
   .hero-wrap {
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
   }
 }
 
 /* Extra large devices (1281px+) */
 @media (min-width:1281px) {
   .hero-wrap {
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
   }
 }
 
@@ -1555,7 +1609,10 @@
 
 /* =========================================
    STANDARDIZED BUTTON SYSTEM
+   Paleta de colores consistente basada en --neon-blue y --neon-cyan
 ========================================= */
+
+/* Botón primario - Acción principal */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -1567,7 +1624,7 @@
   line-height: 1.25rem;
   color: #ffffff;
   background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 119, 255, 0.3);
   border-radius: 0.75rem;
   box-shadow: 0 4px 14px 0 rgba(0, 119, 255, 0.3), 0 2px 8px 0 rgba(0, 247, 239, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1592,6 +1649,7 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4), 0 4px 12px rgba(0, 247, 239, 0.3);
   background: linear-gradient(135deg, color-mix(in oklab, var(--neon-blue) 90%, white), color-mix(in oklab, var(--neon-cyan) 90%, white));
+  border-color: rgba(0, 119, 255, 0.5);
 }
 
 .btn-primary:hover::before {
@@ -1630,7 +1688,7 @@
   width: 100%;
 }
 
-/* Botón secundario */
+/* Botón secundario - Acción secundaria con acentos de la paleta */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -1641,20 +1699,37 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 119, 255, 0.1);
+  border: 1px solid rgba(0, 119, 255, 0.3);
   border-radius: 0.75rem;
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 247, 239, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 119, 255, 0.2);
+  border-color: rgba(0, 119, 255, 0.5);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.2);
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
 }
 
 .btn-secondary:active {
@@ -1663,10 +1738,10 @@
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 3px rgba(0, 247, 239, 0.3);
 }
 
-/* Botón de icono */
+/* Botón de icono - Botones circulares con acentos de la paleta */
 .btn-icon {
   display: inline-flex;
   align-items: center;
@@ -1674,20 +1749,104 @@
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 119, 255, 0.1);
+  border: 1px solid rgba(0, 119, 255, 0.3);
   border-radius: 0.75rem;
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 247, 239, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 119, 255, 0.2);
+  border-color: rgba(0, 119, 255, 0.5);
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.2);
+}
+
+.btn-icon:hover::before {
+  left: 100%;
 }
 
 .btn-icon:active {
   transform: scale(0.95);
+}
+
+.btn-icon:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 247, 239, 0.3);
+}
+
+/* Botón de acento - Acciones especiales con gradiente cyan */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+  border: 1px solid rgba(0, 247, 239, 0.3);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 14px 0 rgba(0, 247, 239, 0.3), 0 2px 8px 0 rgba(0, 119, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 247, 239, 0.4), 0 4px 12px rgba(0, 119, 255, 0.3);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--neon-cyan) 90%, white), color-mix(in oklab, var(--neon-blue) 90%, white));
+  border-color: rgba(0, 247, 239, 0.5);
+}
+
+.btn-accent:hover::before {
+  left: 100%;
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(0, 247, 239, 0.3), 0 2px 8px rgba(0, 119, 255, 0.2);
+}
+
+.btn-accent:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.5), 0 4px 14px rgba(0, 247, 239, 0.3);
+}
+
+.btn-accent:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 14px rgba(0, 247, 239, 0.2);
 }

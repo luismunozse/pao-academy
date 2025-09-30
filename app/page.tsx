@@ -150,16 +150,15 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
       />
 
         {/* HERO OPTIMIZADO CON A/B TESTING */}
-        <section className="relative overflow-hidden">
+        <div className="relative overflow-hidden">
           <div className="hero-euro absolute inset-0 -z-10"/>
             <HeroFixed
               brandName={brandName}
               t={t}
               cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
             />
-        </section>
+        </div>
 
-      <LazyMotion features={domAnimation} strict>
         {/* Cursos en Vivo - Sección Principal */}
         <LazySection animation="fadeInUp" threshold={0.15}>
           <LiveCourses
@@ -169,6 +168,8 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
             onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
           />
         </LazySection>
+
+      <LazyMotion features={domAnimation} strict>
 
         {/* Social proof - Movido arriba para generar confianza temprana */}
         <LazySection animation="fadeInUp" threshold={0.15}>

@@ -14,7 +14,7 @@ export default function HeroFixed({
   ];
 
   return (
-    <section id="inicio" className="section-academic hero-wrap overflow-hidden">
+    <section id="inicio" className="hero-wrap overflow-hidden">
       {/* Imagen de fondo optimizada */}
       <div className="hero-bg-desktop absolute inset-0">
         <Image
@@ -31,11 +31,11 @@ export default function HeroFixed({
       {/* Overlay sutil - Colores neutros */}
       <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-gray-900/60 to-slate-800/70"></div>
 
-      <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
+      <div className="relative z-10 container mx-auto px-4 py-12 md:py-20">
         <div className="max-w-5xl mx-auto text-center">
           
           {/* Badge de confianza elegante */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-6">
             <Star className="h-4 w-4 text-yellow-400" />
             <span className="text-white/90 text-sm font-medium">
               +500 profesionales ya transformaron su carrera
@@ -43,20 +43,20 @@ export default function HeroFixed({
           </div>
 
           {/* Título principal */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
             Formación práctica que acelera tu carrera
-            <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mt-2">
+            <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mt-1">
               con {brandName}
             </span>
           </h1>
 
           {/* Subtítulo */}
-          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/80 mb-6 max-w-3xl mx-auto leading-relaxed">
             Desarrollá habilidades reales, aplicá lo que aprendés y destacate en el mercado laboral. Clases en vivo con mentores expertos y proyectos que suman a tu portfolio.
           </p>
 
           {/* CTAs principales */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <button
               onClick={cta}
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"

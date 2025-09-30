@@ -55,7 +55,7 @@ export default function CorporateTraining({
 
   return (
     <section id="corporate-training" className="section-corporate">
-      <div className="relative full-width-content py-12 md:py-16">
+      <div className="relative full-width-content py-8 md:py-12">
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

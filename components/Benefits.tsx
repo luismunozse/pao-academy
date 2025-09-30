@@ -86,10 +86,10 @@ export default function Benefits({
 
   return (
     <section id="benefits" className="section-benefits">
-      <div className="relative full-width-content py-16 md:py-20">
+      <div className="relative full-width-content py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4">
               {title}
             </h2>
