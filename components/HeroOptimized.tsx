@@ -67,9 +67,22 @@ export default function HeroOptimized({
     cta();
   };
 
+  // Debug temporal
+  useEffect(() => {
+    console.log('🔍 Hero Debug:', {
+      heroTitle: t('heroTitle'),
+      heroSubtitle: t('heroSubtitle'),
+      brandName,
+      mounted,
+      abVariant
+    });
+  }, [t, brandName, mounted, abVariant]);
+
+  console.log('🎯 Hero RENDERIZANDO - Texto hardcodeado debería aparecer');
+
   return (
     <section id="inicio" className="section-academic hero-wrap overflow-hidden">
-      {/* Imagen de fondo optimizada con next/image */}
+      {/* Imagen de fondo optimizada */}
       <div className="hero-bg-desktop absolute inset-0">
         <Image
           src="/hero.jpg"
@@ -77,19 +90,23 @@ export default function HeroOptimized({
           fill
           priority
           quality={85}
-          className="object-cover brightness-[0.4] saturate-[0.8]"
+          className="object-cover brightness-[0.3] saturate-[0.8]"
           sizes="100vw"
         />
       </div>
+      
+      {/* Overlay sutil - Colores neutros */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-gray-900/60 to-slate-800/70"></div>
 
       <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge de confianza */}
+        <div className="max-w-5xl mx-auto text-center">
+          
+          {/* Badge de confianza elegante */}
           <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
           >
             <Star className="h-4 w-4 text-yellow-400" />
             <span className="text-white/90 text-sm font-medium">
@@ -97,30 +114,20 @@ export default function HeroOptimized({
             </span>
           </m.div>
 
-               {/* Título principal */}
-               <m.h1
-                 initial={{ opacity: 0, y: 30 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.8, delay: 0.2 }}
-                 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-               >
-                 {t('heroTitle') || 'Formación práctica que acelera tu carrera'}
-                 <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-2">
-                   con {brandName}
-                 </span>
-               </m.h1>
+          {/* Título principal - SIN ANIMACIONES */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            Formación práctica que acelera tu carrera
+            <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mt-2">
+              con {brandName}
+            </span>
+          </h1>
 
-          {/* Subtítulo */}
-          <m.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed"
-          >
-            {t('heroSubtitle') || 'Desarrollá habilidades reales, aplicá lo que aprendés y destacate en el mercado laboral. Clases en vivo con mentores expertos y proyectos que suman a tu portfolio.'}
-          </m.p>
+          {/* Subtítulo - SIN ANIMACIONES */}
+          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Desarrollá habilidades reales, aplicá lo que aprendés y destacate en el mercado laboral. Clases en vivo con mentores expertos y proyectos que suman a tu portfolio.
+          </p>
 
-          {/* CTA Principal con A/B Testing */}
+          {/* CTAs principales */}
           <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -129,24 +136,17 @@ export default function HeroOptimized({
           >
             <button
               onClick={handleCTAClick}
-              className={`group relative px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
-                ctaButtonConfig.color === 'primary' 
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl' 
-                  : ctaButtonConfig.color === 'accent'
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl'
-                  : 'bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl'
-              } hover:scale-105 active:scale-95`}
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
             >
               <span className="flex items-center gap-2">
                 {ctaButtonConfig.text}
-                <CTAIcon className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
 
             <button
               onClick={() => {
                 trackCTAClick('hero_secondary', 'hero_section');
-                // Scroll to cursos section
                 document.getElementById('cursos-en-vivo')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="px-8 py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95"
@@ -155,7 +155,7 @@ export default function HeroOptimized({
             </button>
           </m.div>
 
-          {/* Features con animación */}
+          {/* Features elegantes */}
           <LazyMotion features={domAnimation} strict>
             <m.div
               initial={{ opacity: 0, y: 30 }}
@@ -187,7 +187,7 @@ export default function HeroOptimized({
         </div>
       </div>
 
-      {/* Indicador de scroll */}
+      {/* Indicador de scroll sutil */}
       <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
