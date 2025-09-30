@@ -1,10 +1,28 @@
 'use client';
 import { m, LazyMotion, domAnimation } from 'framer-motion';
-import { Award, Star, GraduationCap, ArrowRight } from 'lucide-react';
+import { Award, Star, GraduationCap, ArrowRight, Rocket, Calendar, Users, Target, Shield } from 'lucide-react';
+import Image from 'next/image';
+import { useABTest, getVariantConfig, trackConversion } from '../lib/ab-testing';
+import { useCTATracking } from '../hooks/useAnalytics';
+import { useEffect, useState } from 'react';
 
 export default function Hero({
-  brandName, t, cta, reducedMotion
-}:{ brandName:string; t:(k:string)=>string; cta:()=>void; reducedMotion:boolean; }){
+  brandName, t, cta
+}:{ brandName:string; t:(k:string)=>string; cta:()=>void; }){
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mq.matches);
+    const listener = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener?.('change', listener);
+    return () => mq.removeEventListener?.('change', listener);
+  }, []);
   // const stats = [
   //   { number: '500+', label: 'Estudiantes', icon: Users },
   //   { number: '95%',  label: 'Satisfacción', icon: Star },
@@ -12,48 +30,59 @@ export default function Hero({
   //   { number: '24/7', label: 'Soporte',     icon: Shield },
   // ];
   const features = [
-    { icon: GraduationCap, title: t('bullet1'), desc: 'Mentores expertos' },
-    { icon: Award,         title: t('bullet2'), desc: 'Proyectos reales' },
-    { icon: Star,          title: t('bullet3'), desc: 'Certificación válida' },
+    { icon: GraduationCap, title: t('bullet1'), desc: 'Mentores expertos', metric: '15+ años exp.' },
+    { icon: Award,         title: t('bullet2'), desc: 'Proyectos reales', metric: '100% aplicable' },
+    { icon: Star,          title: t('bullet3'), desc: 'Certificación válida', metric: 'Universidad' },
+  ];
+
+  // Estadísticas de prueba social
+  const socialProof = [
+    { number: '2,500+', label: 'Estudiantes graduados', icon: Users },
+    { number: '95%', label: 'Tasa de empleabilidad', icon: Target },
+    { number: '4.8/5', label: 'Satisfacción promedio', icon: Star },
+    { number: '24/7', label: 'Soporte incluido', icon: Shield },
   ];
 
   return (
     <section id="inicio" className="section-academic hero-wrap overflow-hidden">
-      {/* Imagen de fondo hero.jpg con overlay académico - Desktop */}
-      <div 
-        className="hero-bg-desktop absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/hero.jpg')",
-          filter: "brightness(0.4) saturate(0.8)",
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-      />
+      {/* Imagen de fondo optimizada con next/image */}
+      <div className="hero-bg-desktop absolute inset-0">
+        <Image
+          src="/hero.jpg"
+          alt="GLOMIND360 - Formación profesional"
+          fill
+          priority
+          quality={85}
+          className="object-cover brightness-[0.4] saturate-[0.8]"
+          sizes="100vw"
+        />
+      </div>
       
       {/* Imagen responsive para móviles */}
-      <div 
-        className="hero-bg-mobile absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/hero.jpg')",
-          filter: "brightness(0.4) saturate(0.8)",
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-        }}
-      />
+      <div className="hero-bg-mobile absolute inset-0 md:hidden">
+        <Image
+          src="/hero.jpg"
+          alt="GLOMIND360 - Formación profesional"
+          fill
+          priority
+          quality={85}
+          className="object-cover object-top brightness-[0.4] saturate-[0.8]"
+          sizes="100vw"
+        />
+      </div>
       
       {/* Imagen para tablets */}
-      <div 
-        className="hero-bg-tablet absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block lg:hidden"
-        style={{
-          backgroundImage: "url('/hero.jpg')",
-          filter: "brightness(0.4) saturate(0.8)",
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-      />
+      <div className="hero-bg-tablet absolute inset-0 hidden md:block lg:hidden">
+        <Image
+          src="/hero.jpg"
+          alt="GLOMIND360 - Formación profesional"
+          fill
+          priority
+          quality={85}
+          className="object-cover brightness-[0.4] saturate-[0.8]"
+          sizes="100vw"
+        />
+      </div>
       
       {/* Overlay académico para integrar con la paleta de colores */}
       <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--academic-gray-900)]/90 via-[color:var(--academic-primary)]/30 to-[color:var(--academic-secondary)]/40" />
@@ -133,23 +162,25 @@ export default function Hero({
             </m.div>
           </LazyMotion>
 
-          {/* stats - OCULTO */}
-          {/* <LazyMotion features={domAnimation} strict>
+          {/* Prueba social - Estadísticas */}
+          <LazyMotion features={domAnimation} strict>
             <m.div
               initial={reducedMotion ? false : { opacity:0, y:24 }}
               animate={reducedMotion ? undefined : { opacity:1, y:0 }}
               transition={{ delay:.6, duration:.5 }}
-              className="hero-stats mb-12 max-w-3xl mx-auto px-2"
+              className="hero-stats mb-12 max-w-4xl mx-auto px-2"
             >
-              {stats.map(({number,label,icon:Icon})=>(
-                <div key={label} className="stat-academic">
-                  <Icon className="w-7 h-7 text-[color:var(--academic-secondary)] mx-auto mb-1.5"/>
-                  <div className="stat-number text-2xl">{number}</div>
-                  <div className="stat-label text-xs sm:text-sm">{label}</div>
-                </div>
-              ))}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                {socialProof.map(({number,label,icon:Icon})=>(
+                  <div key={label} className="stat-academic text-center group">
+                    <Icon className="w-6 h-6 text-[color:var(--academic-secondary)] mx-auto mb-2 group-hover:scale-110 transition-transform"/>
+                    <div className="stat-number text-xl md:text-2xl font-bold text-white">{number}</div>
+                    <div className="stat-label text-xs md:text-sm text-white/80">{label}</div>
+                  </div>
+                ))}
+              </div>
             </m.div>
-          </LazyMotion> */}
+          </LazyMotion>
 
           {/* beneficios */}
           <LazyMotion features={domAnimation} strict>
@@ -165,7 +196,10 @@ export default function Hero({
                     <f.icon className="size-7 text-[color:var(--academic-secondary)]"/>
                   </div>
                   <h3 className="font-academic-heading text-white text-base sm:text-lg mb-1.5">{f.title}</h3>
-                  <p className="text-white/70 text-sm font-academic">{f.desc}</p>
+                  <p className="text-white/70 text-sm font-academic mb-2">{f.desc}</p>
+                  <div className="text-[color:var(--academic-secondary)] text-xs font-semibold bg-[color:var(--academic-secondary)]/10 px-2 py-1 rounded-full inline-block">
+                    {f.metric}
+                  </div>
                 </div>
               ))}
             </m.div>

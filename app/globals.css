@@ -62,7 +62,7 @@
   --header-bg:rgba(255,255,255,.85);
 }
 
-/* Tema “graphite” (oscuro opcional) */
+/* Tema "graphite" (oscuro opcional) */
 [data-theme="graphite"]{
   --bg:#0F1114;
   --fg:#E9EEF6;
@@ -252,13 +252,26 @@
 /* =========================================
    SECCIONES ACADÉMICAS / COMPONENTES
 ========================================= */
-.section-academic{ padding:4rem 0; background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%); }
-.section-academic-light{ background: linear-gradient(135deg, var(--academic-gray-50) 0%, var(--academic-gray-100) 100%); color: var(--academic-gray-900); }
-.grid-academic{ display:grid; gap:2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.section-academic{ 
+  padding: 5rem 0; /* Aumentado de 4rem a 5rem para más respiración */
+  background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%); 
+}
 
-/* Sección de cursos asincrónicos - más compacta */
+.section-academic-light{ 
+  background: linear-gradient(135deg, var(--academic-gray-50) 0%, var(--academic-gray-100) 100%); 
+  color: var(--academic-gray-900); 
+  padding: 5rem 0; /* Consistencia en padding */
+}
+
+.grid-academic{ 
+  display:grid; 
+  gap: 2.5rem; /* Aumentado de 2rem a 2.5rem */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+}
+
+/* Sección de cursos asincrónicos - optimizada con mejor espaciado */
 #cursos-asincronos .section-academic{ 
-  padding: 2.5rem 0; 
+  padding: 4rem 0; /* Aumentado de 2.5rem a 4rem */
   background: linear-gradient(135deg, rgba(10, 15, 27, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%); 
 }
 

@@ -3,6 +3,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import HeroOptimized from '../components/HeroOptimized';
+import UrgencyPopup from '../components/UrgencyPopup';
+import AdvancedForm from '../components/forms/AdvancedForm';
 import LiveCourses from '../components/LiveCourses';
 import Featured from '../components/Featured';
 import AsyncCourses from '../components/AsyncCourses';
@@ -14,8 +17,10 @@ import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
+import ReservationForm from '../components/forms/ReservationForm';
 import NewsletterModal from '../components/NewsletterModal';
 import WhatsAppFloat from '../components/WhatsAppFloat';
+import LazySection from '../components/LazySection';
 import { copy, cursosBase, microcursos, type Lang } from '../lib/i18n';
 import './globals.css';
 
@@ -25,6 +30,7 @@ export default function Page(){
 
   const [modalOpen,setModalOpen] = useState(false);
   const [newsletterOpen,setNewsletterOpen] = useState(false);
+  const [urgencyPopupOpen,setUrgencyPopupOpen] = useState(false);
   const [interes,setInteres] = useState('');
   const [lang,setLang] = useState<Lang>('es');
   const [reducedMotion,setReducedMotion] = useState(false);
@@ -48,7 +54,15 @@ export default function Page(){
     return ()=>mq.removeEventListener?.('change',listener);
   },[]);
 
-  // Newsletter modal - show after 3 seconds (only on client side)
+  // Mostrar popup de urgencia después de 45 segundos (menos agresivo)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setUrgencyPopupOpen(true);
+    }, 45000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Newsletter modal - show after 30 seconds (menos intrusivo)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
@@ -56,30 +70,9 @@ export default function Page(){
     } catch {}
     const timer = setTimeout(() => {
       openNewsletterOnce();
-    }, 3000);
+    }, 30000);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  // Also show newsletter on first interaction (fallback for SSG)
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      if (sessionStorage.getItem(NEWSLETTER_SESSION_KEY) === '1') return;
-    } catch {}
-    const handleFirstInteraction = () => {
-      openNewsletterOnce();
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('scroll', handleFirstInteraction);
-    };
-
-    document.addEventListener('click', handleFirstInteraction);
-    document.addEventListener('scroll', handleFirstInteraction);
-
-    return () => {
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('scroll', handleFirstInteraction);
-    };
   }, []);
 
   const t = (k:string)=> copy[lang][k] || k;
@@ -157,89 +150,90 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         setLang={setLang}
       />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="hero-euro absolute inset-0 -z-10"/>
-        <Hero 
-          brandName={brandName} 
-          t={t} 
-          cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }} 
-          reducedMotion={reducedMotion}
-        />
-      </section>
+        {/* HERO OPTIMIZADO CON A/B TESTING */}
+        <section className="relative overflow-hidden">
+          <div className="hero-euro absolute inset-0 -z-10"/>
+          <HeroOptimized
+            brandName={brandName}
+            t={t}
+            cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+          />
+        </section>
 
       <LazyMotion features={domAnimation} strict>
         {/* Cursos en Vivo - Sección Principal */}
-        <LiveCourses
-          t={t}
-          lang={lang}
-          onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
-          onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
-        />
+        <LazySection animation="fadeInUp" threshold={0.15}>
+          <LiveCourses
+            t={t}
+            lang={lang}
+            onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
+            onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+          />
+        </LazySection>
 
-        {/* Cursos destacados - OCULTO */}
-        {/* <Featured
-          t={t}
-          cursos={cursos}
-          onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
-        /> */}
+        {/* Social proof - Movido arriba para generar confianza temprana */}
+        <LazySection animation="fadeInUp" threshold={0.15}>
+          <SocialProof
+            t={t}
+            lang={lang}
+            testimonios={testimonios}
+            idx={idxTestimonio}
+          />
+        </LazySection>
 
         {/* Cursos asincrónicos */}
-        <AsyncCourses
-          t={t}
-          microcursos={microcursosData}
-          onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
-        />
+        <LazySection animation="fadeInUp" threshold={0.15}>
+          <AsyncCourses
+            t={t}
+            microcursos={microcursosData}
+            onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
+          />
+        </LazySection>
 
-        {/* Formación corporativa */}
-        <CorporateTraining
-          t={t}
-          onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
-        />
+        {/* Beneficios diferenciales - Movido antes de corporativo */}
+        <LazySection animation="scaleIn" threshold={0.15}>
+          <Benefits t={t} />
+        </LazySection>
 
-        {/* Opciones de formación */}
-        <TrainingOptions
-          t={t}
-          onLiveClick={()=>{ setInteres('programas en vivo'); setModalOpen(true); }}
-          onAsyncClick={()=>{ setInteres('cursos asincrónicos'); setModalOpen(true); }}
-          onCorporateClick={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
-        />
-
-        {/* Beneficios diferenciales */}
-        <Benefits t={t} />
-
-        {/* Social proof */}
-        <SocialProof
-          t={t}
-          lang={lang}
-          testimonios={testimonios}
-          idx={idxTestimonio}
-        />
+        {/* Formación corporativa - Sección consolidada sin TrainingOptions redundante */}
+        <LazySection animation="fadeInUp" threshold={0.15}>
+          <CorporateTraining
+            t={t}
+            onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
+          />
+        </LazySection>
 
         {/* FAQ */}
-        <FAQ t={t} />
+        <LazySection animation="fadeInUp" threshold={0.15}>
+          <FAQ t={t} />
+        </LazySection>
 
-        {/* Contacto */}
-        <Contact
-          t={t}
-          interes={interes}
-          setInteres={setInteres}
-          whatsappUrl={whatsappUrl}
-          openModal={()=>{ setInteres(''); setModalOpen(true); }}
-        />
+        {/* Contacto - Simplificado al final */}
+        <LazySection animation="fadeInUp" threshold={0.15}>
+          <Contact
+            t={t}
+            interes={interes}
+            setInteres={setInteres}
+            whatsappUrl={whatsappUrl}
+            openModal={()=>{ setInteres(''); setModalOpen(true); }}
+          />
+        </LazySection>
 
         {/* Footer con selector de idioma */}
-        <Footer brandName={brandName} t={t} lang={lang} setLang={setLang} />
+        <LazySection animation="fadeInUp" threshold={0.1}>
+          <Footer brandName={brandName} t={t} lang={lang} setLang={setLang} />
+        </LazySection>
 
         {/* Modal + CTA flotante */}
         {modalOpen && (
           <Modal onClose={()=>setModalOpen(false)} t={t}>
-            <h3 className="text-xl font-semibold">{t('speak')}</h3>
-            <p className="mt-1 opacity-80">{t('contactLead')} <span className="font-semibold">{interes || (lang==='es'? 'nuestros programas':'our programs')}</span>.</p>
-            <div className="mt-4 grid grid-cols-1 gap-3">
-              <input className="input" placeholder={t('name')} />
-              <input className="input" placeholder={t('email')} />
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-accent w-full text-center">{t('writeOnWhatsApp')}</a>
+            <h3 className="text-xl font-semibold">Reserva tu lugar</h3>
+            <p className="mt-1 opacity-80">Completa tus datos y te contactamos para confirmar la inscripción.</p>
+            <div className="mt-4">
+              <ReservationForm defaultCourse={interes} onSuccess={()=>setModalOpen(false)} />
+            </div>
+            <div className="mt-4">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary w-full text-center">También escribir por WhatsApp</a>
             </div>
           </Modal>
         )}
@@ -254,12 +248,23 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
               />
 
 
-      {/* Newsletter Modal */}
-      <NewsletterModal
-        t={t}
-        isOpen={newsletterOpen}
-        onClose={() => { try { if (typeof window !== 'undefined') sessionStorage.setItem(NEWSLETTER_SESSION_KEY, '1'); } catch {} setNewsletterOpen(false); }}
-      />
-    </div>
-  );
-}
+        {/* Newsletter Modal */}
+        <NewsletterModal
+          t={t}
+          isOpen={newsletterOpen}
+          onClose={() => { try { if (typeof window !== 'undefined') sessionStorage.setItem(NEWSLETTER_SESSION_KEY, '1'); } catch {} setNewsletterOpen(false); }}
+        />
+
+        {/* Urgency Popup */}
+        <UrgencyPopup
+          isOpen={urgencyPopupOpen}
+          onClose={() => setUrgencyPopupOpen(false)}
+          onAction={() => {
+            setInteres('urgencia');
+            setModalOpen(true);
+            setUrgencyPopupOpen(false);
+          }}
+        />
+      </div>
+    );
+  }

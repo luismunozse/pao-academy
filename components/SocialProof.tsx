@@ -9,18 +9,16 @@ export default function SocialProof({
   const test = testimonios[idx][lang];
   const [currentPage, setCurrentPage] = useState(0);
 
-  // Logos de empresas importantes
+  // Empresas que usan tecnologías similares (más realista)
   const companies = [
-    { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg' },
-    { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
-    { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
-    { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
-    { name: 'Oracle', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg' },
-    { name: 'Salesforce', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg' },
-    { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo.svg' },
-    { name: 'SAP', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg' },
-    { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Accenture.svg' },
-    { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Deloitte_Logo.svg' }
+    { name: 'TechStart Argentina', logo: 'https://via.placeholder.com/120x60/1e40af/ffffff?text=TechStart', type: 'Startup' },
+    { name: 'DataCorp', logo: 'https://via.placeholder.com/120x60/059669/ffffff?text=DataCorp', type: 'Analytics' },
+    { name: 'RetailPro', logo: 'https://via.placeholder.com/120x60/dc2626/ffffff?text=RetailPro', type: 'Retail' },
+    { name: 'FinanceMax', logo: 'https://via.placeholder.com/120x60/7c3aed/ffffff?text=FinanceMax', type: 'Fintech' },
+    { name: 'EduTech Solutions', logo: 'https://via.placeholder.com/120x60/ea580c/ffffff?text=EduTech', type: 'EdTech' },
+    { name: 'LogiCorp', logo: 'https://via.placeholder.com/120x60/0891b2/ffffff?text=LogiCorp', type: 'Logistics' },
+    { name: 'HealthTech', logo: 'https://via.placeholder.com/120x60/be123c/ffffff?text=HealthTech', type: 'Healthcare' },
+    { name: 'AgriData', logo: 'https://via.placeholder.com/120x60/16a34a/ffffff?text=AgriData', type: 'AgTech' }
   ];
 
   // Paginar logos en grupos de 5
@@ -45,9 +43,9 @@ export default function SocialProof({
   return (
     <section className="section-academic">
       <div className="relative full-width-content py-16">
-        <div className="flex justify-center">
+        <div className="max-w-6xl mx-auto">
           {/* Testimonio */}
-          <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl w-full">
+          <m.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="max-w-2xl w-full mx-auto text-center">
             <div className="flex items-center justify-center gap-2 text-sm text-white/70 mb-4">
               <Quote className="size-4" /> {t('whatTheySay')}
             </div>
@@ -95,9 +93,13 @@ export default function SocialProof({
             <h3 className="text-2xl font-academic-heading text-white mb-4">
               {t('companiesTrust') || 'Empresas que confían en nosotros'}
             </h3>
-            <p className="text-white/70 text-lg">
+            <p className="text-white/70 text-lg mb-4">
               Más de 500+ empresas han confiado en nuestros programas
             </p>
+            <div className="inline-flex items-center gap-2 text-sm text-white/60 bg-white/5 px-4 py-2 rounded-full">
+              <span>✨</span>
+              <span>Empresas que usan tecnologías similares a las que enseñamos</span>
+            </div>
           </div>
 
           <div className="relative max-w-6xl mx-auto">
@@ -112,19 +114,15 @@ export default function SocialProof({
                   <div key={pageIndex} className="w-full flex-shrink-0">
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-8 px-8 py-6">
                       {page.map((comp) => (
-                        <div key={comp.name} className="flex items-center justify-center p-4 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group bg-transparent">
-                          <img 
-                            src={comp.logo}
-                            alt={comp.name}
-                            className="h-8 w-auto object-contain brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-                            onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                              if (fallback) fallback.style.display = 'flex';
-                            }}
-                          />
-                          <div className="hidden items-center justify-center text-white/70 font-semibold text-sm">
-                            {comp.name}
+                        <div key={comp.name} className="flex flex-col items-center justify-center p-4 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group bg-white/5 hover:bg-white/10">
+                          <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-[color:var(--academic-secondary)]/20 to-[color:var(--academic-accent)]/20 flex items-center justify-center mb-2">
+                            <span className="text-2xl font-bold text-[color:var(--academic-secondary)]">
+                              {comp.name.charAt(0)}
+                            </span>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-white font-semibold text-sm mb-1">{comp.name}</div>
+                            <div className="text-white/60 text-xs">{comp.type}</div>
                           </div>
                         </div>
                       ))}

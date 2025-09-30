@@ -2,6 +2,8 @@
 import React from 'react';
 import { m } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { getCourseImage, getCourseFallback } from '../lib/course-images';
 
 export default function AsyncCourses({
   t, microcursos, onClickCourse
@@ -13,6 +15,66 @@ export default function AsyncCourses({
   const title = t('asyncCoursesTitle');
   const desc = t('asyncCoursesDesc');
   const ctaText = t('exploreAsyncCourses');
+
+  // Información específica para cada categoría
+  const categoryInfo = {
+    '📊 Análisis de Datos': {
+      description: 'Domina herramientas de análisis y visualización de datos',
+      courseCount: '12+ cursos',
+      duration: '2-4 horas cada uno',
+      level: 'Principiante a Avanzado',
+      cta: 'Explorar cursos de datos'
+    },
+    '💼 Negocios y Finanzas': {
+      description: 'Estrategias empresariales y gestión financiera',
+      courseCount: '8+ cursos',
+      duration: '1-3 horas cada uno',
+      level: 'Intermedio',
+      cta: 'Ver cursos de negocios'
+    },
+    '🎨 Diseño y Creatividad': {
+      description: 'Herramientas de diseño y desarrollo creativo',
+      courseCount: '15+ cursos',
+      duration: '2-5 horas cada uno',
+      level: 'Principiante a Intermedio',
+      cta: 'Descubrir diseño'
+    },
+    '🚀 Marketing Digital': {
+      description: 'Estrategias de marketing online y redes sociales',
+      courseCount: '10+ cursos',
+      duration: '1-4 horas cada uno',
+      level: 'Principiante a Avanzado',
+      cta: 'Aprender marketing'
+    },
+    '💻 Programación': {
+      description: 'Lenguajes de programación y desarrollo web',
+      courseCount: '20+ cursos',
+      duration: '3-8 horas cada uno',
+      level: 'Principiante a Experto',
+      cta: 'Comenzar a programar'
+    },
+    '🎯 Liderazgo': {
+      description: 'Habilidades de liderazgo y gestión de equipos',
+      courseCount: '6+ cursos',
+      duration: '2-3 horas cada uno',
+      level: 'Intermedio a Avanzado',
+      cta: 'Desarrollar liderazgo'
+    },
+    '📈 Ventas': {
+      description: 'Técnicas de ventas y cierre de negocios',
+      courseCount: '9+ cursos',
+      duration: '1-3 horas cada uno',
+      level: 'Principiante a Intermedio',
+      cta: 'Mejorar ventas'
+    },
+    '🧠 Desarrollo Personal': {
+      description: 'Crecimiento personal y productividad',
+      courseCount: '7+ cursos',
+      duration: '1-2 horas cada uno',
+      level: 'Todos los niveles',
+      cta: 'Crecer personalmente'
+    }
+  };
 
   // Agrupar microcursos por categoría
   const cursosPorCategoria = microcursos.reduce((acc, curso) => {
@@ -33,36 +95,6 @@ export default function AsyncCourses({
       .trim();
   }
 
-  function getCategoryImage(categoria: string){
-    const c = normalize(categoria);
-    // Imágenes fijas por categoría (URLs externas)
-    if (c.includes('datos') || c.includes('analitica') || c.includes('analisis') || c.includes('data'))
-      return 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('gestion de procesos') || c.includes('procesos'))
-      return 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('negocios') || c.includes('finanzas'))
-      return 'https://images.unsplash.com/photo-1556157382-97eda2f9e69b?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('mindset') || c.includes('desarrollo personal'))
-      return 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('tech') || c.includes('program'))
-      return 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('marketing digital'))
-      return 'https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('diseño') || c.includes('creatividad') || c.includes('ux') || c.includes('ui'))
-      return 'https://images.unsplash.com/photo-1557264337-e8a93017fe92?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('ventas') || c.includes('customer'))
-      return 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1600&auto=format&fit=crop';
-    return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1600&auto=format&fit=crop';
-  }
-
-  function getCategoryFallback(categoria: string){
-    const c = normalize(categoria);
-    if (c.includes('datos') || c.includes('analitica') || c.includes('analisis') || c.includes('data'))
-      return 'https://images.unsplash.com/photo-1551281044-8e3f9b35afe5?q=80&w=1600&auto=format&fit=crop';
-    if (c.includes('negocios') || c.includes('finanzas'))
-      return 'https://images.unsplash.com/photo-1554224155-3a589877462f?q=80&w=1600&auto=format&fit=crop';
-    return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1600&auto=format&fit=crop';
-  }
 
   function getCategoryEmoji(categoria: string){
     const first = categoria?.[0];
@@ -87,14 +119,26 @@ export default function AsyncCourses({
         {/* Cards de categorías */}
         <div className="max-w-7xl mx-auto px-2 md:px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            {categorias.map((categoria, i) => (
-              <m.article
+            {categorias.map((categoria, i) => {
+              // Usar funciones centralizadas para imágenes confiables
+              const categoryImage = getCourseImage(categoria);
+              const categoryFallback = getCourseFallback(categoria);
+              const info = categoryInfo[categoria as keyof typeof categoryInfo] || {
+                description: 'Cursos especializados en esta área',
+                courseCount: '5+ cursos',
+                duration: '2-4 horas cada uno',
+                level: 'Todos los niveles',
+                cta: 'Ver cursos'
+              };
+
+              return (
+                <m.article
                 key={categoria}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="group relative overflow-hidden flex flex-col rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+                className="group relative overflow-hidden flex flex-col rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-105"
               >
                 {/* Media */}
                 <div className="relative w-full aspect-[16/10] overflow-hidden">
@@ -104,37 +148,72 @@ export default function AsyncCourses({
                       {getCategoryEmoji(categoria)}
                     </span>
                   </div>
-                  <img
-                    src={getCategoryImage(categoria)}
+                  <Image
+                    src={categoryImage}
                     alt={categoria}
-                    className="relative z-10 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                    fill
+                    className="relative z-10 object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    quality={80}
+                    unoptimized
+                    loader={({ src }) => src}
                     onError={(e) => {
                       const img = e.currentTarget as HTMLImageElement;
+                      if (img.onerror) return; // Evitar bucle infinito
                       img.onerror = null;
-                      img.src = getCategoryFallback(categoria);
+
+                      // Intentar con imagen de fallback
+                      if (img.src !== categoryFallback) {
+                        img.src = categoryFallback;
+                      } else {
+                        // Si ya es el fallback, usar placeholder
+                        img.style.display = 'none';
+                      }
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-20" />
                   <div className="absolute bottom-2 left-2 text-2xl z-30">
                     {getCategoryEmoji(categoria)}
                   </div>
+                  <div className="absolute top-2 right-2 z-30">
+                    <div className="bg-[color:var(--academic-secondary)]/90 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                      {info.courseCount}
+                    </div>
+                  </div>
                 </div>
                 {/* Body */}
-                <div className="p-4 flex flex-col gap-3">
+                <div className="p-4 flex flex-col gap-3 flex-1">
                   <h4 className="text-white text-base font-semibold leading-tight">
                     {categoria}
                   </h4>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {info.description}
+                  </p>
+                  
+                  {/* Información adicional */}
+                  <div className="space-y-2 text-xs text-white/60">
+                    <div className="flex items-center justify-between">
+                      <span>Duración:</span>
+                      <span className="text-white/80">{info.duration}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Nivel:</span>
+                      <span className="text-white/80">{info.level}</span>
+                    </div>
+                  </div>
+
                   <div className="mt-auto">
                     <button
                       onClick={() => onClickCourse(categoria)}
                       className="w-full btn-primary-compact text-sm px-3 py-2 group-hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-1"
                     >
-                      Ver cursos <ChevronRight className="size-4" />
+                      {info.cta} <ChevronRight className="size-4" />
                     </button>
                   </div>
                 </div>
               </m.article>
-            ))}
+              );
+            })}
           </div>
         </div>
 

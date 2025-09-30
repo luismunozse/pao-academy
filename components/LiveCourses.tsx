@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { m } from 'framer-motion';
-import { ChevronRight, TrendingUp, Users, Sparkles, Megaphone, BarChart4, Database, GraduationCap, BookOpen, Clock, Star, UserCheck, Play, ArrowRight, Shield, Target, Zap } from 'lucide-react';
+import { ChevronRight, TrendingUp, Users, Sparkles, Megaphone, BarChart4, Database, GraduationCap, BookOpen, Clock, Star, UserCheck, Play, ArrowRight, Shield, Target, Zap, Calendar, DollarSign, MapPin } from 'lucide-react';
 import type { Lang } from '../lib/i18n';
 import CategoryRecommendations from './CategoryRecommendations';
 
@@ -21,42 +21,96 @@ const courseData = {
       tag: 'Comercial',
       title: 'Ventas Consultivas',
       description: 'Aprendé a detectar oportunidades y cerrar con técnicas modernas de prospección y discovery.',
-      recommendations: ['branding', 'mindset'], // Marca Personal y Motivación y Hábitos
+      recommendations: ['branding', 'mindset'],
+      price: '$89,900',
+      originalPrice: '$119,900',
+      modality: 'Online en vivo',
+      duration: '6 semanas',
+      nextStart: '15 de Marzo 2024',
+      schedule: 'Martes y Jueves 19:00-21:00',
+      level: 'Intermedio',
+      students: 150,
+      rating: 4.9,
     },
     {
       id: 'liderazgo',
       tag: 'Liderazgo',
       title: 'Liderazgo Ágil',
       description: 'Potenciá equipos de alto rendimiento con dinámicas ágiles, feedback constante y prácticas efectivas.',
-      recommendations: ['ventas', 'mindset'], // Ventas Consultivas y Motivación y Hábitos
+      recommendations: ['ventas', 'mindset'],
+      price: '$95,900',
+      originalPrice: '$129,900',
+      modality: 'Online en vivo',
+      duration: '8 semanas',
+      nextStart: '22 de Marzo 2024',
+      schedule: 'Lunes y Miércoles 19:00-21:00',
+      level: 'Avanzado',
+      students: 120,
+      rating: 4.8,
     },
     {
       id: 'mindset',
       tag: 'Mindset',
       title: 'Motivación y Hábitos',
       description: 'Diseñá rutinas y sistemas que sostengan tu productividad y eleven tu mentalidad a otro nivel.',
-      recommendations: ['ventas', 'liderazgo'], // Ventas Consultivas y Liderazgo Ágil
+      recommendations: ['ventas', 'liderazgo'],
+      price: '$69,900',
+      originalPrice: '$99,900',
+      modality: 'Online en vivo',
+      duration: '4 semanas',
+      nextStart: '18 de Marzo 2024',
+      schedule: 'Sábados 10:00-12:00',
+      level: 'Principiante',
+      students: 200,
+      rating: 4.9,
     },
     {
       id: 'branding',
       tag: 'Branding',
       title: 'Marca Personal',
       description: 'Construí tu narrativa, aumentá tu visibilidad y diferenciá tu perfil en el mercado profesional.',
-      recommendations: ['ventas', 'powerbi'], // Ventas Consultivas y Power BI
+      recommendations: ['ventas', 'powerbi'],
+      price: '$79,900',
+      originalPrice: '$109,900',
+      modality: 'Online en vivo',
+      duration: '5 semanas',
+      nextStart: '20 de Marzo 2024',
+      schedule: 'Miércoles y Viernes 19:00-21:00',
+      level: 'Intermedio',
+      students: 180,
+      rating: 4.7,
     },
     {
       id: 'powerbi',
       tag: 'Datos',
       title: 'Power BI desde Cero',
       description: 'Transformá datos en decisiones con dashboards, métricas y reportes que generan impacto real.',
-      recommendations: ['analytics', 'branding'], // Data Analytics Bootcamp y Marca Personal
+      recommendations: ['analytics', 'branding'],
+      price: '$99,900',
+      originalPrice: '$139,900',
+      modality: 'Online en vivo',
+      duration: '7 semanas',
+      nextStart: '25 de Marzo 2024',
+      schedule: 'Martes y Jueves 19:00-21:00',
+      level: 'Principiante',
+      students: 160,
+      rating: 4.8,
     },
     {
       id: 'analytics',
       tag: 'Datos',
       title: 'Data Analytics Bootcamp',
       description: 'Domina SQL, ETL y métricas de negocio end-to-end para resolver problemas con analítica aplicada.',
-      recommendations: ['powerbi', 'liderazgo'], // Power BI y Liderazgo Ágil
+      recommendations: ['powerbi', 'liderazgo'],
+      price: '$119,900',
+      originalPrice: '$159,900',
+      modality: 'Online en vivo',
+      duration: '10 semanas',
+      nextStart: '28 de Marzo 2024',
+      schedule: 'Lunes, Miércoles y Viernes 19:00-21:00',
+      level: 'Intermedio',
+      students: 90,
+      rating: 4.9,
     },
   ],
   en: [
@@ -66,6 +120,15 @@ const courseData = {
       title: 'Consultative Sales',
       description: 'Learn to detect opportunities and close with modern prospecting and discovery techniques.',
       recommendations: ['branding', 'mindset'],
+      price: '$89,900',
+      originalPrice: '$119,900',
+      modality: 'Live Online',
+      duration: '6 weeks',
+      nextStart: 'March 15, 2024',
+      schedule: 'Tuesday & Thursday 7:00-9:00 PM',
+      level: 'Intermediate',
+      students: 150,
+      rating: 4.9,
     },
     {
       id: 'liderazgo',
@@ -73,6 +136,15 @@ const courseData = {
       title: 'Agile Leadership',
       description: 'Empower high-performance teams with agile dynamics, constant feedback and effective practices.',
       recommendations: ['ventas', 'mindset'],
+      price: '$95,900',
+      originalPrice: '$129,900',
+      modality: 'Live Online',
+      duration: '8 weeks',
+      nextStart: 'March 22, 2024',
+      schedule: 'Monday & Wednesday 7:00-9:00 PM',
+      level: 'Advanced',
+      students: 120,
+      rating: 4.8,
     },
     {
       id: 'mindset',
@@ -80,6 +152,15 @@ const courseData = {
       title: 'Motivation & Habits',
       description: 'Design routines and systems that sustain your productivity and elevate your mindset to another level.',
       recommendations: ['ventas', 'liderazgo'],
+      price: '$69,900',
+      originalPrice: '$99,900',
+      modality: 'Live Online',
+      duration: '4 weeks',
+      nextStart: 'March 18, 2024',
+      schedule: 'Saturdays 10:00 AM-12:00 PM',
+      level: 'Beginner',
+      students: 200,
+      rating: 4.9,
     },
     {
       id: 'branding',
@@ -87,6 +168,15 @@ const courseData = {
       title: 'Personal Branding',
       description: 'Build your narrative, increase your visibility and differentiate your profile in the professional market.',
       recommendations: ['ventas', 'powerbi'],
+      price: '$79,900',
+      originalPrice: '$109,900',
+      modality: 'Live Online',
+      duration: '5 weeks',
+      nextStart: 'March 20, 2024',
+      schedule: 'Wednesday & Friday 7:00-9:00 PM',
+      level: 'Intermediate',
+      students: 180,
+      rating: 4.7,
     },
     {
       id: 'powerbi',
@@ -94,6 +184,15 @@ const courseData = {
       title: 'Power BI from Zero',
       description: 'Transform data into decisions with dashboards, metrics and reports that generate real impact.',
       recommendations: ['analytics', 'branding'],
+      price: '$99,900',
+      originalPrice: '$139,900',
+      modality: 'Live Online',
+      duration: '7 weeks',
+      nextStart: 'March 25, 2024',
+      schedule: 'Tuesday & Thursday 7:00-9:00 PM',
+      level: 'Beginner',
+      students: 160,
+      rating: 4.8,
     },
     {
       id: 'analytics',
@@ -101,6 +200,15 @@ const courseData = {
       title: 'Data Analytics Bootcamp',
       description: 'Master SQL, ETL and end-to-end business metrics to solve problems with applied analytics.',
       recommendations: ['powerbi', 'liderazgo'],
+      price: '$119,900',
+      originalPrice: '$159,900',
+      modality: 'Live Online',
+      duration: '10 weeks',
+      nextStart: 'March 28, 2024',
+      schedule: 'Monday, Wednesday & Friday 7:00-9:00 PM',
+      level: 'Intermediate',
+      students: 90,
+      rating: 4.9,
     },
   ],
 };
@@ -255,12 +363,12 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
                         {course.tag}
                       </button>
                       <div className="flex items-center gap-3 mt-3">
-                        <div className="flex items-center gap-1">
-                          <Star className="size-4 text-yellow-400 fill-current" />
-                          <span className="text-sm font-academic-heading text-white">4.9</span>
-                        </div>
-                        <div className="w-1 h-1 bg-white/30 rounded-full"></div>
-                        <span className="text-sm text-white/70 font-academic">150+ estudiantes</span>
+                      <div className="flex items-center gap-1">
+                        <Star className="size-4 text-yellow-400 fill-current" />
+                        <span className="text-sm font-academic-heading text-white">{course.rating}</span>
+                      </div>
+                      <div className="w-1 h-1 bg-white/30 rounded-full"></div>
+                      <span className="text-sm text-white/70 font-academic">{course.students}+ estudiantes</span>
                       </div>
                     </div>
                   </div>
@@ -282,14 +390,45 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
                   </p>
 
                   {/* Course Stats */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="grid grid-cols-2 gap-3 mb-6">
                     <div className="flex items-center gap-2 text-white/70 bg-white/5 rounded-lg p-3">
                       <Clock className="size-4 text-[color:var(--academic-accent)]" />
-                      <span className="text-sm font-academic">6 semanas</span>
+                      <span className="text-sm font-academic">{course.duration}</span>
                     </div>
                     <div className="flex items-center gap-2 text-white/70 bg-white/5 rounded-lg p-3">
                       <UserCheck className="size-4 text-[color:var(--academic-accent)]" />
-                      <span className="text-sm font-academic">Intermedio</span>
+                      <span className="text-sm font-academic">{course.level}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/70 bg-white/5 rounded-lg p-3">
+                      <MapPin className="size-4 text-[color:var(--academic-accent)]" />
+                      <span className="text-sm font-academic">{course.modality}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/70 bg-white/5 rounded-lg p-3">
+                      <Calendar className="size-4 text-[color:var(--academic-accent)]" />
+                      <span className="text-sm font-academic">{course.nextStart}</span>
+                    </div>
+                  </div>
+
+                  {/* Precio */}
+                  <div className="mb-6 p-4 bg-gradient-to-r from-[color:var(--academic-secondary)]/10 to-[color:var(--academic-accent)]/10 rounded-lg border border-[color:var(--academic-secondary)]/20">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <DollarSign className="size-4 text-[color:var(--academic-secondary)]" />
+                          <span className="text-sm text-white/70 font-academic">Precio</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-2xl font-bold text-white">{course.price}</span>
+                          <span className="text-sm text-white/50 line-through">{course.originalPrice}</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-white/70 font-academic">Próximo inicio</div>
+                        <div className="text-sm font-semibold text-[color:var(--academic-secondary)]">{course.nextStart}</div>
+                      </div>
+                    </div>
+                    <div className="mt-2 text-xs text-white/60 font-academic">
+                      Horario: {course.schedule}
                     </div>
                   </div>
                 </div>
