@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Menu, X, Globe, GraduationCap, BookOpen, Users, Target, Info, Phone, ChevronRight } from 'lucide-react';
+import { Menu, X, Globe, GraduationCap, BookOpen, Users, Target, Info, Phone, ChevronRight, ChevronDown, Video, FileText } from 'lucide-react';
 
 export default function Header({
   brandName,
@@ -24,6 +24,10 @@ export default function Header({
   const [open, setOpen] = useState(false);
   const [elevated, setElevated] = useState(false);
   const [showPromo, setShowPromo] = useState(showPromoBar);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [nestedDropdownOpen, setNestedDropdownOpen] = useState<string | null>(null);
+  const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
+  const [mobileNestedOpen, setMobileNestedOpen] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setElevated(window.scrollY > 6);
@@ -39,13 +43,60 @@ export default function Header({
     return () => { document.body.style.overflow = orig; };
   }, [open]);
 
+  // Cursos en vivo
+  const liveCoursesList = [
+    { name: 'Ventas Consultivas', tag: 'Comercial', href: '#cursos-en-vivo' },
+    { name: 'Liderazgo Ágil', tag: 'Liderazgo', href: '#cursos-en-vivo' },
+    { name: 'Motivación y Hábitos', tag: 'Mindset', href: '#cursos-en-vivo' },
+    { name: 'Marca Personal', tag: 'Branding', href: '#cursos-en-vivo' },
+    { name: 'Power BI desde Cero', tag: 'Datos', href: '#cursos-en-vivo' },
+    { name: 'Data Analytics Bootcamp', tag: 'Datos', href: '#cursos-en-vivo' },
+  ];
+
+  // Categorías de cursos asincrónicos - Redirigen a WhatsApp
+  const asyncCoursesCategories = [
+    { name: '📊 Análisis de Datos', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Análisis de Datos asincrónicos.' },
+    { name: '💼 Negocios y Finanzas', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Negocios y Finanzas asincrónicos.' },
+    { name: '⚙️ Gestión de Procesos', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Gestión de Procesos asincrónicos.' },
+    { name: '🚀 Desarrollo Personal', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Desarrollo Personal asincrónicos.' },
+    { name: '💻 Tecnología', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Tecnología asincrónicos.' },
+    { name: '📱 Marketing Digital', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Marketing Digital asincrónicos.' },
+  ];
+
+  // Estructura de navegación con submenu para cursos
+  const coursesSubmenu = [
+    { 
+      label: t('liveCourses'), 
+      icon: Video, 
+      description: 'Clases en vivo con mentores',
+      hasNestedSubmenu: true,
+      nestedItems: liveCoursesList
+    },
+    { 
+      label: t('asyncCourses'), 
+      icon: FileText, 
+      description: 'Aprende a tu ritmo',
+      hasNestedSubmenu: true,
+      nestedItems: asyncCoursesCategories
+    },
+  ];
+
   const navigationItems = [
     { href: '#inicio',            label: t('home'),          icon: GraduationCap },
-    { href: '#cursos-en-vivo',    label: t('liveCourses'),   icon: BookOpen },
-    { href: '#cursos-asincronos', label: t('asyncCourses'),  icon: BookOpen },
+    { 
+      label: 'Cursos', 
+      icon: BookOpen, 
+      hasSubmenu: true, 
+      submenu: coursesSubmenu 
+    },
     { href: '#corporate-training', label: 'Corporate Training', icon: Target },
     { href: '#sobre-nosotros',    label: t('aboutUs'),       icon: Info },
-    { href: '#contacto',          label: t('contact'),       icon: Phone },
+    { 
+      label: t('contact'), 
+      icon: Phone, 
+      isWhatsApp: true,
+      href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa recibir más información sobre los cursos de GLOMIND360.'
+    },
   ];
 
   return (
@@ -100,15 +151,107 @@ export default function Header({
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-1">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="header-nav-link flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/8 transition-all duration-200 text-sm font-medium"
-                >
-                  <item.icon className="w-3.5 h-3.5" />
-                  <span>{item.label}</span>
-                </a>
+              {navigationItems.map((item, index) => (
+                item.hasSubmenu ? (
+                  // Menú con dropdown
+                  <div
+                    key={index}
+                    className="relative"
+                    onMouseEnter={() => setDropdownOpen(true)}
+                    onMouseLeave={() => setDropdownOpen(false)}
+                  >
+                    <button
+                      className="header-nav-link flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/8 transition-all duration-200 text-sm font-medium"
+                    >
+                      <item.icon className="w-3.5 h-3.5" />
+                      <span>{item.label}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {/* Dropdown menu principal */}
+                    {dropdownOpen && (
+                      <div className="absolute top-full left-0 mt-2 bg-[color:var(--academic-primary)]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-visible z-50">
+                        <div className="flex">
+                          {/* Primera columna: Categorías principales */}
+                          <div className="w-64 border-r border-white/10">
+                            {item.submenu?.map((subitem, subIndex) => (
+                              <div
+                                key={subIndex}
+                                className="relative"
+                                onMouseEnter={() => setNestedDropdownOpen(subitem.label)}
+                                onMouseLeave={() => setNestedDropdownOpen(null)}
+                              >
+                                <div className="flex items-start gap-3 px-4 py-3 hover:bg-white/10 transition-all duration-200 group cursor-pointer">
+                                  <subitem.icon className="w-5 h-5 text-[color:var(--academic-accent)] mt-0.5 group-hover:scale-110 transition-transform" />
+                                  <div className="flex-1">
+                                    <div className="text-white font-semibold text-sm group-hover:text-[color:var(--academic-accent)] transition-colors">
+                                      {subitem.label}
+                                    </div>
+                                    <div className="text-white/60 text-xs mt-0.5">
+                                      {subitem.description}
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
+                                </div>
+
+                                {/* Segunda columna: Lista de cursos */}
+                                {nestedDropdownOpen === subitem.label && subitem.hasNestedSubmenu && (
+                                  <div className="absolute left-full top-0 ml-0 w-72 bg-[color:var(--academic-primary)]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden">
+                                    <div className="p-2 border-b border-white/10 bg-white/5">
+                                      <div className="text-white font-bold text-sm px-3 py-1">
+                                        {subitem.label}
+                                      </div>
+                                    </div>
+                                    <div className="max-h-96 overflow-y-auto">
+                                      {subitem.nestedItems?.map((course: any, courseIndex: number) => (
+                                        <a
+                                          key={courseIndex}
+                                          href={course.href}
+                                          target={course.href.includes('wa.me') ? '_blank' : undefined}
+                                          rel={course.href.includes('wa.me') ? 'noopener noreferrer' : undefined}
+                                          className="flex items-center justify-between px-4 py-2.5 hover:bg-white/10 transition-all duration-200 group"
+                                        >
+                                          <div className="flex-1">
+                                            <div className="text-white text-sm font-medium group-hover:text-[color:var(--academic-accent)] transition-colors">
+                                              {course.name}
+                                            </div>
+                                            {course.tag && (
+                                              <div className="text-white/50 text-xs mt-0.5">
+                                                {course.tag}
+                                              </div>
+                                            )}
+                                          </div>
+                                          {course.href.includes('wa.me') ? (
+                                            <span className="text-green-400 text-xs">💬</span>
+                                          ) : (
+                                            <ChevronRight className="w-3.5 h-3.5 text-white/40 group-hover:text-[color:var(--academic-accent)] group-hover:translate-x-0.5 transition-all" />
+                                          )}
+                                        </a>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  // Menú normal sin dropdown
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target={item.isWhatsApp ? '_blank' : undefined}
+                    rel={item.isWhatsApp ? 'noopener noreferrer' : undefined}
+                    className="header-nav-link flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/8 transition-all duration-200 text-sm font-medium"
+                  >
+                    <item.icon className="w-3.5 h-3.5" />
+                    <span>{item.label}</span>
+                    {item.isWhatsApp && <span className="text-xs text-green-400">💬</span>}
+                  </a>
+                )
               ))}
             </nav>
 
@@ -179,19 +322,105 @@ export default function Header({
         </div>
 
         <nav className="mobile-menu-links">
-          {navigationItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="mobile-menu-link group"
-              onClick={() => setOpen(false)}
-            >
-              <div className="flex items-center gap-3">
-                <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>{item.label}</span>
-                <ChevronRight className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform" />
+          {navigationItems.map((item, index) => (
+            item.hasSubmenu ? (
+              // Item con submenu
+              <div key={index} className="space-y-1">
+                <button
+                  onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
+                  className="mobile-menu-link group w-full"
+                >
+                  <div className="flex items-center gap-3">
+                    <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span>{item.label}</span>
+                    <ChevronDown className={`w-4 h-4 ml-auto transition-transform ${mobileCoursesOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                </button>
+
+                {/* Submenu expandible */}
+                {mobileCoursesOpen && (
+                  <div className="ml-4 space-y-1 mt-2">
+                    {item.submenu?.map((subitem, subIndex) => (
+                      <div key={subIndex} className="space-y-1">
+                        <button
+                          onClick={() => setMobileNestedOpen(mobileNestedOpen === subitem.label ? null : subitem.label)}
+                          className="w-full flex items-start gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-all group"
+                        >
+                          <subitem.icon className="w-4 h-4 text-[color:var(--academic-accent)] mt-0.5 group-hover:scale-110 transition-transform" />
+                          <div className="flex-1 text-left">
+                            <div className="text-white font-semibold text-sm">
+                              {subitem.label}
+                            </div>
+                            <div className="text-white/60 text-xs mt-0.5">
+                              {subitem.description}
+                            </div>
+                          </div>
+                          <ChevronDown className={`w-3.5 h-3.5 text-white/60 transition-transform ${mobileNestedOpen === subitem.label ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        {/* Lista de cursos nested */}
+                        {mobileNestedOpen === subitem.label && subitem.hasNestedSubmenu && (
+                          <div className="ml-6 space-y-1 mt-1">
+                            {subitem.nestedItems?.map((course: any, courseIndex: number) => (
+                              <a
+                                key={courseIndex}
+                                href={course.href}
+                                target={course.href.includes('wa.me') ? '_blank' : undefined}
+                                rel={course.href.includes('wa.me') ? 'noopener noreferrer' : undefined}
+                                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-all group"
+                                onClick={() => {
+                                  if (!course.href.includes('wa.me')) {
+                                    setOpen(false);
+                                    setMobileCoursesOpen(false);
+                                    setMobileNestedOpen(null);
+                                  }
+                                }}
+                              >
+                                <div className="flex-1">
+                                  <div className="text-white text-sm font-medium">
+                                    {course.name}
+                                  </div>
+                                  {course.tag && (
+                                    <div className="text-white/50 text-xs">
+                                      {course.tag}
+                                    </div>
+                                  )}
+                                </div>
+                                {course.href.includes('wa.me') ? (
+                                  <span className="text-green-400 text-xs">💬</span>
+                                ) : (
+                                  <ChevronRight className="w-3 h-3 text-white/40 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                                )}
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            </a>
+            ) : (
+              // Item normal sin submenu
+              <a
+                key={item.href}
+                href={item.href}
+                target={item.isWhatsApp ? '_blank' : undefined}
+                rel={item.isWhatsApp ? 'noopener noreferrer' : undefined}
+                className="mobile-menu-link group"
+                onClick={() => setOpen(false)}
+              >
+                <div className="flex items-center gap-3">
+                  <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span>{item.label}</span>
+                  {item.isWhatsApp ? (
+                    <span className="text-green-400 text-sm ml-auto">💬</span>
+                  ) : (
+                    <ChevronRight className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                  )}
+                </div>
+              </a>
+            )
           ))}
         </nav>
 

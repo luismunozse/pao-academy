@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Limpiar Caché</title>
+</head>
+<body>
+  <h1>Limpiando caché del navegador...</h1>
+  <p>Por favor, sigue estos pasos:</p>
+  <ol>
+    <li><strong>Chrome/Edge:</strong> Presiona <code>Ctrl+Shift+Delete</code> (Windows) o <code>Cmd+Shift+Delete</code> (Mac)</li>
+    <li>Selecciona "Imágenes y archivos en caché"</li>
+    <li>Haz clic en "Borrar datos"</li>
+    <li>Luego presiona <code>Ctrl+Shift+R</code> (Windows) o <code>Cmd+Shift+R</code> (Mac) para recargar sin caché</li>
+  </ol>
+  
+  <h2>O directamente:</h2>
+  <button onclick="clearAll()">Limpiar Todo y Recargar</button>
+  
+  <script>
+    async function clearAll() {
+      try {
+        // Limpiar caché de service workers
+        if ('serviceWorker' in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (let registration of registrations) {
+            await registration.unregister();
+          }
+          console.log('Service workers eliminados');
+        }
+        
+        // Limpiar caché de CacheStorage
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
+          console.log('CacheStorage limpiado');
+        }
+        
+        // Limpiar localStorage
+        localStorage.clear();
+        console.log('localStorage limpiado');
+        
+        // Limpiar sessionStorage
+        sessionStorage.clear();
+        console.log('sessionStorage limpiado');
+        
+        alert('Caché limpiado! Recargando...');
+        
+        // Recargar sin caché
+        window.location.href = window.location.origin + '?nocache=' + Date.now();
+      } catch (error) {
+        console.error('Error limpiando caché:', error);
+        alert('Por favor usa Ctrl+Shift+R para recargar sin caché');
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    button {
+      background: #0070f3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #0051cc;
+    }
+  </style>
+</body>
+</html>

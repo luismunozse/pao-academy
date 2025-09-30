@@ -69,11 +69,8 @@ export default function HeroOptimized({
 
   return (
     <section id="inicio" className="section-academic hero-wrap overflow-hidden">
-      {/* Siempre renderizar ambos: imagen Y gradiente fallback */}
-      {/* La imagen es visible por defecto, el gradiente está oculto */}
-      
-      {/* Imagen de fondo optimizada con next/image - SIEMPRE presente */}
-      <div className="hero-bg-desktop absolute inset-0" style={{ opacity: mounted ? 1 : 1 }}>
+      {/* Imagen de fondo optimizada con next/image */}
+      <div className="hero-bg-desktop absolute inset-0">
         <Image
           src="/hero.jpg"
           alt="GLOMIND360 - Formación profesional"
@@ -84,12 +81,6 @@ export default function HeroOptimized({
           sizes="100vw"
         />
       </div>
-      
-      {/* Gradiente fallback - SIEMPRE presente pero oculto por defecto */}
-      <div 
-        className="hero-bg-fallback absolute inset-0 bg-gradient-to-br from-gray-900/90 via-blue-900/30 to-purple-900/40 pointer-events-none"
-        style={{ opacity: 0 }}
-      />
 
       <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
@@ -106,18 +97,18 @@ export default function HeroOptimized({
             </span>
           </m.div>
 
-          {/* Título principal */}
-          <m.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-          >
-            {t('heroTitle')}
-            <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              {brandName}
-            </span>
-          </m.h1>
+               {/* Título principal */}
+               <m.h1
+                 initial={{ opacity: 0, y: 30 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.8, delay: 0.2 }}
+                 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+               >
+                 {t('heroTitle') || 'Formación práctica que acelera tu carrera'}
+                 <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mt-2">
+                   con {brandName}
+                 </span>
+               </m.h1>
 
           {/* Subtítulo */}
           <m.p
@@ -126,7 +117,7 @@ export default function HeroOptimized({
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            {t('heroSubtitle')}
+            {t('heroSubtitle') || 'Desarrollá habilidades reales, aplicá lo que aprendés y destacate en el mercado laboral. Clases en vivo con mentores expertos y proyectos que suman a tu portfolio.'}
           </m.p>
 
           {/* CTA Principal con A/B Testing */}

@@ -5,6 +5,8 @@ export type Theme = typeof THEMES[number];
 export const copy: Record<Lang, Record<string, string>> = {
   es: {
     brandTagline: "Formación en vivo y online para transformar tu futuro",
+    heroTitle: "Formación práctica que acelera tu carrera",
+    heroSubtitle: "Desarrollá habilidades reales, aplicá lo que aprendés y destacate en el mercado laboral. Clases en vivo con mentores expertos y proyectos que suman a tu portfolio.",
     heroDesc: "Clases en vivo y cursos asincrónicos que convierten el aprendizaje en resultados: más experiencia, más confianza, más oportunidades.",
     knowMore: "Ver curso",
     viewCatalog: "Ver catálogo completo",
@@ -187,6 +189,8 @@ export const copy: Record<Lang, Record<string, string>> = {
 
   en: {
     brandTagline: "Live and online training to transform your future",
+    heroTitle: "Practical training that accelerates your career",
+    heroSubtitle: "Develop real skills, apply what you learn, and stand out in the job market. Live classes with expert mentors and projects that add to your portfolio.",
     heroDesc: "Live classes and asynchronous courses that turn learning into results: more experience, more confidence, more opportunities.",
     knowMore: "View course",
     viewCatalog: "View complete catalog",

@@ -2,23 +2,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import Header from '../components/Header';
-import Hero from '../components/Hero';
 import HeroOptimized from '../components/HeroOptimized';
 import UrgencyPopup from '../components/UrgencyPopup';
 import AdvancedForm from '../components/forms/AdvancedForm';
 import LiveCourses from '../components/LiveCourses';
 import Featured from '../components/Featured';
-import AsyncCourses from '../components/AsyncCourses';
+// import AsyncCourses from '../components/AsyncCourses'; // Removido
 import CorporateTraining from '../components/CorporateTraining';
 import TrainingOptions from '../components/TrainingOptions';
 import Benefits from '../components/Benefits';
 import SocialProof from '../components/SocialProof';
 import FAQ from '../components/FAQ';
-import Contact from '../components/Contact';
+// import Contact from '../components/Contact'; // Removido
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import ReservationForm from '../components/forms/ReservationForm';
 import NewsletterModal from '../components/NewsletterModal';
+import NewsletterSection from '../components/NewsletterSection';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import LazySection from '../components/LazySection';
 import { copy, cursosBase, microcursos, type Lang } from '../lib/i18n';
@@ -54,26 +54,25 @@ export default function Page(){
     return ()=>mq.removeEventListener?.('change',listener);
   },[]);
 
-  // Mostrar popup de urgencia después de 45 segundos (menos agresivo)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setUrgencyPopupOpen(true);
-    }, 45000);
-    return () => clearTimeout(timer);
-  }, []);
+  // Desactivado: Popup de urgencia (muy intrusivo)
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setUrgencyPopupOpen(true);
+  //   }, 45000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  // Newsletter modal - show after 30 seconds (menos intrusivo)
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      if (sessionStorage.getItem(NEWSLETTER_SESSION_KEY) === '1') return;
-    } catch {}
-    const timer = setTimeout(() => {
-      openNewsletterOnce();
-    }, 30000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  // Desactivado: Newsletter modal automático (muy intrusivo)
+  // useEffect(() => {
+  //   if (typeof window === 'undefined') return;
+  //   try {
+  //     if (sessionStorage.getItem(NEWSLETTER_SESSION_KEY) === '1') return;
+  //   } catch {}
+  //   const timer = setTimeout(() => {
+  //     openNewsletterOnce();
+  //   }, 30000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   const t = (k:string)=> copy[lang][k] || k;
 
@@ -181,14 +180,6 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           />
         </LazySection>
 
-        {/* Cursos asincrónicos */}
-        <LazySection animation="fadeInUp" threshold={0.15}>
-          <AsyncCourses
-            t={t}
-            microcursos={microcursosData}
-            onClickCourse={(title)=>{ setInteres(title); setModalOpen(true); }}
-          />
-        </LazySection>
 
         {/* Beneficios diferenciales - Movido antes de corporativo */}
         <LazySection animation="scaleIn" threshold={0.15}>
@@ -208,15 +199,9 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           <FAQ t={t} />
         </LazySection>
 
-        {/* Contacto - Simplificado al final */}
+        {/* Newsletter Section - Inline, no modal */}
         <LazySection animation="fadeInUp" threshold={0.15}>
-          <Contact
-            t={t}
-            interes={interes}
-            setInteres={setInteres}
-            whatsappUrl={whatsappUrl}
-            openModal={()=>{ setInteres(''); setModalOpen(true); }}
-          />
+          <NewsletterSection t={t} />
         </LazySection>
 
         {/* Footer con selector de idioma */}

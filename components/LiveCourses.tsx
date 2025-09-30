@@ -496,40 +496,6 @@ export default function LiveCourses({ t, lang, onCourseClick, onCatalogClick }: 
           />
         )}
 
-        {/* CTA final */}
-        <m.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center"
-        >
-          <div className="relative max-w-4xl mx-auto text-center p-12 rounded-3xl bg-gradient-to-br from-[color:var(--academic-secondary)]/10 via-[color:var(--academic-accent)]/5 to-[color:var(--academic-secondary)]/10 border border-[color:var(--academic-secondary)]/20 backdrop-blur-sm">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-10" style={{
-              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E\")",
-            }} />
-            
-            <div className="relative z-10">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-[color:var(--academic-secondary)] to-[color:var(--academic-accent)] flex items-center justify-center shadow-lg">
-                <GraduationCap className="size-10 text-white" />
-              </div>
-              <h3 className="text-3xl md:text-4xl font-academic-heading text-white mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                ¿Listo para transformar tu carrera?
-              </h3>
-              <p className="text-xl text-white/80 mb-8 font-academic max-w-2xl mx-auto leading-relaxed">
-                Únete a miles de profesionales que ya están desarrollando las habilidades del futuro.
-              </p>
-              <button 
-                onClick={onCatalogClick}
-                className="btn-primary btn-lg flex items-center gap-3 mx-auto group shadow-2xl hover:shadow-[color:var(--academic-secondary)]/25"
-              >
-                {t('seeFullCatalog')}
-                <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-            </div>
-          </div>
-        </m.div>
       </div>
     </section>
   );
