@@ -107,9 +107,6 @@ export const copy: Record<Lang, Record<string, string>> = {
     learningPathsDesc: "Diseñadas para avanzar por etapas y asegurar adopción real en el día a día.",
     wantThisPath: "Quiero esta ruta",
 
-    // Course categories
-    productivity: "Productividad",
-
     // Course details
     salesConsultativeTitle: "Ventas Consultivas",
     salesConsultativeDesc: "Aprendé a detectar oportunidades y cerrar con técnicas modernas de prospección y discovery.",
@@ -299,9 +296,6 @@ export const copy: Record<Lang, Record<string, string>> = {
     learningPaths: "Learning paths (Continuous training)",
     learningPathsDesc: "Designed to progress in stages and ensure real adoption day-to-day.",
     wantThisPath: "I want this path",
-
-    // Course categories
-    productivity: "Productivity",
 
     // Course details
     salesConsultativeTitle: "Consultative Sales",

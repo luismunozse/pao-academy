@@ -301,7 +301,7 @@ export default function MarcaPersonalPage() {
                     <Star key={i} className="size-4 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-white/90 mb-4 italic">"{testimonial.quote}"</p>
+                <p className="text-white/90 mb-4 italic">&ldquo;{testimonial.quote}&rdquo;</p>
                 <div>
                   <p className="font-semibold text-white">{testimonial.name}</p>
                   <p className="text-sm text-white/70">{testimonial.role}</p>

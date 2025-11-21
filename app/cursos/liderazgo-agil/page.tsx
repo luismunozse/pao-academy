@@ -301,7 +301,7 @@ export default function LiderazgoAgilPage() {
                     <Star key={i} className="size-3 sm:size-4 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-white/90 mb-4 italic quote text-sm sm:text-base">"{testimonial.quote}"</p>
+                <p className="text-white/90 mb-4 italic quote text-sm sm:text-base">&ldquo;{testimonial.quote}&rdquo;</p>
                 <div>
                   <p className="font-semibold text-white author text-sm sm:text-base">{testimonial.name}</p>
                   <p className="text-xs sm:text-sm text-white/70 role">{testimonial.role}</p>

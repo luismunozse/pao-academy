@@ -90,7 +90,7 @@ export default function SocialProof({
 
                   {/* Testimonio text */}
                   <blockquote className="text-xl md:text-2xl leading-relaxed text-white text-center mb-8 font-medium">
-                    "{test.frase}"
+                    &ldquo;{test.frase}&rdquo;
                   </blockquote>
 
                   {/* Rating stars */}

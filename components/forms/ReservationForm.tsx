@@ -163,7 +163,7 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
         <div className="relative">
           <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
-            className={`input pl-10 ${fieldErrors.name ? 'border-red-500' : ''}`}
+            className={`input-neon input-with-icon w-full h-11 text-base ${fieldErrors.name ? 'border-red-500' : ''}`}
             placeholder={t.name}
             value={name}
             onChange={e => {
@@ -182,7 +182,7 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
-            className={`input pl-10 ${fieldErrors.email ? 'border-red-500' : ''}`}
+            className={`input-neon input-with-icon w-full h-11 text-base ${fieldErrors.email ? 'border-red-500' : ''}`}
             type="email"
             placeholder={t.email}
             value={email}
@@ -202,7 +202,7 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
         <div className="relative">
           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
-            className={`input pl-10 ${fieldErrors.phone ? 'border-red-500' : ''}`}
+            className={`input-neon input-with-icon w-full h-11 text-base ${fieldErrors.phone ? 'border-red-500' : ''}`}
             type="tel"
             placeholder={t.phone}
             value={phone}
@@ -222,7 +222,7 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
         <div className="relative">
           <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <select
-            className="input pl-10 appearance-none"
+            className="input-neon input-with-icon w-full h-11 text-base appearance-none"
             value={country}
             onChange={e => setCountry(e.target.value)}
           >
@@ -241,43 +241,11 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
         </div>
       </div>
 
-      {/* Curso */}
-      <div>
-        <div className="relative">
-          <MessageSquare className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <input
-            className={`input pl-10 ${fieldErrors.course ? 'border-red-500' : ''}`}
-            placeholder={t.course}
-            value={course}
-            onChange={e => {
-              setCourse(e.target.value);
-              if (fieldErrors.course) {
-                setFieldErrors(prev => ({ ...prev, course: '' }));
-              }
-            }}
-          />
-        </div>
-        {fieldErrors.course && <p className="text-red-500 text-xs mt-1">{fieldErrors.course}</p>}
-      </div>
-
-      {/* Fecha */}
-      <div>
-        <div className="relative">
-          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <input
-            className="input pl-10"
-            type="date"
-            placeholder={t.date}
-            value={date}
-            onChange={e => setDate(e.target.value)}
-          />
-        </div>
-      </div>
 
       {/* Mensaje */}
       <div>
         <textarea
-          className="input min-h-24"
+          className="textarea-neon input-with-icon w-full min-h-[100px] text-base bg-[rgba(255,255,255,0.04)]"
           placeholder={t.message}
           value={message}
           onChange={e => setMessage(e.target.value)}
@@ -289,7 +257,7 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
       <button
         type="submit"
         disabled={!isValid || loading}
-        className="btn-accent w-full text-center disabled:opacity-60 flex items-center justify-center gap-2"
+        className="btn-accent w-full h-12 text-center disabled:opacity-60 flex items-center justify-center gap-2 rounded-xl"
       >
         {loading ? (
           <>

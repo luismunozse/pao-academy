@@ -265,7 +265,7 @@ export default function UrgencyPopup({
                 />
                 <div>
                   <p className="text-sm text-gray-700">
-                    "Duplicamos la tasa de cierre en 90 días"
+                    &ldquo;Duplicamos la tasa de cierre en 90 días&rdquo;
                   </p>
                   <p className="text-xs text-gray-500">- Mariana Pérez, Líder Comercial</p>
                 </div>

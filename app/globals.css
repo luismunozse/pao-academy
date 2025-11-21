@@ -84,6 +84,11 @@
 .btn-primary{color:#fff;background-image:linear-gradient(90deg,var(--acc1),var(--acc2));background-size:200% 100%;box-shadow:0 10px 20px rgba(0,119,255,.18)}
 .btn-primary:hover{transform:translateY(-1px);background-position:100% 0}
 .btn-primary:active{transform:translateY(0)}
+.btn-primary:focus-visible, .btn-accent:focus-visible, .btn-outline:focus-visible{
+  outline:2px solid var(--ring);
+  outline-offset:2px;
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--ring) 40%, transparent);
+}
 .btn-ghost{border:1px solid var(--card-border);background:#fff;color:var(--fg)}
 .btn-ghost:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.06)}
 /* Alias compatibilidad */
@@ -181,6 +186,18 @@
 .input-with-icon{ padding-left:2.75rem; }
 .input-neon::placeholder{ color:rgba(234,242,255,.55); }
 .input-neon:focus{ border-color:color-mix(in oklab, var(--neon-cyan) 55%, white); box-shadow:0 0 0 3px rgba(0,247,239,.22), 0 6px 16px rgba(0,247,239,.12); }
+.input-neon:focus-visible, .textarea-neon:focus-visible, select:focus-visible{
+  outline:2px solid var(--ring);
+  outline-offset:2px;
+}
+select.input, select.input-neon, select.input-with-icon {
+  color:#0f172a;
+  background:#ffffff;
+}
+select.input option, select.input-neon option, select.input-with-icon option {
+  color:#0f172a;
+  background:#ffffff;
+}
 
 /* Textarea consistente */
 .textarea-neon{ min-height:120px; resize:vertical; padding-top:2.25rem; line-height:1.45; }
@@ -253,20 +270,20 @@
    SECCIONES ACADÉMICAS / COMPONENTES
 ========================================= */
 .section-academic{ 
-  padding: 5rem 0; /* Aumentado de 4rem a 5rem para más respiración */
+  padding: 3rem 0;
   background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%); 
 }
 
 /* Sección sin padding superior para conectar con hero */
 .section-academic-no-top{ 
-  padding: 0 0 5rem 0; /* Solo padding inferior */
+  padding: 0 0 3rem 0;
   background: linear-gradient(135deg, var(--academic-gray-900) 0%, var(--academic-gray-800) 100%); 
 }
 
 .section-academic-light{ 
   background: linear-gradient(135deg, var(--academic-gray-50) 0%, var(--academic-gray-100) 100%); 
   color: var(--academic-gray-900); 
-  padding: 5rem 0; /* Consistencia en padding */
+  padding: 3rem 0;
 }
 
 .grid-academic{ 
@@ -277,7 +294,7 @@
 
 /* Sección de cursos asincrónicos - optimizada con mejor espaciado */
 #cursos-asincronos .section-academic{ 
-  padding: 4rem 0; /* Aumentado de 2.5rem a 4rem */
+  padding: 3rem 0;
   background: linear-gradient(135deg, rgba(10, 15, 27, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%); 
 }
 
@@ -756,6 +773,28 @@
 .header-size{ transition: height .25s ease, padding .25s ease; }
 
 /* =========================================
+   PALETA UNIFICADA (AZUL PROFUNDO + CIAN)
+========================================= */
+:root{
+  --acc1:#2563EB;
+  --acc2:#0EA5E9;
+  --fg:#0F172A;
+  --card-border:#E2E8F0;
+  --pill-bg:#E0F2FE;
+  --ring:rgba(37,99,235,.35);
+  --header-bg:rgba(255,255,255,.9);
+
+  --neon-blue:#2563EB;
+  --neon-cyan:#0EA5E9;
+  --neon-purple:#6366F1;
+  --neon-accent:#0EA5E9;
+
+  --academic-primary:#2563EB;
+  --academic-secondary:#0EA5E9;
+  --academic-accent:#0EA5E9;
+}
+
+/* =========================================
    HERO CERTIFICATION BADGE
 ========================================= */
 .hero-certification-badge {
@@ -959,7 +998,7 @@
 
 @media (min-width: 1024px) {
   .section-responsive {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 }
 
@@ -1850,3 +1889,5 @@
   transform: none;
   box-shadow: 0 4px 14px rgba(0, 247, 239, 0.2);
 }
+
+

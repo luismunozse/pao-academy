@@ -2,40 +2,44 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
 
-export default function Modal({
-  children, onClose, t
-}:{ children:React.ReactNode; onClose:()=>void; t:(k:string)=>string; }){
-  useEffect(()=>{
-    const onKey=(e:KeyboardEvent)=>e.key==='Escape' && onClose();
-    window.addEventListener('keydown',onKey);
-    return ()=>window.removeEventListener('keydown',onKey);
-  },[onClose]);
+type ModalProps = {
+  children: React.ReactNode;
+  onClose: () => void;
+  t: (k: string) => string;
+};
+
+export default function Modal({ children, onClose, t }: ModalProps) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* overlay con blur + tinte neón */}
+    <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 backdrop-blur-md"
-        style={{
-          background:
-            'radial-gradient(60% 40% at 20% 10%, rgba(0,247,239,.20), transparent), ' +
-            'radial-gradient(60% 40% at 80% 0%, rgba(0,119,255,.18), transparent), ' +
-            'rgba(0,0,0,.55)'
-        }}
+        className="absolute inset-0 bg-[#050915]/80 backdrop-blur-md"
         onClick={onClose}
       />
 
-      {/* panel vidrio */}
-      <div className="relative w-full max-w-md rounded-2xl border border-[color:var(--neon-border)] p-6 text-[color:var(--neon-fg)] shadow-2xl"
-           style={{background:'linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03))'}}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        className="relative w-full max-w-xl rounded-3xl border border-white/12 bg-gradient-to-br from-[#0d172a]/92 to-[#0b1224]/92 p-6 md:p-8 text-white shadow-[0_24px_90px_rgba(0,0,0,0.45)]"
+      >
+        <div className="absolute inset-0 pointer-events-none rounded-3xl border border-white/8" />
+        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[var(--acc1)] via-[var(--acc2)] to-[#7c3aed]" />
+
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-full p-1 text-white/80 hover:bg-white/10"
+          className="absolute right-4 top-4 rounded-full p-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
           aria-label={t('close')}
         >
-          <X className="size-5"/>
+          <X className="size-5" />
         </button>
-        {children}
+        <div className="space-y-6">
+          {children}
+        </div>
       </div>
     </div>
   );

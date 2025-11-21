@@ -20,7 +20,6 @@ import ReservationForm from '../components/forms/ReservationForm';
 import NewsletterModal from '../components/NewsletterModal';
 import NewsletterSection from '../components/NewsletterSection';
 import WhatsAppFloat from '../components/WhatsAppFloat';
-import LazySection from '../components/LazySection';
 import { copy, cursosBase, microcursos, type Lang } from '../lib/i18n';
 import './globals.css';
 
@@ -160,55 +159,40 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         </div>
 
         {/* Cursos en Vivo - Sección Principal */}
-        <LazySection animation="fadeInUp" threshold={0.15}>
-          <LiveCourses
-            t={t}
-            lang={lang}
-            onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
-            onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
-          />
-        </LazySection>
+        <LiveCourses
+          t={t}
+          lang={lang}
+          onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
+          onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+        />
 
       <LazyMotion features={domAnimation} strict>
 
         {/* Social proof - Movido arriba para generar confianza temprana */}
-        <LazySection animation="fadeInUp" threshold={0.15}>
-          <SocialProof
-            t={t}
-            lang={lang}
-            testimonios={testimonios}
-            idx={idxTestimonio}
-          />
-        </LazySection>
-
+        <SocialProof
+          t={t}
+          lang={lang}
+          testimonios={testimonios}
+          idx={idxTestimonio}
+        />
 
         {/* Beneficios diferenciales - Movido antes de corporativo */}
-        <LazySection animation="scaleIn" threshold={0.15}>
-          <Benefits t={t} />
-        </LazySection>
+        <Benefits t={t} />
 
         {/* Formación corporativa - Sección consolidada sin TrainingOptions redundante */}
-        <LazySection animation="fadeInUp" threshold={0.15}>
-          <CorporateTraining
-            t={t}
-            onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
-          />
-        </LazySection>
+        <CorporateTraining
+          t={t}
+          onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
+        />
 
         {/* FAQ */}
-        <LazySection animation="fadeInUp" threshold={0.15}>
-          <FAQ t={t} />
-        </LazySection>
+        <FAQ t={t} />
 
         {/* Newsletter Section - Inline, no modal */}
-        <LazySection animation="fadeInUp" threshold={0.15}>
-          <NewsletterSection t={t} />
-        </LazySection>
+        <NewsletterSection t={t} />
 
         {/* Footer con selector de idioma */}
-        <LazySection animation="fadeInUp" threshold={0.1}>
-          <Footer brandName={brandName} t={t} lang={lang} setLang={setLang} />
-        </LazySection>
+        <Footer brandName={brandName} t={t} lang={lang} setLang={setLang} />
 
         {/* Modal + CTA flotante */}
         {modalOpen && (
@@ -218,10 +202,7 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
             <div className="mt-4">
               <ReservationForm defaultCourse={interes} onSuccess={()=>setModalOpen(false)} />
             </div>
-            <div className="mt-4">
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary w-full text-center">También escribir por WhatsApp</a>
-            </div>
-          </Modal>
+            </Modal>
         )}
 
       </LazyMotion>
@@ -254,3 +235,5 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
       </div>
     );
   }
+
+

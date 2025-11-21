@@ -170,10 +170,10 @@ export default function Header({
 
                     {/* Dropdown menu principal */}
                     {dropdownOpen && (
-                      <div className="absolute top-full left-0 mt-2 bg-[color:var(--academic-primary)]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-visible z-50">
-                        <div className="flex">
+                      <div className="absolute top-full left-0 mt-3 min-w-[360px] rounded-2xl border border-white/12 bg-[#0b0f1d]/98 backdrop-blur-md shadow-[0_24px_70px_rgba(0,0,0,0.55)] overflow-hidden z-[1200]">
+                        <div className="flex divide-x divide-white/10">
                           {/* Primera columna: Categorías principales */}
-                          <div className="w-64 border-r border-white/10">
+                          <div className="w-64">
                             {item.submenu?.map((subitem, subIndex) => (
                               <div
                                 key={subIndex}
@@ -181,7 +181,7 @@ export default function Header({
                                 onMouseEnter={() => setNestedDropdownOpen(subitem.label)}
                                 onMouseLeave={() => setNestedDropdownOpen(null)}
                               >
-                                <div className="flex items-start gap-3 px-4 py-3 hover:bg-white/10 transition-all duration-200 group cursor-pointer">
+                                <div className="flex items-start gap-3 px-4 py-2.5 hover:bg-white/10 transition-all duration-200 group cursor-pointer">
                                   <subitem.icon className="w-5 h-5 text-[color:var(--academic-accent)] mt-0.5 group-hover:scale-110 transition-transform" />
                                   <div className="flex-1">
                                     <div className="text-white font-semibold text-sm group-hover:text-[color:var(--academic-accent)] transition-colors">
@@ -196,7 +196,7 @@ export default function Header({
 
                                 {/* Segunda columna: Lista de cursos */}
                                 {nestedDropdownOpen === subitem.label && subitem.hasNestedSubmenu && (
-                                  <div className="absolute left-full top-0 ml-0 w-72 bg-[color:var(--academic-primary)]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden">
+                                  <div className="absolute left-full top-0 ml-0 w-72 bg-[#0b0f1d]/98 backdrop-blur-md border border-white/12 rounded-xl shadow-[0_24px_70px_rgba(0,0,0,0.55)] overflow-hidden z-[1300]">
                                     <div className="p-2 border-b border-white/10 bg-white/5">
                                       <div className="text-white font-bold text-sm px-3 py-1">
                                         {subitem.label}
