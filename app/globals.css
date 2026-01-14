@@ -3,44 +3,115 @@
 @tailwind utilities;
 
 /* =========================================
-   TOKENS DE COLOR
+   SHADCN/UI VARIABLES
+========================================= */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+/* =========================================
+   TOKENS DE COLOR - TEMA MODERNO CLARO
+   Inspirado en Platzi + EducaciónIT
 ========================================= */
 :root{
-  --acc1:#0077FF;      /* Azul eléctrico */
-  --acc2:#00F7EF;      /* Aqua */
-  --fg:#1E1E1E;        /* Gris grafito */
+  /* Fondos - Tema Claro */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #F1F5F9;
+  --bg-accent: #EFF6FF;  /* Azul muy claro */
 
-  --glass:#FFFFFF;
-  --card-bg:#FFFFFF;
-  --card-border:#E8EDF3; /* borde sutil para cards */
-  --pill-bg:#F1F6FF;     /* chips/pills muy suaves */
-  --ring:rgba(0,119,255,.35);  /* focus ring accesible */
-  --header-bg:rgba(255,255,255,.85); /* header glass */
+  /* Texto */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #94A3B8;
+  --text-inverse: #FFFFFF;
 
-  /* NEON */
-  --neon-bg:#0A0F1B;
-  --neon-fg:#EAF2FF;
-  --neon-card:rgba(255,255,255,.05);
-  --neon-border:rgba(255,255,255,.12);
-  --neon-blue:#0077FF;
-  --neon-cyan:#00F7EF;
-  --neon-purple:#7B5CFF;
-  --neon-accent:#00F7EF; /* usado en announcement-bar */
+  /* Borders & Dividers */
+  --border-light: #E2E8F0;
+  --border-medium: #CBD5E1;
+  --border-dark: #94A3B8;
 
-  /* ACADEMIC THEME COLORS */
-  --academic-primary:#0077FF;
-  --academic-secondary:#00F7EF;
-  --academic-accent:#00F7EF;
-  --academic-gray-50:#F8FAFC;
-  --academic-gray-100:#F1F5F9;
-  --academic-gray-300:#CBD5E1;
-  --academic-gray-800:#1E293B;
-  --academic-gray-900:#0F172A;
+  /* Colores de Acción - Platzi Style */
+  --accent-blue: #3B82F6;      /* Primary blue */
+  --accent-blue-hover: #2563EB;
+  --accent-green: #22C55E;     /* Success green */
+  --accent-yellow: #EAB308;    /* Warning yellow */
+  --accent-orange: #F97316;    /* Orange */
+  --accent-red: #EF4444;       /* Danger red */
+  --accent-purple: #8B5CF6;    /* Purple */
 
-  /* Fondo base opcional */
-  --bg:#F9FBFF;
+  /* Colores por Categoría (Platzi style) */
+  --category-data: #22C55E;        /* Verde */
+  --category-data-light: #DCFCE7;
+  --category-leadership: #8B5CF6;  /* Púrpura */
+  --category-leadership-light: #EDE9FE;
+  --category-sales: #F97316;       /* Naranja */
+  --category-sales-light: #FFEDD5;
+  --category-marketing: #EAB308;   /* Amarillo */
+  --category-marketing-light: #FEF9C3;
+  --category-tech: #3B82F6;        /* Azul */
+  --category-tech-light: #DBEAFE;
 
-  /* alto del header fijo (ajusta si cambias el header) */
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Compatibilidad con código existente */
+  --acc1: var(--accent-blue);
+  --acc2: var(--accent-green);
+  --fg: var(--text-primary);
+  --bg: var(--bg-primary);
+  --card-bg: var(--bg-primary);
+  --card-border: var(--border-light);
+  --header-bg: rgba(255,255,255,0.95);
+
+  /* Layout */
   --header-h: 64px;
 }
 
@@ -230,7 +301,7 @@ select.input option, select.input-neon option, select.input-with-icon option {
   padding: 1rem 0;
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
 }
-.header-glass { background: rgba(15,23,42,.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.08); transition: box-shadow .25s ease, border-color .25s ease, background .25s ease; }
+.header-glass { background: rgba(15,23,42,.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.08); border-top: none; margin-top: -1px; transition: box-shadow .25s ease, border-color .25s ease, background .25s ease; overflow: visible !important; }
 .header-elevated { background: rgba(15,23,42,.92); border-bottom-color: rgba(255,255,255,.12); box-shadow: 0 8px 26px rgba(0,0,0,.25); }
 
 .hamburger{ display:flex; flex-direction:column; cursor:pointer; padding:0.5rem; border-radius:8px; transition:all .3s ease; z-index:1001; }
@@ -252,8 +323,8 @@ select.input option, select.input-neon option, select.input-with-icon option {
 .icon-academic:hover{ color: var(--academic-accent); transform: scale(1.1); }
 
 /* Announcement bar */
-.announcement-bar{ background: linear-gradient(135deg, var(--neon-accent) 0%, var(--neon-cyan) 100%); animation: slideDown .3s ease-out; border-bottom: 2px solid rgba(0, 0, 0, .2); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-.announcement-bar.elevated{ background: linear-gradient(135deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.9) 100%); box-shadow: 0 6px 25px rgba(0,0,0,.3); backdrop-filter: blur(10px); border-bottom: 2px solid rgba(255,255,255,.2); }
+.announcement-bar{ background: linear-gradient(135deg, var(--neon-accent) 0%, var(--neon-cyan) 100%); animation: slideDown .3s ease-out; border: none; box-shadow: none; margin: 0; padding: 0; }
+.announcement-bar.elevated{ background: linear-gradient(135deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.9) 100%); backdrop-filter: blur(10px); border: none; box-shadow: none; }
 @keyframes slideDown{ from{ transform: translateY(-100%);} to{ transform: translateY(0);} }
 .announcement-bar-close{ transition: all .2s ease; background: rgba(0,0,0,.05); }
 .announcement-bar-close:hover{ background: rgba(0,0,0,.15); transform: scale(1.1); }
@@ -772,27 +843,7 @@ select.input option, select.input-neon option, select.input-with-icon option {
 .logo-badge::after{ content:""; position:absolute; inset:-10px; border-radius:20px; background: conic-gradient(from 180deg, var(--academic-accent), transparent 45%, transparent 70%); filter: blur(18px); opacity:.45; pointer-events:none; z-index:-1; }
 .header-size{ transition: height .25s ease, padding .25s ease; }
 
-/* =========================================
-   PALETA UNIFICADA (AZUL PROFUNDO + CIAN)
-========================================= */
-:root{
-  --acc1:#2563EB;
-  --acc2:#0EA5E9;
-  --fg:#0F172A;
-  --card-border:#E2E8F0;
-  --pill-bg:#E0F2FE;
-  --ring:rgba(37,99,235,.35);
-  --header-bg:rgba(255,255,255,.9);
-
-  --neon-blue:#2563EB;
-  --neon-cyan:#0EA5E9;
-  --neon-purple:#6366F1;
-  --neon-accent:#0EA5E9;
-
-  --academic-primary:#2563EB;
-  --academic-secondary:#0EA5E9;
-  --academic-accent:#0EA5E9;
-}
+/* Duplicación eliminada - Variables ya definidas en líneas 8-45 */
 
 /* =========================================
    HERO CERTIFICATION BADGE

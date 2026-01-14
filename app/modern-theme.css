@@ -1,0 +1,482 @@
+/* =========================================
+   TEMA MODERNO CLARO - PAO ACADEMY
+   Inspirado en Platzi, EducaciónIT, CoderHouse
+========================================= */
+
+/* Body & Layout Base */
+.modern-theme {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* =========================================
+   COMPONENTES BUTTON - Platzi Style
+========================================= */
+
+/* Primary Button - Azul sólido */
+.btn-modern-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  background: var(--accent-blue);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(59 130 246 / 0.2);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-modern-primary:hover {
+  background: var(--accent-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgb(59 130 246 / 0.3);
+}
+
+.btn-modern-primary:active {
+  transform: translateY(0);
+}
+
+/* Success Button - Verde */
+.btn-modern-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  background: var(--accent-green);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(34 197 94 / 0.2);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-modern-success:hover {
+  background: #16A34A;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgb(34 197 94 / 0.3);
+}
+
+/* Outline Button - Secondary */
+.btn-modern-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: white;
+  border: 2px solid var(--border-medium);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-modern-outline:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+/* Ghost Button */
+.btn-modern-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-modern-ghost:hover {
+  background: var(--bg-secondary);
+}
+
+/* Button Sizes */
+.btn-modern-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-modern-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+/* =========================================
+   BADGES - CoderHouse + Platzi Style
+========================================= */
+
+/* Badge Base */
+.badge-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  line-height: 1.5;
+}
+
+/* Badge Tipos de Curso */
+.badge-bootcamp {
+  background: var(--category-leadership-light);
+  color: var(--category-leadership);
+}
+
+.badge-carrera {
+  background: var(--category-tech-light);
+  color: var(--accent-blue);
+}
+
+.badge-curso {
+  background: var(--category-data-light);
+  color: var(--category-data);
+}
+
+.badge-taller {
+  background: var(--category-marketing-light);
+  color: var(--category-marketing);
+}
+
+/* Badge Categorías */
+.badge-data {
+  background: var(--category-data-light);
+  color: var(--category-data);
+}
+
+.badge-leadership {
+  background: var(--category-leadership-light);
+  color: var(--category-leadership);
+}
+
+.badge-sales {
+  background: var(--category-sales-light);
+  color: var(--category-sales);
+}
+
+.badge-marketing {
+  background: var(--category-marketing-light);
+  color: var(--category-marketing);
+}
+
+.badge-tech {
+  background: var(--category-tech-light);
+  color: var(--category-tech);
+}
+
+/* =========================================
+   CARDS - Estilo Moderno Platzi/EducaciónIT
+========================================= */
+
+/* Card Base Blanca */
+.card-modern {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-modern:hover {
+  box-shadow: var(--shadow-2xl);
+  transform: translateY(-4px);
+}
+
+/* Card con barra de color superior (categoría) */
+.card-modern-category {
+  position: relative;
+}
+
+.card-modern-category::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+}
+
+.card-modern-category[data-category="data"]::before {
+  background: linear-gradient(90deg, #22C55E, #16A34A);
+}
+
+.card-modern-category[data-category="leadership"]::before {
+  background: linear-gradient(90deg, #8B5CF6, #7C3AED);
+}
+
+.card-modern-category[data-category="sales"]::before {
+  background: linear-gradient(90deg, #F97316, #EA580C);
+}
+
+.card-modern-category[data-category="marketing"]::before {
+  background: linear-gradient(90deg, #EAB308, #CA8A04);
+}
+
+.card-modern-category[data-category="tech"]::before {
+  background: linear-gradient(90deg, #3B82F6, #2563EB);
+}
+
+/* =========================================
+   SECTIONS - Backgrounds Limpios
+========================================= */
+
+.section-modern-white {
+  background: var(--bg-primary);
+  padding: 4rem 0;
+}
+
+.section-modern-gray {
+  background: var(--bg-secondary);
+  padding: 4rem 0;
+}
+
+.section-modern-accent {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  padding: 4rem 0;
+}
+
+/* Hero Section - Split Layout Platzi */
+.hero-modern {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #E0F2FE 100%);
+  padding: 5rem 0 4rem;
+  min-height: 600px;
+}
+
+/* =========================================
+   STATS - EducaciónIT Style
+========================================= */
+
+.stat-modern {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.stat-modern-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-modern-icon svg {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+}
+
+.stat-modern:hover .stat-modern-icon {
+  transform: scale(1.1);
+}
+
+.stat-modern-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-modern-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Icon Colors por tipo */
+.stat-modern-icon.green {
+  background: linear-gradient(135deg, #22C55E, #16A34A);
+}
+
+.stat-modern-icon.yellow {
+  background: linear-gradient(135deg, #EAB308, #CA8A04);
+}
+
+.stat-modern-icon.purple {
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+}
+
+.stat-modern-icon.blue {
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+}
+
+/* =========================================
+   TYPOGRAPHY - Platzi Style
+========================================= */
+
+.text-modern-h1 {
+  font-size: 3.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.text-modern-h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.text-modern-h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.text-modern-h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.text-modern-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.text-modern-large {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.text-modern-small {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* Text Gradients */
+.text-gradient-blue {
+  background: linear-gradient(90deg, #3B82F6, #06B6D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-green {
+  background: linear-gradient(90deg, #22C55E, #10B981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(90deg, #8B5CF6, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =========================================
+   UTILITIES
+========================================= */
+
+.shadow-modern {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-modern-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.border-modern {
+  border: 1px solid var(--border-light);
+}
+
+.rounded-modern {
+  border-radius: 1rem;
+}
+
+.rounded-modern-lg {
+  border-radius: 1.5rem;
+}
+
+/* Container responsivo */
+.container-modern {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-modern {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-modern {
+    padding: 0 2rem;
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  .text-modern-h1 {
+    font-size: 2.5rem;
+  }
+
+  .text-modern-h2 {
+    font-size: 2rem;
+  }
+
+  .text-modern-h3 {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}

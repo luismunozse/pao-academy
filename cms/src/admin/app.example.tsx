@@ -1,4 +1,5 @@
-import type { StrapiApp } from '@strapi/strapi/admin';
+// @ts-nocheck
+                                                                                                                                                                                      import type { StrapiApp } from '@strapi/strapi/admin';
 
 export default {
   config: {

@@ -1,27 +1,40 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
-import { LazyMotion, domAnimation } from 'framer-motion';
-import Header from '../components/Header';
-import HeroFixed from '../components/HeroFixed';
-import UrgencyPopup from '../components/UrgencyPopup';
-import AdvancedForm from '../components/forms/AdvancedForm';
-import LiveCourses from '../components/LiveCourses';
-import Featured from '../components/Featured';
-// import AsyncCourses from '../components/AsyncCourses'; // Removido
-import CorporateTraining from '../components/CorporateTraining';
-import TrainingOptions from '../components/TrainingOptions';
-import Benefits from '../components/Benefits';
-import SocialProof from '../components/SocialProof';
-import FAQ from '../components/FAQ';
-// import Contact from '../components/Contact'; // Removido
-import Footer from '../components/Footer';
-import Modal from '../components/Modal';
+import dynamic from 'next/dynamic';
+import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion';
+import HeaderModern from '../components/HeaderModern';
+// import HeroFixed from '../components/HeroFixed';
+// import Hero from '../components/Hero';
+import HeroSimple from '../components/HeroSimple';
+// import HeroMinimal from '../components/Hero/variants/HeroMinimal';
+// import HeroPremium from '../components/Hero/variants/HeroPremium';
+import LiveCoursesSimple from '../components/LiveCoursesSimple';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../components/ui/dialog';
 import ReservationForm from '../components/forms/ReservationForm';
-import NewsletterModal from '../components/NewsletterModal';
-import NewsletterSection from '../components/NewsletterSection';
-import WhatsAppFloat from '../components/WhatsAppFloat';
+import FooterSimple from '../components/FooterSimple';
 import { copy, cursosBase, microcursos, type Lang } from '../lib/i18n';
 import './globals.css';
+
+// Lazy load components below the fold for better performance
+const CorporateTrainingSimple = dynamic(() => import('../components/CorporateTrainingSimple'), {
+  loading: () => <LoadingSpinner size="lg" />,
+});
+const BenefitsSimple = dynamic(() => import('../components/BenefitsSimple'), {
+  loading: () => <LoadingSpinner size="lg" />,
+});
+const SocialProofSimple = dynamic(() => import('../components/SocialProofSimple'), {
+  loading: () => <LoadingSpinner size="lg" />,
+});
+const FAQSimple = dynamic(() => import('../components/FAQSimple'), {
+  loading: () => <LoadingSpinner size="lg" />,
+});
+const NewsletterSectionSimple = dynamic(() => import('../components/NewsletterSectionSimple'), {
+  loading: () => <LoadingSpinner size="lg" />,
+});
+const NewsletterModal = dynamic(() => import('../components/NewsletterModal'));
+const WhatsAppFloat = dynamic(() => import('../components/WhatsAppFloat'));
+const UrgencyPopup = dynamic(() => import('../components/UrgencyPopup'));
 
 export default function Page(){
   const brandName = 'GLOMIND360';
@@ -139,8 +152,8 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
 
   return (
     <div data-theme="euro">
-      {/* Header */}
-      <Header
+      {/* Header Moderno - Tema claro */}
+      <HeaderModern
         brandName={brandName}
         t={t}
         onClickCTA={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
@@ -148,18 +161,37 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         setLang={setLang}
       />
 
-        {/* HERO OPTIMIZADO CON A/B TESTING */}
-        <div className="relative overflow-hidden">
-          <div className="hero-euro absolute inset-0 -z-10"/>
-            <HeroFixed
-              brandName={brandName}
-              t={t}
-              cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
-            />
-        </div>
+      <main id="main" role="main">
+        {/* HERO SIMPLE - Sin animaciones para debugging */}
+        <HeroSimple
+          brandName={brandName}
+          t={t}
+          cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+        />
 
-        {/* Cursos en Vivo - Sección Principal */}
-        <LiveCourses
+        {/* VARIANTES ALTERNATIVAS (descomenta para probar):
+
+        <HeroModern
+          brandName={brandName}
+          t={t}
+          cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+        />
+
+        <HeroMinimal
+          brandName={brandName}
+          t={t}
+          cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+        />
+
+        <HeroPremium
+          brandName={brandName}
+          t={t}
+          cta={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+        />
+        */}
+
+        {/* Cursos en Vivo - Cards blancas simples */}
+        <LiveCoursesSimple
           t={t}
           lang={lang}
           onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
@@ -168,44 +200,48 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
 
       <LazyMotion features={domAnimation} strict>
 
-        {/* Social proof - Movido arriba para generar confianza temprana */}
-        <SocialProof
+        {/* Social proof - Diseño moderno limpio */}
+        <SocialProofSimple
           t={t}
           lang={lang}
           testimonios={testimonios}
           idx={idxTestimonio}
         />
 
-        {/* Beneficios diferenciales - Movido antes de corporativo */}
-        <Benefits t={t} />
+        {/* Beneficios diferenciales - Diseño moderno claro */}
+        <BenefitsSimple t={t} />
 
         {/* Formación corporativa - Sección consolidada sin TrainingOptions redundante */}
-        <CorporateTraining
+        <CorporateTrainingSimple
           t={t}
           onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
         />
 
         {/* FAQ */}
-        <FAQ t={t} />
+        <FAQSimple t={t} />
 
         {/* Newsletter Section - Inline, no modal */}
-        <NewsletterSection t={t} />
-
-        {/* Footer con selector de idioma */}
-        <Footer brandName={brandName} t={t} lang={lang} setLang={setLang} />
-
-        {/* Modal + CTA flotante */}
-        {modalOpen && (
-          <Modal onClose={()=>setModalOpen(false)} t={t}>
-            <h3 className="text-xl font-semibold">Reserva tu lugar</h3>
-            <p className="mt-1 opacity-80">Completa tus datos y te contactamos para confirmar la inscripción.</p>
-            <div className="mt-4">
-              <ReservationForm defaultCourse={interes} onSuccess={()=>setModalOpen(false)} />
-            </div>
-            </Modal>
-        )}
-
+        <NewsletterSectionSimple t={t} />
       </LazyMotion>
+      </main>
+
+      {/* Footer con selector de idioma */}
+      <FooterSimple brandName={brandName} t={t} lang={lang} setLang={setLang} />
+
+      {/* Modal + CTA flotante */}
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent className="bg-gradient-to-br from-[#0d172a]/95 to-[#0b1224]/95 border-white/12 text-white max-w-xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold text-white">Reserva tu lugar</DialogTitle>
+            <DialogDescription className="text-white/80">
+              Completa tus datos y te contactamos para confirmar la inscripción.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            <ReservationForm defaultCourse={interes} onSuccess={()=>setModalOpen(false)} />
+          </div>
+        </DialogContent>
+      </Dialog>
 
               {/* WhatsApp Floating Button */}
               <WhatsAppFloat

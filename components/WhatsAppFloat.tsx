@@ -69,7 +69,8 @@ function WhatsAppFloat({
                 </p>
                 <button
                   onClick={handleWhatsAppClick}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-colors"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+                  aria-label="Abrir WhatsApp para chatear"
                 >
                   Chatear por WhatsApp
                 </button>
@@ -77,6 +78,7 @@ function WhatsAppFloat({
               <button
                 onClick={handleToggleExpanded}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Cerrar mensaje de WhatsApp"
               >
                 ✕
               </button>
@@ -90,28 +92,25 @@ function WhatsAppFloat({
         {/* Botón principal */}
         <button
           onClick={isExpanded ? handleWhatsAppClick : handleToggleExpanded}
-          className="relative w-16 h-16 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center group bg-green-500 hover:bg-green-600 hover:scale-105"
+          className="relative w-16 h-16 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center group bg-green-500 hover:bg-green-600 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-2"
+          aria-label={isExpanded ? "Abrir chat de WhatsApp" : "Mostrar mensaje de WhatsApp"}
         >
-          {/* Efecto de pulso */}
-          <div className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-30" />
-          
+          {/* Efecto de pulso - solo en hover */}
+          <div className="absolute inset-0 rounded-full bg-green-400 group-hover:animate-ping opacity-0 group-hover:opacity-30 transition-opacity" />
+
           {/* Icono de WhatsApp */}
           <WhatsAppIcon className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
 
-          {/* Indicador de notificación */}
+          {/* Indicador de notificación - pulso suave en lugar de bounce */}
           {!isExpanded && (
-            <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-bounce">
+            <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
               <span className="text-xs text-white font-bold">!</span>
             </div>
           )}
         </button>
       </div>
 
-      {/* Efecto de ondas */}
-      <div className="absolute inset-0 rounded-full pointer-events-none">
-        <div className="absolute inset-0 rounded-full bg-green-400 animate-pulse opacity-20" />
-        <div className="absolute inset-0 rounded-full bg-green-400 animate-pulse opacity-10" style={{ animationDelay: '0.5s' }} />
-      </div>
+      {/* Efecto de ondas - removido para mejor performance */}
     </div>
   );
 }

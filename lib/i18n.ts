@@ -397,12 +397,12 @@ export function translateTag(tag: string){
 }
 
 export const cursosBase = [
-  { id: "ventas360", tag: "Comercial", es: { titulo: "Ventas Consultivas", duracion: "6 semanas", modalidad: "En vivo + mentoría", inicio: "Octubre 2025" }, en: { titulo: "Consultative Sales", duracion: "6 weeks", modalidad: "Live + mentorship", inicio: "October 2025" } },
-  { id: "liderazgo", tag: "Liderazgo", es: { titulo: "Liderazgo Ágil", duracion: "5 semanas", modalidad: "En vivo", inicio: "Noviembre 2025" }, en: { titulo: "Agile Leadership", duracion: "5 weeks", modalidad: "Live", inicio: "November 2025" } },
-  { id: "habitos", tag: "Mindset", es: { titulo: "Motivación y Hábitos", duracion: "3 semanas", modalidad: "En vivo + sesiones", inicio: "Continuo" }, en: { titulo: "Motivation & Habits", duracion: "3 weeks", modalidad: "Live + sessions", inicio: "Ongoing" } },
-  { id: "marcaPro", tag: "Branding", es: { titulo: "Marca Personal", duracion: "4 semanas", modalidad: "En vivo + proyecto", inicio: "Octubre 2025" }, en: { titulo: "Personal Branding", duracion: "4 weeks", modalidad: "Live + project", inicio: "October 2025" } },
-  { id: "powerbi", tag: "Datos", es: { titulo: "Power BI desde Cero", duracion: "6 semanas", modalidad: "En vivo + práctica", inicio: "Octubre 2025" }, en: { titulo: "Power BI from Zero", duracion: "6 weeks", modalidad: "Live + practice", inicio: "October 2025" } },
-  { id: "analytics", tag: "Datos", es: { titulo: "Data Analytics Bootcamp", duracion: "8 semanas", modalidad: "En vivo intensivo", inicio: "Enero 2026" }, en: { titulo: "Data Analytics Bootcamp", duracion: "8 weeks", modalidad: "Live intensive", inicio: "January 2026" } },
+  { id: "ventas360", tag: "Comercial", image: "/ventas-consultivas.webp", es: { titulo: "Ventas Consultivas", duracion: "6 semanas", modalidad: "En vivo + mentoría", inicio: "Febrero 2026" }, en: { titulo: "Consultative Sales", duracion: "6 weeks", modalidad: "Live + mentorship", inicio: "February 2026" } },
+  { id: "liderazgo", tag: "Liderazgo", image: "/liderazgo-agil.webp", es: { titulo: "Liderazgo Ágil", duracion: "5 semanas", modalidad: "En vivo", inicio: "Febrero 2026" }, en: { titulo: "Agile Leadership", duracion: "5 weeks", modalidad: "Live", inicio: "February 2026" } },
+  { id: "habitos", tag: "Mindset", image: "/motivacion-habitos.webp", es: { titulo: "Motivación y Hábitos", duracion: "3 semanas", modalidad: "En vivo + sesiones", inicio: "Febrero 2026" }, en: { titulo: "Motivation & Habits", duracion: "3 weeks", modalidad: "Live + sessions", inicio: "February 2026" } },
+  { id: "marcaPro", tag: "Branding", image: "/marca-personal.webp", es: { titulo: "Marca Personal", duracion: "4 semanas", modalidad: "En vivo + proyecto", inicio: "Febrero 2026" }, en: { titulo: "Personal Branding", duracion: "4 weeks", modalidad: "Live + project", inicio: "February 2026" } },
+  { id: "powerbi", tag: "Datos", image: "/powerbi-desde-cero.webp", es: { titulo: "Power BI desde Cero", duracion: "6 semanas", modalidad: "En vivo + práctica", inicio: "Febrero 2026" }, en: { titulo: "Power BI from Zero", duracion: "6 weeks", modalidad: "Live + practice", inicio: "February 2026" } },
+  { id: "analytics", tag: "Datos", image: "/data-analytics.webp", es: { titulo: "Data Analytics Bootcamp", duracion: "8 semanas", modalidad: "En vivo intensivo", inicio: "Febrero 2026" }, en: { titulo: "Data Analytics Bootcamp", duracion: "8 weeks", modalidad: "Live intensive", inicio: "February 2026" } },
 ] as const;
 
 export const featureText = {

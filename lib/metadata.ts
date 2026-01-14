@@ -69,9 +69,8 @@ export const defaultMetadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '',
   },
 };
 

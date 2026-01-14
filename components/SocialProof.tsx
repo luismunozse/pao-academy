@@ -7,17 +7,6 @@ export default function SocialProof({
 }:{ t:(k:string)=>string; lang:'es'|'en'; testimonios:any[]; idx:number; }){
   const test = testimonios[idx][lang];
 
-      // Empresas que confían en nuestros egresados (reducido a 5)
-      const companies = [
-        { name: 'TechStart Argentina', logo: 'https://via.placeholder.com/120x60/1e40af/ffffff?text=TechStart', type: 'Startup' },
-        { name: 'DataCorp', logo: 'https://via.placeholder.com/120x60/059669/ffffff?text=DataCorp', type: 'Analytics' },
-        { name: 'RetailPro', logo: 'https://via.placeholder.com/120x60/dc2626/ffffff?text=RetailPro', type: 'Retail' },
-        { name: 'FinanceMax', logo: 'https://via.placeholder.com/120x60/7c3aed/ffffff?text=FinanceMax', type: 'Fintech' },
-        { name: 'EduTech Solutions', logo: 'https://via.placeholder.com/120x60/ea580c/ffffff?text=EduTech', type: 'EdTech' }
-      ];
-
-  // Ya no necesitamos paginación ni carrusel
-
   return (
     <section className="section-academic">
           <div className="relative full-width-content pt-4 pb-8 md:pt-6 md:pb-12">
@@ -39,51 +28,85 @@ export default function SocialProof({
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
+              {/* Stat 1 - Estudiantes */}
+              <m.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="group relative overflow-hidden bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md border border-white/20 hover:border-green-400/40 rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20"
+              >
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+                <div className="relative w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-green-400/30 group-hover:shadow-2xl group-hover:shadow-green-400/50 group-hover:scale-110 transition-all duration-300">
                   <Users className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-2">500+</div>
-                <div className="text-white/70">Estudiantes graduados</div>
-              </div>
-              
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="h-6 w-6 text-white" />
+                <div className="relative text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">500+</div>
+                <div className="relative text-white group-hover:text-green-300 transition-colors">Estudiantes graduados</div>
+              </m.div>
+
+              {/* Stat 2 - Rating */}
+              <m.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="group relative overflow-hidden bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md border border-white/20 hover:border-yellow-400/40 rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20"
+              >
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+                <div className="relative w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-yellow-400/30 group-hover:shadow-2xl group-hover:shadow-yellow-400/50 group-hover:scale-110 transition-all duration-300">
+                  <Star className="h-6 w-6 text-white fill-current" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-2">4.9/5</div>
-                <div className="text-white/70">Calificación promedio</div>
-              </div>
-              
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="relative text-3xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">4.9/5</div>
+                <div className="relative text-white group-hover:text-yellow-300 transition-colors">Calificación promedio</div>
+              </m.div>
+
+              {/* Stat 3 - Empleo */}
+              <m.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="group relative overflow-hidden bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md border border-white/20 hover:border-purple-400/40 rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+              >
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+                <div className="relative w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-400/30 group-hover:shadow-2xl group-hover:shadow-purple-400/50 group-hover:scale-110 transition-all duration-300">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-2">95%</div>
-                <div className="text-white/70">Consiguen trabajo</div>
-              </div>
+                <div className="relative text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">95%</div>
+                <div className="relative text-white group-hover:text-purple-300 transition-colors">Consiguen trabajo</div>
+              </m.div>
             </div>
           </m.div>
 
-          {/* Testimonio principal mejorado */}
-          <m.div 
-            initial={{opacity:0,y:30}} 
-            whileInView={{opacity:1,y:0}} 
+          {/* Testimonio principal con premium effects */}
+          <m.div
+            initial={{opacity:0,y:30}}
+            whileInView={{opacity:1,y:0}}
             viewport={{once:true}}
+            transition={{ delay: 0.4 }}
             className="max-w-4xl mx-auto mb-16"
           >
-            <div className="relative">
-              {/* Card principal con gradiente */}
-              <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 overflow-hidden">
+            <div className="relative group">
+              {/* Card principal con gradiente y shimmer */}
+              <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl border border-white/20 hover:border-white/30 rounded-3xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20">
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1500 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
                 {/* Patrón de fondo */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5"></div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full -translate-y-16 translate-x-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-400/10 to-blue-400/10 rounded-full translate-y-12 -translate-x-12"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-110 transition-transform duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-400/10 to-blue-400/10 rounded-full translate-y-12 -translate-x-12 group-hover:scale-110 transition-transform duration-500"></div>
                 
                 <div className="relative z-10">
-                  {/* Quote icon */}
+                  {/* Quote icon con glow */}
                   <div className="flex justify-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                    <div className="relative w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center shadow-lg shadow-blue-400/30 group-hover:shadow-2xl group-hover:shadow-blue-400/50 group-hover:scale-110 transition-all duration-300">
                       <Quote className="h-8 w-8 text-white" />
                     </div>
                   </div>
@@ -118,7 +141,7 @@ export default function SocialProof({
                     
                     <div className="text-center md:text-left">
                       <h4 className="text-xl font-bold text-white mb-1">{test.autor}</h4>
-                      <p className="text-white/70 text-lg">{test.rol}</p>
+                      <p className="text-white text-lg">{test.rol}</p>
                       <div className="flex items-center justify-center md:justify-start gap-2 mt-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                         <span className="text-green-400 text-sm font-medium">Estudiante Verificado</span>
@@ -130,88 +153,6 @@ export default function SocialProof({
             </div>
           </m.div>
         </div>
-
-            {/* Empresas estáticas */}
-            <m.div 
-              initial={{opacity:0,y:20}} 
-              whileInView={{opacity:1,y:0}} 
-              viewport={{once:true}}
-              transition={{ delay: 0.3 }}
-              className="mt-20"
-            >
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 rounded-full px-6 py-3 mb-6">
-                  <Award className="h-5 w-5 text-emerald-400" />
-                  <span className="text-white font-semibold">Empresas Colaboradoras</span>
-                </div>
-                
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  Confían en nuestros <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">egresados</span>
-                </h3>
-                <p className="text-white/70 text-lg mb-6 max-w-2xl mx-auto">
-                  Más de 500+ empresas han contratado a nuestros estudiantes y confían en la calidad de nuestra formación
-                </p>
-                
-                <div className="flex flex-wrap justify-center gap-4 text-sm">
-                  <div className="flex items-center gap-2 text-white/60 bg-white/5 px-4 py-2 rounded-full">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
-                    <span>Empresas verificadas</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-white/60 bg-white/5 px-4 py-2 rounded-full">
-                    <TrendingUp className="h-4 w-4 text-blue-400" />
-                    <span>Alta tasa de contratación</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-white/60 bg-white/5 px-4 py-2 rounded-full">
-                    <Star className="h-4 w-4 text-yellow-400" />
-                    <span>Excelente feedback</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative max-w-7xl mx-auto">
-                {/* Grid estático de empresas */}
-                <div className="rounded-3xl bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8">
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                    {companies.map((comp, compIndex) => (
-                      <m.div 
-                        key={comp.name} 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: compIndex * 0.1 }}
-                        className="group relative"
-                      >
-                        <div className="flex flex-col items-center justify-center p-6 rounded-2xl border border-white/10 hover:border-white/30 transition-all duration-500 group-hover:scale-105 bg-gradient-to-br from-white/5 via-white/10 to-white/5 hover:from-white/10 hover:to-white/15 backdrop-blur-sm">
-                          {/* Logo container con gradiente */}
-                          <div className="relative mb-4">
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                              <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                                {comp.name.charAt(0)}
-                              </span>
-                            </div>
-                            {/* Efecto de brillo */}
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          </div>
-                          
-                          <div className="text-center">
-                            <h4 className="text-white font-bold text-sm mb-2 group-hover:text-blue-300 transition-colors">
-                              {comp.name}
-                            </h4>
-                            <div className="inline-flex items-center gap-1 text-xs text-white/60 bg-white/10 px-3 py-1 rounded-full">
-                              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                              <span>{comp.type}</span>
-                            </div>
-                          </div>
-                          
-                          {/* Efecto de hover */}
-                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                      </m.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </m.div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+// import { updateSession } from '@/lib/supabase/middleware'; // Deshabilitado temporalmente
 
 // Lista de imágenes rotas y sus reemplazos
 const BROKEN_IMAGES_MAP = new Map([
@@ -7,13 +8,13 @@ const BROKEN_IMAGES_MAP = new Map([
   // Agregar más imágenes rotas aquí si se encuentran
 ]);
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Solo interceptar solicitudes de imágenes de Next.js
   if (pathname.startsWith('/_next/image')) {
     const url = request.nextUrl.searchParams.get('url');
-    
+
     if (url) {
       // Verificar si la URL contiene alguna imagen rota
       for (const [brokenId, replacementId] of BROKEN_IMAGES_MAP) {
@@ -27,6 +28,8 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Actualizar sesión de Supabase en cada request
+  // return await updateSession(request); // Deshabilitado temporalmente
   return NextResponse.next();
 }
 

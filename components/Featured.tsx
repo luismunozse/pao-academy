@@ -52,6 +52,22 @@ export default function Featured({
     setIsAutoPlaying(false);
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextSlide();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <section id="featured" className="section-academic">
       <div className="relative full-width-content py-16 md:py-20">
@@ -78,19 +94,26 @@ export default function Featured({
                     key={`${c.titulo}-${currentIndex}-${i}`}
                     initial={{ opacity: 0, scale: 0.9, y: 30 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.7, 
+                    transition={{
+                      duration: 0.7,
                       delay: i * 0.2,
                       ease: "easeOut"
                     }}
-                    className="card-neon featured-card group p-8 relative overflow-hidden min-h-[400px] flex flex-col justify-between"
+                    className="card-neon featured-card group p-8 relative overflow-hidden min-h-[400px] flex flex-col justify-between hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      perspective: '1000px'
+                    }}
                   >
-              {/* Background gradient effect */}
+              {/* Background gradient effect con profundidad */}
               <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--neon-blue)]/10 via-transparent to-[color:var(--neon-cyan)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
               
-              {/* Featured badge */}
-              <div className="absolute top-4 right-4 flex items-center gap-1 bg-[color:var(--neon-accent)] text-black px-3 py-1 rounded-full text-xs font-semibold">
-                <Star className="size-3" />
+              {/* Featured badge con glow */}
+              <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg shadow-yellow-400/50 group-hover:shadow-xl group-hover:shadow-yellow-400/70 transition-all duration-300">
+                <Star className="size-3 fill-current animate-pulse" />
                 Destacado
               </div>
 
@@ -159,21 +182,24 @@ export default function Featured({
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="size-4 text-[color:var(--neon-accent)] fill-current" />
                       ))}
-                      <span className="text-sm text-white/70 ml-2">4.9/5</span>
+                      <span className="text-sm text-white/87 ml-2">4.9/5</span>
                     </div>
-                    <p className="text-xs text-white/60">+500 estudiantes satisfechos</p>
+                    <p className="text-xs text-white/90">+500 estudiantes satisfechos</p>
                   </div>
                 </div>
 
                 <div className="flex gap-3 justify-center">
-                  <button 
-                    onClick={()=>onClickCourse(c.titulo)} 
-                    className="btn-primary group-hover:scale-105 transition-transform duration-500 px-6"
+                  <button
+                    onClick={()=>onClickCourse(c.titulo)}
+                    className="btn-primary group/cta relative overflow-hidden group-hover:scale-105 transition-transform duration-500 px-6 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50"
                   >
-                    {t('knowMore')} <ChevronRight className="size-4" />
+                    <div className="absolute inset-0 -translate-x-full group-hover/cta:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                    <span className="relative flex items-center gap-2">
+                      {t('knowMore')} <ChevronRight className="size-4" />
+                    </span>
                   </button>
-                  <button className="btn-icon">
-                    <PlayCircle className="size-5 text-[color:var(--neon-cyan)]" />
+                  <button className="btn-icon group/play hover:scale-110 transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/50">
+                    <PlayCircle className="size-5 text-[color:var(--neon-cyan)] group-hover/play:scale-110 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -183,22 +209,24 @@ export default function Featured({
             </div>
 
             {/* Desktop Navigation Buttons - Mejorados */}
-            <button 
+            <button
               onClick={prevSlide}
-              className="featured-nav-button absolute left-2 top-1/2 -translate-y-1/2 p-4 rounded-full group shadow-2xl z-10"
+              aria-label="Ver cursos anteriores"
+              className="featured-nav-button absolute left-2 top-1/2 -translate-y-1/2 p-4 rounded-full group shadow-2xl z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--neon-cyan)]"
             >
               <ChevronLeft className="size-6 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
             </button>
-            
-            <button 
+
+            <button
               onClick={nextSlide}
-              className="featured-nav-button absolute right-2 top-1/2 -translate-y-1/2 p-4 rounded-full group shadow-2xl z-10"
+              aria-label="Ver siguientes cursos"
+              className="featured-nav-button absolute right-2 top-1/2 -translate-y-1/2 p-4 rounded-full group shadow-2xl z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--neon-cyan)]"
             >
               <ChevronRight className="size-6 text-white group-hover:text-[color:var(--neon-cyan)] transition-colors" />
             </button>
 
             {/* Desktop Dots Indicator - Mejorado */}
-            <div className="flex justify-center mt-8 gap-3">
+            <div className="flex justify-center mt-8 gap-3" role="tablist" aria-label="Grupos de cursos destacados">
               {Array.from({ length: Math.ceil(cursos.length / 3) }).map((_, index) => {
                 const groupStart = index * 3;
                 const isActive = currentIndex >= groupStart && currentIndex < groupStart + 3;
@@ -206,7 +234,10 @@ export default function Featured({
                   <button
                     key={index}
                     onClick={() => goToSlide(groupStart)}
-                    className={`featured-dot w-4 h-4 rounded-full ${
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-label={`Ver grupo de cursos ${index + 1}`}
+                    className={`featured-dot w-4 h-4 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--neon-cyan)] ${
                       isActive ? 'active' : ''
                     }`}
                   >
@@ -234,14 +265,21 @@ export default function Featured({
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.7 }}
-                    className="card-neon group mx-4 p-8 relative overflow-hidden min-h-[450px] flex flex-col justify-between"
+                    className="card-neon group mx-4 p-8 relative overflow-hidden min-h-[450px] flex flex-col justify-between hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-500"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      perspective: '1000px'
+                    }}
                   >
-                    {/* Background gradient effect */}
+                    {/* Background gradient effect con profundidad */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--neon-blue)]/10 via-transparent to-[color:var(--neon-cyan)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    {/* Featured badge */}
-                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-[color:var(--neon-accent)] text-black px-3 py-1 rounded-full text-xs font-semibold">
-                      <Star className="size-3" />
+
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+                    {/* Featured badge con glow */}
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg shadow-yellow-400/50 group-hover:shadow-xl group-hover:shadow-yellow-400/70 transition-all duration-300">
+                      <Star className="size-3 fill-current animate-pulse" />
                       Destacado
                     </div>
 
@@ -310,21 +348,24 @@ export default function Featured({
                             {[...Array(5)].map((_, i) => (
                               <Star key={i} className="size-4 text-[color:var(--neon-accent)] fill-current" />
                             ))}
-                            <span className="text-sm text-white/70 ml-2">4.9/5</span>
+                            <span className="text-sm text-white/87 ml-2">4.9/5</span>
                           </div>
-                          <p className="text-xs text-white/60">+500 estudiantes satisfechos</p>
+                          <p className="text-xs text-white/90">+500 estudiantes satisfechos</p>
                         </div>
                       </div>
 
                       <div className="flex gap-3 justify-center">
-                        <button 
-                          onClick={()=>onClickCourse(c.titulo)} 
-                          className="btn-primary group-hover:scale-105 transition-transform duration-500 px-8"
+                        <button
+                          onClick={()=>onClickCourse(c.titulo)}
+                          className="btn-primary group/cta relative overflow-hidden group-hover:scale-105 transition-transform duration-500 px-8 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50"
                         >
-                          {t('knowMore')} <ChevronRight className="size-4" />
+                          <div className="absolute inset-0 -translate-x-full group-hover/cta:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                          <span className="relative flex items-center gap-2">
+                            {t('knowMore')} <ChevronRight className="size-4" />
+                          </span>
                         </button>
-                        <button className="btn-icon">
-                          <PlayCircle className="size-5 text-[color:var(--neon-cyan)]" />
+                        <button className="btn-icon group/play hover:scale-110 transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/50">
+                          <PlayCircle className="size-5 text-[color:var(--neon-cyan)] group-hover/play:scale-110 transition-transform" />
                         </button>
                       </div>
                     </div>

@@ -7,8 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
-  MapPin,
-  Play,
   Star,
   UserCheck,
 } from 'lucide-react';
@@ -26,6 +24,7 @@ type LiveCourse = {
   nextStart: string;
   rating: number;
   students: number;
+  image?: string;
 };
 
 type Props = {
@@ -34,13 +33,6 @@ type Props = {
   onCourseClick: (title: string) => void;
   onCatalogClick: () => void;
   liveCourses?: LiveCourse[];
-};
-
-const courseIcons: Record<string, JSX.Element> = {
-  Comercial: <Star className="size-6" />,
-  Liderazgo: <UserCheck className="size-6" />,
-  Datos: <Clock className="size-6" />,
-  default: <Play className="size-6" />,
 };
 
 export default function LiveCourses({
@@ -76,6 +68,7 @@ export default function LiveCourses({
         nextStart: data.inicio,
         rating: 4.9,
         students: 500,
+        image: c.image,
       };
     });
   }, [lang, t]);
@@ -104,9 +97,26 @@ export default function LiveCourses({
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % filteredCourses.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + filteredCourses.length) % filteredCourses.length);
 
+  // Keyboard navigation para el carrusel
+  useEffect(() => {
+    if (!isMobile || filteredCourses.length === 0) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextSlide();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobile, filteredCourses.length]);
+
   function renderCourseCard(course: LiveCourse) {
     const isExpanded = expandedCard === course.id;
-    const icon = courseIcons[course.tag] || courseIcons.default;
 
     return (
       <m.div
@@ -114,104 +124,102 @@ export default function LiveCourses({
         initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="course-card-academic group relative overflow-hidden p-5 md:p-6 flex flex-col gap-4 cursor-pointer"
+        className="course-card-academic group relative overflow-hidden flex flex-col cursor-pointer"
         onClick={() => handleCourseClick(course.id, course.title)}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--academic-secondary)]/10 via-transparent to-[color:var(--academic-accent)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-        <div className="relative z-10 flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[color:var(--academic-secondary)]/20 to-[color:var(--academic-accent)]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg">
-              <div className="text-[color:var(--academic-secondary)]">{icon}</div>
-            </div>
-            <div className="flex flex-col gap-1">
-              <div className="inline-flex items-center gap-2 text-xs text-white/70">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 text-[color:var(--academic-secondary)] border border-white/20">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                  {t('live')}
-                </span>
-                <button
-                  className="px-3 py-1 rounded-full bg-white/5 text-[color:var(--academic-secondary)] text-xs font-semibold border border-white/15 hover:bg-white/10"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedTag(course.tag);
-                  }}
-                  aria-label={`Filtrar por ${course.tag}`}
-                >
-                  {course.tag}
-                </button>
-              </div>
-              <div className="flex items-center gap-2 text-white/70 text-sm">
-                <Star className="size-4 text-yellow-400 fill-current" />
-                <span className="font-semibold text-white">{course.rating}</span>
-                <span className="text-white/60">· {course.students}+ {t('students')}</span>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-white/60 group-hover:text-[color:var(--academic-secondary)] transition-colors duration-300">
-            <Play className="size-4" />
-            <ChevronRight className="size-4 group-hover:translate-x-1 transition-transform duration-300" />
-          </div>
-        </div>
-
-        <div className="relative z-10 flex flex-col gap-3 flex-1">
-          <h3 className="text-xl font-academic-heading group-hover:text-[color:var(--academic-secondary)] transition-colors text-white">
-            {course.title}
-          </h3>
-
-          <p className="text-white/80 text-sm leading-relaxed font-academic line-clamp-2">
-            {course.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2 mt-1">
-            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/8 text-white/80 text-sm border border-white/10">
-              <Clock className="size-4 text-[color:var(--academic-accent)]" />
-              <span>{course.duration}</span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/8 text-white/80 text-sm border border-white/10">
-              <UserCheck className="size-4 text-[color:var(--academic-accent)]" />
-              <span>{course.level}</span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/8 text-white/80 text-sm border border-white/10">
-              <Calendar className="size-4 text-[color:var(--academic-accent)]" />
-              <span>{course.nextStart}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 pt-2">
-          <button
-            className="btn-primary flex items-center justify-center gap-2 group px-6 w-full h-11"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCourseClick(course.id, course.title);
-            }}
-            aria-label={`${t('wantToKnowMore')} ${course.title}`}
-          >
-            <span>{t('wantToKnowMore')}</span>
-            <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-        </div>
-
-        {isExpanded && (
-          <m.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative z-10 mt-4 pt-4 border-t border-white/10"
-          >
-            <h4 className="text-base font-academic-heading text-white mb-3">
-              {t('recommendedCourses')}
-            </h4>
-            <CategoryRecommendations
-              selectedCategory={course.tag}
-              onCourseClick={handleRecommendedCourseClick}
-              t={t}
-              lang={lang}
+        {/* Imagen del curso */}
+        {course.image && (
+          <div className="relative w-full h-48 overflow-hidden rounded-t-xl">
+            <img
+              src={course.image}
+              alt={course.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-          </m.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute top-3 left-3 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm text-[color:var(--academic-secondary)] text-xs border border-white/20">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                {t('live')}
+              </span>
+              <button
+                className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-semibold border border-white/20 hover:bg-black/70"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedTag(course.tag);
+                }}
+                aria-label={`Filtrar por ${course.tag}`}
+              >
+                {course.tag}
+              </button>
+            </div>
+            <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white text-sm">
+              <Star className="size-4 text-yellow-400 fill-current" />
+              <span className="font-semibold">{course.rating}</span>
+              <span className="text-white/80">· {course.students}+ {t('students')}</span>
+            </div>
+          </div>
         )}
+
+        <div className="p-5 md:p-6 flex flex-col gap-4 flex-1">
+          <div className="relative z-10 flex flex-col gap-3 flex-1">
+            <h3 className="text-xl font-academic-heading group-hover:text-[color:var(--academic-secondary)] transition-colors text-white">
+              {course.title}
+            </h3>
+
+            <p className="text-white/80 text-sm leading-relaxed font-academic line-clamp-2">
+              {course.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mt-1">
+              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/8 text-white/80 text-sm border border-white/10">
+                <Clock className="size-4 text-[color:var(--academic-accent)]" />
+                <span>{course.duration}</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/8 text-white/80 text-sm border border-white/10">
+                <UserCheck className="size-4 text-[color:var(--academic-accent)]" />
+                <span>{course.level}</span>
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/8 text-white/80 text-sm border border-white/10">
+                <Calendar className="size-4 text-[color:var(--academic-accent)]" />
+                <span>{course.nextStart}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 pt-2">
+            <button
+              className="btn-primary flex items-center justify-center gap-2 group px-6 w-full h-11"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCourseClick(course.id, course.title);
+              }}
+              aria-label={`${t('wantToKnowMore')} ${course.title}`}
+            >
+              <span>{t('wantToKnowMore')}</span>
+              <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
+
+          {isExpanded && (
+            <m.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-10 mt-4 pt-4 border-t border-white/10"
+            >
+              <h4 className="text-base font-academic-heading text-white mb-3">
+                {t('recommendedCourses')}
+              </h4>
+              <CategoryRecommendations
+                selectedCategory={course.tag}
+                onCourseClick={handleRecommendedCourseClick}
+                t={t}
+                lang={lang}
+              />
+            </m.div>
+          )}
+        </div>
       </m.div>
     );
   }
@@ -293,16 +301,20 @@ export default function LiveCourses({
             <div className="flex items-center justify-between mt-6 px-4">
               <button
                 onClick={prevSlide}
-                className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
+                aria-label={t('previousCourse') || 'Curso anterior'}
+                className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--academic-accent)]"
               >
                 <ChevronLeft className="h-5 w-5 text-white" />
               </button>
-              <div className="flex gap-2">
-                {filteredCourses.map((_, index) => (
+              <div className="flex gap-2" role="tablist" aria-label="Indicadores de curso">
+                {filteredCourses.map((course, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    role="tab"
+                    aria-selected={index === currentSlide}
+                    aria-label={`Ir a ${course.title}`}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--academic-accent)] ${
                       index === currentSlide
                         ? 'bg-[color:var(--academic-accent)] w-8'
                         : 'bg-white/30 hover:bg-white/50'
@@ -312,7 +324,8 @@ export default function LiveCourses({
               </div>
               <button
                 onClick={nextSlide}
-                className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300"
+                aria-label={t('nextCourse') || 'Siguiente curso'}
+                className="p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--academic-accent)]"
               >
                 <ChevronRight className="h-5 w-5 text-white" />
               </button>

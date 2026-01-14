@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { mergeConfig, type UserConfig } from 'vite';
 
 export default (config: UserConfig) => {

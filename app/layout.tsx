@@ -1,5 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
+import "./modern-theme.css";
+import "./accessibility.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 

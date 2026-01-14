@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Menu, X, Globe, GraduationCap, BookOpen, Users, Target, Info, Phone, ChevronRight, ChevronDown, Video, FileText } from 'lucide-react';
+import { Menu, X, Globe, GraduationCap, Library, Users, Briefcase, Info, MessageCircle, ChevronRight, ChevronDown, Video, PlayCircle, Target } from 'lucide-react';
 
 export default function Header({
   brandName,
@@ -65,16 +65,16 @@ export default function Header({
 
   // Estructura de navegación con submenu para cursos
   const coursesSubmenu = [
-    { 
-      label: t('liveCourses'), 
-      icon: Video, 
+    {
+      label: t('liveCourses'),
+      icon: Video,
       description: 'Clases en vivo con mentores',
       hasNestedSubmenu: true,
       nestedItems: liveCoursesList
     },
-    { 
-      label: t('asyncCourses'), 
-      icon: FileText, 
+    {
+      label: t('asyncCourses'),
+      icon: PlayCircle, // Cambio: FileText → PlayCircle (mejor representa contenido on-demand)
       description: 'Aprende a tu ritmo',
       hasNestedSubmenu: true,
       nestedItems: asyncCoursesCategories
@@ -83,17 +83,17 @@ export default function Header({
 
   const navigationItems = [
     { href: '#inicio',            label: t('home'),          icon: GraduationCap },
-    { 
-      label: 'Cursos', 
-      icon: BookOpen, 
-      hasSubmenu: true, 
-      submenu: coursesSubmenu 
+    {
+      label: 'Cursos',
+      icon: Library, // Cambio: BookOpen → Library (más moderno y profesional)
+      hasSubmenu: true,
+      submenu: coursesSubmenu
     },
-    { href: '#corporate-training', label: 'Corporate Training', icon: Target },
+    { href: '#corporate-training', label: 'Corporate Training', icon: Briefcase }, // Cambio: Target → Briefcase (más corporativo)
     { href: '#sobre-nosotros',    label: t('aboutUs'),       icon: Info },
-    { 
-      label: t('contact'), 
-      icon: Phone, 
+    {
+      label: t('contact'),
+      icon: MessageCircle, // Cambio: Phone → MessageCircle (mejor representa WhatsApp/chat)
       isWhatsApp: true,
       href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa recibir más información sobre los cursos de GLOMIND360.'
     },
@@ -103,16 +103,16 @@ export default function Header({
     <>
       {/* Barra de Promoción */}
       {showPromo && (
-        <div className={`fixed top-0 left-0 right-0 z-[1001] announcement-bar transition-all duration-300 ${elevated ? 'elevated text-white' : 'text-black'}`}>
-          <div className="full-width-content py-2">
-            <div className="flex items-center justify-center gap-4">
+        <div className={`fixed top-0 left-0 right-0 z-[1001] announcement-bar transition-all duration-300 ${elevated ? 'elevated' : ''}`}>
+          <div className="full-width-content">
+            <div className="flex items-center justify-center gap-3 max-w-7xl mx-auto px-4 py-2 relative">
               <div className="flex items-center gap-2">
-                <span className={`font-bold text-sm sm:text-base drop-shadow-sm ${elevated ? 'text-white' : 'text-black'}`}>🎉 {promoMessage}</span>
-                <span className={`hidden sm:inline text-sm drop-shadow-sm ${elevated ? 'text-white' : 'text-black'}`}>{promoSubMessage}</span>
+                <span className="font-bold text-xs sm:text-sm drop-shadow-sm text-white">🎉 {promoMessage}</span>
+                <span className="hidden sm:inline text-xs sm:text-sm drop-shadow-sm text-white">{promoSubMessage}</span>
               </div>
               <button
                 onClick={() => setShowPromo(false)}
-                className={`announcement-bar-close p-1 rounded-full ${elevated ? 'text-white hover:bg-white/20' : 'text-black hover:bg-black/10'}`}
+                className="absolute right-4 p-1 rounded-full transition-all duration-200 hover:scale-110 text-white hover:bg-white/20"
                 aria-label="Cerrar promoción"
               >
                 <X className="w-4 h-4" />
@@ -123,8 +123,9 @@ export default function Header({
       )}
 
       <header
-        className={`fixed ${showPromo ? 'top-10' : 'top-0'} left-0 right-0 z-[1000] header-glass ${elevated ? 'header-elevated' : ''}`}
+        className={`fixed ${showPromo ? 'top-[39px]' : 'top-0'} left-0 right-0 z-[1000] header-glass ${elevated ? 'header-elevated' : ''} transition-[top] duration-300`}
         role="banner"
+        style={{ overflow: 'visible' }}
       >
         <a
           href="#main"
@@ -170,7 +171,9 @@ export default function Header({
 
                     {/* Dropdown menu principal */}
                     {dropdownOpen && (
-                      <div className="absolute top-full left-0 mt-3 min-w-[360px] rounded-2xl border border-white/12 bg-[#0b0f1d]/98 backdrop-blur-md shadow-[0_24px_70px_rgba(0,0,0,0.55)] overflow-hidden z-[1200]">
+                      <div className="absolute top-full left-0 mt-3 min-w-[360px] rounded-2xl border border-white/12 bg-[#0b0f1d]/98 backdrop-blur-md shadow-[0_24px_70px_rgba(0,0,0,0.55)] overflow-hidden z-[9999]"
+                        style={{ position: 'absolute' }}
+                      >
                         <div className="flex divide-x divide-white/10">
                           {/* Primera columna: Categorías principales */}
                           <div className="w-64">
@@ -196,7 +199,9 @@ export default function Header({
 
                                 {/* Segunda columna: Lista de cursos */}
                                 {nestedDropdownOpen === subitem.label && subitem.hasNestedSubmenu && (
-                                  <div className="absolute left-full top-0 ml-0 w-72 bg-[#0b0f1d]/98 backdrop-blur-md border border-white/12 rounded-xl shadow-[0_24px_70px_rgba(0,0,0,0.55)] overflow-hidden z-[1300]">
+                                  <div className="absolute left-full top-0 ml-0 w-72 bg-[#0b0f1d]/98 backdrop-blur-md border border-white/12 rounded-xl shadow-[0_24px_70px_rgba(0,0,0,0.55)] overflow-hidden z-[10000]"
+                                    style={{ position: 'absolute' }}
+                                  >
                                     <div className="p-2 border-b border-white/10 bg-white/5">
                                       <div className="text-white font-bold text-sm px-3 py-1">
                                         {subitem.label}
@@ -447,8 +452,6 @@ export default function Header({
 
       {/* Overlay */}
       {open && <div className="fixed inset-0 bg-black/50 z-[998] lg:hidden" onClick={() => setOpen(false)} />}
-      {/* Spacer para evitar solapar contenido con header fijo */}
-      <div aria-hidden className={`${showPromo ? 'h-[104px] sm:h-[112px]' : 'h-[64px] sm:h-[72px]'}`} />
     </>
   );
 }
