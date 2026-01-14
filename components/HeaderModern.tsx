@@ -173,9 +173,9 @@ export default function HeaderModern({
 
                     {/* Dropdown moderno blanco */}
                     {dropdownOpen && (
-                      <div className="absolute top-full left-0 mt-2 min-w-[360px] rounded-xl border border-gray-200 bg-white shadow-2xl overflow-hidden z-[1200]">
+                      <div className="absolute top-full left-0 mt-2 min-w-[360px] rounded-xl border border-gray-200 bg-white shadow-2xl z-[1200]">
                         <div className="flex divide-x divide-gray-200">
-                          <div className="w-64">
+                          <div className="w-64 overflow-hidden rounded-l-xl">
                             {item.submenu?.map((subitem, subIndex) => (
                               <div
                                 key={subIndex}
@@ -197,13 +197,15 @@ export default function HeaderModern({
 
                                 {/* Nested dropdown */}
                                 {nestedDropdownOpen === subitem.label && subitem.hasNestedSubmenu && (
-                                  <div className="absolute left-full top-0 ml-0 w-72 bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden z-[1300]">
+                                  <div className="absolute left-full top-0 ml-1 w-80 bg-white border border-gray-200 rounded-xl shadow-2xl z-[1300]" style={{
+                                    maxHeight: '500px'
+                                  }}>
                                     <div className="p-3 border-b border-gray-200 bg-gray-50">
                                       <div className="text-gray-900 font-bold text-sm">
                                         {subitem.label}
                                       </div>
                                     </div>
-                                    <div className="max-h-96 overflow-y-auto">
+                                    <div className="overflow-y-auto" style={{ maxHeight: '440px' }}>
                                       {subitem.nestedItems?.map((course: any, courseIndex: number) => (
                                         <a
                                           key={courseIndex}
