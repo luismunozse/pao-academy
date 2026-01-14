@@ -1,6 +1,13 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Phone, MapPin, Calendar, User, Mail, MessageSquare, Globe } from 'lucide-react';
+import { Phone, User, Mail, Globe } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
   defaultCourse?: string;
@@ -219,26 +226,26 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
 
       {/* País */}
       <div>
-        <div className="relative">
-          <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <select
-            className="input-neon input-with-icon w-full h-11 text-base appearance-none"
-            value={country}
-            onChange={e => setCountry(e.target.value)}
-          >
-            <option value="">{t.country}</option>
-            <option value="AR">Argentina</option>
-            <option value="MX">México</option>
-            <option value="CO">Colombia</option>
-            <option value="PE">Perú</option>
-            <option value="CL">Chile</option>
-            <option value="UY">Uruguay</option>
-            <option value="BR">Brasil</option>
-            <option value="US">Estados Unidos</option>
-            <option value="ES">España</option>
-            <option value="other">Otro</option>
-          </select>
-        </div>
+        <Select value={country} onValueChange={setCountry}>
+          <SelectTrigger className="w-full h-11 text-base bg-white/5 border-white/20 text-white data-[placeholder]:text-gray-400 focus:ring-cyan-500/50 focus:border-cyan-400">
+            <div className="flex items-center gap-3">
+              <Globe className="w-4 h-4 text-gray-400" />
+              <SelectValue placeholder={t.country} />
+            </div>
+          </SelectTrigger>
+          <SelectContent className="bg-slate-900 border-white/20 text-white">
+            <SelectItem value="AR" className="focus:bg-cyan-500/20 focus:text-white">Argentina</SelectItem>
+            <SelectItem value="MX" className="focus:bg-cyan-500/20 focus:text-white">México</SelectItem>
+            <SelectItem value="CO" className="focus:bg-cyan-500/20 focus:text-white">Colombia</SelectItem>
+            <SelectItem value="PE" className="focus:bg-cyan-500/20 focus:text-white">Perú</SelectItem>
+            <SelectItem value="CL" className="focus:bg-cyan-500/20 focus:text-white">Chile</SelectItem>
+            <SelectItem value="UY" className="focus:bg-cyan-500/20 focus:text-white">Uruguay</SelectItem>
+            <SelectItem value="BR" className="focus:bg-cyan-500/20 focus:text-white">Brasil</SelectItem>
+            <SelectItem value="US" className="focus:bg-cyan-500/20 focus:text-white">Estados Unidos</SelectItem>
+            <SelectItem value="ES" className="focus:bg-cyan-500/20 focus:text-white">España</SelectItem>
+            <SelectItem value="other" className="focus:bg-cyan-500/20 focus:text-white">Otro</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
 
