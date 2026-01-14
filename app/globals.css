@@ -113,6 +113,31 @@
 
   /* Layout */
   --header-h: 64px;
+
+  /* Neon Theme Colors */
+  --neon-bg: #0B1220;
+  --neon-fg: #E9EEF6;
+  --neon-blue: #0077FF;
+  --neon-cyan: #00F7EF;
+  --neon-accent: #0077FF;
+  --neon-border: rgba(255,255,255,0.08);
+
+  /* Academic Gray Scale */
+  --academic-gray-50: #F8FAFC;
+  --academic-gray-100: #F1F5F9;
+  --academic-gray-200: #E2E8F0;
+  --academic-gray-300: #CBD5E1;
+  --academic-gray-400: #94A3B8;
+  --academic-gray-500: #64748B;
+  --academic-gray-600: #475569;
+  --academic-gray-700: #334155;
+  --academic-gray-800: #1E293B;
+  --academic-gray-900: #0F172A;
+
+  /* Academic Colors */
+  --academic-primary: #0077FF;
+  --academic-secondary: #00F7EF;
+  --academic-accent: #8B5CF6;
 }
 
 @media (min-width:768px){
