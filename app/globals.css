@@ -329,6 +329,17 @@ select.input option, select.input-neon option, select.input-with-icon option {
 .header-glass { background: rgba(15,23,42,.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.08); border-top: none; margin-top: -1px; transition: box-shadow .25s ease, border-color .25s ease, background .25s ease; overflow: visible !important; }
 .header-elevated { background: rgba(15,23,42,.92); border-bottom-color: rgba(255,255,255,.12); box-shadow: 0 8px 26px rgba(0,0,0,.25); }
 
+/* Navigation Menu Dropdown Fix */
+[data-radix-navigation-menu-viewport] { z-index: 99999 !important; position: relative !important; }
+.header-glass [data-radix-collection-item] { overflow: visible !important; }
+.header-glass nav, .header-glass > div { overflow: visible !important; }
+
+/* Header Dropdown Fix - Global */
+header { overflow: visible !important; }
+header > div { overflow: visible !important; }
+header nav { overflow: visible !important; }
+header .relative { overflow: visible !important; }
+
 .hamburger{ display:flex; flex-direction:column; cursor:pointer; padding:0.5rem; border-radius:8px; transition:all .3s ease; z-index:1001; }
 .hamburger:hover{ background: rgba(255,255,255,0.1); }
 .hamburger-line{ width:25px; height:3px; background:white; margin:3px 0; transition:all 0.3s ease; border-radius:2px; }

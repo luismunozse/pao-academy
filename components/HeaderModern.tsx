@@ -1,6 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Menu, X, Globe, GraduationCap, BookOpen, Users, Target, Info, Phone, ChevronRight, ChevronDown, Video, FileText } from 'lucide-react';
+import { X, Globe, GraduationCap, BookOpen, Users, Target, Info, Phone, ChevronRight, ChevronDown, Video, FileText, Menu } from 'lucide-react';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export default function HeaderModern({
   brandName,
@@ -24,8 +32,6 @@ export default function HeaderModern({
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showPromo, setShowPromo] = useState(showPromoBar);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [nestedDropdownOpen, setNestedDropdownOpen] = useState<string | null>(null);
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [mobileNestedOpen, setMobileNestedOpen] = useState<string | null>(null);
 
@@ -65,39 +71,19 @@ export default function HeaderModern({
       label: t('liveCourses'),
       icon: Video,
       description: 'Clases en vivo con mentores',
-      hasNestedSubmenu: true,
       nestedItems: liveCoursesList
     },
     {
       label: t('asyncCourses'),
       icon: FileText,
       description: 'Aprende a tu ritmo',
-      hasNestedSubmenu: true,
       nestedItems: asyncCoursesCategories
-    },
-  ];
-
-  const navigationItems = [
-    { href: '#inicio', label: t('home'), icon: GraduationCap },
-    {
-      label: 'Cursos',
-      icon: BookOpen,
-      hasSubmenu: true,
-      submenu: coursesSubmenu
-    },
-    { href: '#corporate-training', label: 'Corporate Training', icon: Target },
-    { href: '#sobre-nosotros', label: t('aboutUs'), icon: Info },
-    {
-      label: t('contact'),
-      icon: Phone,
-      isWhatsApp: true,
-      href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa recibir más información sobre los cursos de GLOMIND360.'
     },
   ];
 
   return (
     <>
-      {/* Barra de Promoción Urgente - EducaciónIT Style */}
+      {/* Barra de Promoción */}
       {showPromo && (
         <div className="fixed top-0 left-0 right-0 z-[1001] bg-gradient-to-r from-red-500 to-orange-500">
           <div className="max-w-7xl mx-auto px-4 py-2.5 relative">
@@ -120,18 +106,11 @@ export default function HeaderModern({
         </div>
       )}
 
-      {/* Header blanco limpio - Platzi/EducaciónIT Style */}
+      {/* Header */}
       <header
         className={`fixed ${showPromo ? 'top-[42px]' : 'top-0'} left-0 right-0 z-[1000] bg-white border-b border-gray-200 transition-all duration-300 ${scrolled ? 'shadow-md' : ''}`}
         role="banner"
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-3 py-1 rounded"
-        >
-          {t('skip')}
-        </a>
-
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -150,110 +129,100 @@ export default function HeaderModern({
               </div>
             </a>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navigationItems.map((item, index) => (
-                item.hasSubmenu ? (
-                  <div
-                    key={index}
-                    className="relative"
-                    onMouseEnter={() => setDropdownOpen(true)}
-                    onMouseLeave={() => {
-                      setDropdownOpen(false);
-                      setNestedDropdownOpen(null);
-                    }}
+            {/* Desktop Navigation con shadcn NavigationMenu */}
+            <NavigationMenu className="hidden lg:flex">
+              <NavigationMenuList>
+                {/* Inicio */}
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="#inicio"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
                   >
-                    <button
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 text-sm font-medium"
-                    >
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.label}</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    {t('home')}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
 
-                    {/* Dropdown moderno blanco */}
-                    {dropdownOpen && (
-                      <div className="absolute top-full left-0 mt-2 min-w-[360px] rounded-xl border border-gray-200 bg-white shadow-2xl z-[1200]">
-                        <div className="flex divide-x divide-gray-200">
-                          <div className="w-64 overflow-hidden rounded-l-xl">
-                            {item.submenu?.map((subitem, subIndex) => (
-                              <div
-                                key={subIndex}
-                                className="relative"
-                                onMouseEnter={() => setNestedDropdownOpen(subitem.label)}
-                              >
-                                <div className="flex items-start gap-3 px-4 py-3 hover:bg-blue-50 transition-all duration-200 group cursor-pointer">
-                                  <subitem.icon className="w-5 h-5 text-blue-600 mt-0.5 group-hover:scale-110 transition-transform" />
-                                  <div className="flex-1">
-                                    <div className="text-gray-900 font-semibold text-sm group-hover:text-blue-600 transition-colors">
-                                      {subitem.label}
-                                    </div>
-                                    <div className="text-gray-500 text-xs mt-0.5">
-                                      {subitem.description}
-                                    </div>
-                                  </div>
-                                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
-                                </div>
-
-                                {/* Nested dropdown */}
-                                {nestedDropdownOpen === subitem.label && subitem.hasNestedSubmenu && (
-                                  <div className="absolute left-full top-0 ml-1 w-80 bg-white border border-gray-200 rounded-xl shadow-2xl z-[1300]" style={{
-                                    maxHeight: '500px'
-                                  }}>
-                                    <div className="p-3 border-b border-gray-200 bg-gray-50">
-                                      <div className="text-gray-900 font-bold text-sm">
-                                        {subitem.label}
-                                      </div>
-                                    </div>
-                                    <div className="overflow-y-auto" style={{ maxHeight: '440px' }}>
-                                      {subitem.nestedItems?.map((course: any, courseIndex: number) => (
-                                        <a
-                                          key={courseIndex}
-                                          href={course.href}
-                                          target={course.href.includes('wa.me') ? '_blank' : undefined}
-                                          rel={course.href.includes('wa.me') ? 'noopener noreferrer' : undefined}
-                                          className="flex items-center justify-between px-4 py-2.5 hover:bg-blue-50 transition-all duration-200 group"
-                                        >
-                                          <div className="flex-1">
-                                            <div className="text-gray-900 text-sm font-medium group-hover:text-blue-600 transition-colors">
-                                              {course.name}
-                                            </div>
-                                            {course.tag && (
-                                              <div className="text-gray-500 text-xs mt-0.5">
-                                                {course.tag}
-                                              </div>
-                                            )}
-                                          </div>
-                                          {course.href.includes('wa.me') ? (
-                                            <span className="text-green-500 text-xs">💬</span>
-                                          ) : (
-                                            <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
-                                          )}
-                                        </a>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
+                {/* Cursos - Con Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-gray-700 hover:bg-gray-100 hover:text-gray-900 data-[state=open]:bg-gray-100">
+                    <BookOpen className="w-4 h-4 mr-1.5" />
+                    Cursos
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[600px] p-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        {coursesSubmenu.map((category, idx) => (
+                          <div key={idx} className="space-y-3">
+                            <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+                              <category.icon className="w-5 h-5 text-blue-600" />
+                              <div>
+                                <div className="font-semibold text-gray-900">{category.label}</div>
+                                <div className="text-xs text-gray-500">{category.description}</div>
                               </div>
-                            ))}
+                            </div>
+                            <div className="space-y-1">
+                              {category.nestedItems.map((course, courseIdx) => (
+                                <NavigationMenuLink
+                                  key={courseIdx}
+                                  href={course.href}
+                                  target={course.href.includes('wa.me') ? '_blank' : undefined}
+                                  rel={course.href.includes('wa.me') ? 'noopener noreferrer' : undefined}
+                                  className="block px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors group"
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <div>
+                                      <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600">
+                                        {course.name}
+                                      </div>
+                                      {course.tag && (
+                                        <div className="text-xs text-gray-500">{course.tag}</div>
+                                      )}
+                                    </div>
+                                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+                                  </div>
+                                </NavigationMenuLink>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        ))}
                       </div>
-                    )}
-                  </div>
-                ) : (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target={item.isWhatsApp ? '_blank' : undefined}
-                    rel={item.isWhatsApp ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 text-sm font-medium"
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Corporate Training */}
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="#corporate-training"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
                   >
-                    <span>{item.label}</span>
-                  </a>
-                )
-              ))}
-            </nav>
+                    Corporate Training
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+
+                {/* Sobre Nosotros */}
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="#sobre-nosotros"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    {t('aboutUs')}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+
+                {/* Contacto */}
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    href="https://wa.me/5493517601441?text=¡Hola! Me interesa recibir más información sobre los cursos de GLOMIND360."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    {t('contact')}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
 
             {/* Desktop CTAs */}
             <div className="hidden lg:flex items-center gap-3">
@@ -288,7 +257,7 @@ export default function HeaderModern({
         </div>
       </header>
 
-      {/* Mobile Menu - Blanco moderno */}
+      {/* Mobile Menu */}
       <div
         className={`fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-[1100] ${
           open ? 'translate-x-0' : 'translate-x-full'
@@ -313,96 +282,117 @@ export default function HeaderModern({
         </div>
 
         <nav className="p-4 space-y-2 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
-          {navigationItems.map((item, index) => (
-            item.hasSubmenu ? (
-              <div key={index} className="space-y-1">
-                <button
-                  onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
-                >
-                  <div className="flex items-center gap-3">
-                    <item.icon className="w-5 h-5 text-blue-600" />
-                    <span className="font-medium">{item.label}</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${mobileCoursesOpen ? 'rotate-180' : ''}`} />
-                </button>
+          {/* Inicio */}
+          <a
+            href="#inicio"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
+            onClick={() => setOpen(false)}
+          >
+            <GraduationCap className="w-5 h-5 text-blue-600" />
+            <span className="font-medium">{t('home')}</span>
+          </a>
 
-                {mobileCoursesOpen && (
-                  <div className="ml-4 space-y-1 mt-2">
-                    {item.submenu?.map((subitem, subIndex) => (
-                      <div key={subIndex} className="space-y-1">
-                        <button
-                          onClick={() => setMobileNestedOpen(mobileNestedOpen === subitem.label ? null : subitem.label)}
-                          className="w-full flex items-start gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all"
-                        >
-                          <subitem.icon className="w-4 h-4 text-blue-600 mt-0.5" />
-                          <div className="flex-1 text-left">
-                            <div className="text-gray-900 font-semibold text-sm">
-                              {subitem.label}
-                            </div>
-                            <div className="text-gray-500 text-xs mt-0.5">
-                              {subitem.description}
-                            </div>
-                          </div>
-                          <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform ${mobileNestedOpen === subitem.label ? 'rotate-180' : ''}`} />
-                        </button>
-
-                        {mobileNestedOpen === subitem.label && subitem.hasNestedSubmenu && (
-                          <div className="ml-6 space-y-1 mt-1">
-                            {subitem.nestedItems?.map((course: any, courseIndex: number) => (
-                              <a
-                                key={courseIndex}
-                                href={course.href}
-                                target={course.href.includes('wa.me') ? '_blank' : undefined}
-                                rel={course.href.includes('wa.me') ? 'noopener noreferrer' : undefined}
-                                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                                onClick={() => {
-                                  if (!course.href.includes('wa.me')) {
-                                    setOpen(false);
-                                    setMobileCoursesOpen(false);
-                                    setMobileNestedOpen(null);
-                                  }
-                                }}
-                              >
-                                <div className="flex-1">
-                                  <div className="text-gray-900 text-sm font-medium">
-                                    {course.name}
-                                  </div>
-                                  {course.tag && (
-                                    <div className="text-gray-500 text-xs">
-                                      {course.tag}
-                                    </div>
-                                  )}
-                                </div>
-                                {course.href.includes('wa.me') ? (
-                                  <span className="text-green-500 text-xs">💬</span>
-                                ) : (
-                                  <ChevronRight className="w-3 h-3 text-gray-400" />
-                                )}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
+          {/* Cursos con submenu */}
+          <div className="space-y-1">
+            <button
+              onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
+              className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
+            >
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-5 h-5 text-blue-600" />
+                <span className="font-medium">Cursos</span>
               </div>
-            ) : (
-              <a
-                key={item.href}
-                href={item.href}
-                target={item.isWhatsApp ? '_blank' : undefined}
-                rel={item.isWhatsApp ? 'noopener noreferrer' : undefined}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
-                onClick={() => setOpen(false)}
-              >
-                <item.icon className="w-5 h-5 text-blue-600" />
-                <span className="font-medium">{item.label}</span>
-                {item.isWhatsApp && <span className="text-green-500 text-sm ml-auto">💬</span>}
-              </a>
-            )
-          ))}
+              <ChevronDown className={`w-4 h-4 transition-transform ${mobileCoursesOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {mobileCoursesOpen && (
+              <div className="ml-4 space-y-1 mt-2">
+                {coursesSubmenu.map((subitem, subIndex) => (
+                  <div key={subIndex} className="space-y-1">
+                    <button
+                      onClick={() => setMobileNestedOpen(mobileNestedOpen === subitem.label ? null : subitem.label)}
+                      className="w-full flex items-start gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all"
+                    >
+                      <subitem.icon className="w-4 h-4 text-blue-600 mt-0.5" />
+                      <div className="flex-1 text-left">
+                        <div className="text-gray-900 font-semibold text-sm">
+                          {subitem.label}
+                        </div>
+                        <div className="text-gray-500 text-xs mt-0.5">
+                          {subitem.description}
+                        </div>
+                      </div>
+                      <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform ${mobileNestedOpen === subitem.label ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {mobileNestedOpen === subitem.label && (
+                      <div className="ml-6 space-y-1 mt-1">
+                        {subitem.nestedItems.map((course, courseIndex) => (
+                          <a
+                            key={courseIndex}
+                            href={course.href}
+                            target={course.href.includes('wa.me') ? '_blank' : undefined}
+                            rel={course.href.includes('wa.me') ? 'noopener noreferrer' : undefined}
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                            onClick={() => {
+                              if (!course.href.includes('wa.me')) {
+                                setOpen(false);
+                                setMobileCoursesOpen(false);
+                                setMobileNestedOpen(null);
+                              }
+                            }}
+                          >
+                            <div className="flex-1">
+                              <div className="text-gray-900 text-sm font-medium">
+                                {course.name}
+                              </div>
+                              {course.tag && (
+                                <div className="text-gray-500 text-xs">
+                                  {course.tag}
+                                </div>
+                              )}
+                            </div>
+                            <ChevronRight className="w-3 h-3 text-gray-400" />
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Corporate Training */}
+          <a
+            href="#corporate-training"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
+            onClick={() => setOpen(false)}
+          >
+            <Target className="w-5 h-5 text-blue-600" />
+            <span className="font-medium">Corporate Training</span>
+          </a>
+
+          {/* Sobre Nosotros */}
+          <a
+            href="#sobre-nosotros"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
+            onClick={() => setOpen(false)}
+          >
+            <Info className="w-5 h-5 text-blue-600" />
+            <span className="font-medium">{t('aboutUs')}</span>
+          </a>
+
+          {/* Contacto */}
+          <a
+            href="https://wa.me/5493517601441?text=¡Hola! Me interesa recibir más información sobre los cursos de GLOMIND360."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
+          >
+            <Phone className="w-5 h-5 text-blue-600" />
+            <span className="font-medium">{t('contact')}</span>
+          </a>
         </nav>
 
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white space-y-3">

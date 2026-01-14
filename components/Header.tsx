@@ -133,7 +133,7 @@ export default function Header({
       <header
         className={`fixed ${showPromo ? 'top-[39px]' : 'top-0'} left-0 right-0 z-[1000] header-glass ${elevated ? 'header-elevated' : ''} transition-[top] duration-300`}
         role="banner"
-        style={{ overflow: 'visible' }}
+        style={{ overflow: 'visible', isolation: 'isolate' }}
       >
         <a
           href="#main"
@@ -142,7 +142,7 @@ export default function Header({
           {t('skip')}
         </a>
 
-        <div className={`full-width-content header-size ${elevated ? 'py-2' : 'py-3'}`}>
+        <div className={`full-width-content header-size ${elevated ? 'py-2' : 'py-3'}`} style={{ overflow: 'visible' }}>
           <div className="flex items-center justify-between">
             {/* Logo group */}
             <a href="#inicio" className="flex items-center gap-3 group">
@@ -159,7 +159,7 @@ export default function Header({
             </a>
 
             {/* Desktop nav with shadcn NavigationMenu */}
-            <NavigationMenu className="hidden lg:flex">
+            <NavigationMenu className="hidden lg:flex" style={{ position: 'static' }}>
               <NavigationMenuList>
                 {navigationItems.map((item, index) => (
                   <NavigationMenuItem key={index}>
