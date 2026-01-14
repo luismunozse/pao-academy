@@ -57,7 +57,7 @@ export default function HeaderModern({
     { name: 'Data Analytics Bootcamp', tag: 'Datos', href: '#cursos-en-vivo' },
   ];
 
-  const asyncCoursesCategories = [
+  const asyncCoursesCategories: { name: string; href: string; tag?: string }[] = [
     { name: '📊 Análisis de Datos', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Análisis de Datos asincrónicos.' },
     { name: '💼 Negocios y Finanzas', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Negocios y Finanzas asincrónicos.' },
     { name: '⚙️ Gestión de Procesos', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Gestión de Procesos asincrónicos.' },
