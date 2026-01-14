@@ -227,23 +227,23 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
       {/* País */}
       <div>
         <Select value={country} onValueChange={setCountry}>
-          <SelectTrigger className="w-full h-11 text-base bg-white/5 border-white/20 text-white data-[placeholder]:text-gray-400 focus:ring-cyan-500/50 focus:border-cyan-400">
+          <SelectTrigger className="select-trigger-neon w-full h-11 text-base">
             <div className="flex items-center gap-3">
-              <Globe className="w-4 h-4 text-gray-400" />
+              <Globe className="w-4 h-4 text-[rgba(234,242,255,.55)]" />
               <SelectValue placeholder={t.country} />
             </div>
           </SelectTrigger>
-          <SelectContent className="bg-slate-900 border-white/20 text-white">
-            <SelectItem value="AR" className="focus:bg-cyan-500/20 focus:text-white">Argentina</SelectItem>
-            <SelectItem value="MX" className="focus:bg-cyan-500/20 focus:text-white">México</SelectItem>
-            <SelectItem value="CO" className="focus:bg-cyan-500/20 focus:text-white">Colombia</SelectItem>
-            <SelectItem value="PE" className="focus:bg-cyan-500/20 focus:text-white">Perú</SelectItem>
-            <SelectItem value="CL" className="focus:bg-cyan-500/20 focus:text-white">Chile</SelectItem>
-            <SelectItem value="UY" className="focus:bg-cyan-500/20 focus:text-white">Uruguay</SelectItem>
-            <SelectItem value="BR" className="focus:bg-cyan-500/20 focus:text-white">Brasil</SelectItem>
-            <SelectItem value="US" className="focus:bg-cyan-500/20 focus:text-white">Estados Unidos</SelectItem>
-            <SelectItem value="ES" className="focus:bg-cyan-500/20 focus:text-white">España</SelectItem>
-            <SelectItem value="other" className="focus:bg-cyan-500/20 focus:text-white">Otro</SelectItem>
+          <SelectContent className="select-content-neon">
+            <SelectItem value="AR" className="select-item-neon">Argentina</SelectItem>
+            <SelectItem value="MX" className="select-item-neon">México</SelectItem>
+            <SelectItem value="CO" className="select-item-neon">Colombia</SelectItem>
+            <SelectItem value="PE" className="select-item-neon">Perú</SelectItem>
+            <SelectItem value="CL" className="select-item-neon">Chile</SelectItem>
+            <SelectItem value="UY" className="select-item-neon">Uruguay</SelectItem>
+            <SelectItem value="BR" className="select-item-neon">Brasil</SelectItem>
+            <SelectItem value="US" className="select-item-neon">Estados Unidos</SelectItem>
+            <SelectItem value="ES" className="select-item-neon">España</SelectItem>
+            <SelectItem value="other" className="select-item-neon">Otro</SelectItem>
           </SelectContent>
         </Select>
       </div>

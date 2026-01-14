@@ -286,19 +286,49 @@
   outline:2px solid var(--ring);
   outline-offset:2px;
 }
-select.input-neon, select.input-with-icon {
-  color:#0f172a;
-  background:#ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 40px;
-  cursor: pointer;
+/* Select shadcn con paleta neon */
+.select-trigger-neon {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  color: var(--neon-fg);
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
-select.input-neon option, select.input-with-icon option {
-  color:#0f172a;
-  background:#ffffff;
-  padding: 8px 12px;
+.select-trigger-neon:hover {
+  border-color: rgba(255,255,255,.25);
+}
+.select-trigger-neon:focus,
+.select-trigger-neon[data-state="open"] {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.25), 0 6px 16px rgba(59,130,246,.12);
+  outline: none;
+}
+.select-trigger-neon [data-placeholder] {
+  color: rgba(234,242,255,.55);
+}
+.select-content-neon {
+  background: linear-gradient(180deg, #0d172a 0%, #0b1224 100%);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+.select-item-neon {
+  color: var(--neon-fg);
+  border-radius: 8px;
+  margin: 2px 4px;
+  transition: background .15s ease;
+}
+.select-item-neon:hover,
+.select-item-neon:focus,
+.select-item-neon[data-highlighted] {
+  background: linear-gradient(90deg, rgba(59,130,246,.2), rgba(139,92,246,.15));
+  color: #fff;
+  outline: none;
+}
+.select-item-neon[data-state="checked"] {
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  color: #fff;
 }
 
 /* Textarea consistente */
