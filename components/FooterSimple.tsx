@@ -254,7 +254,7 @@ export default function FooterSimple({
             }}>
               <li>
                 <a
-                  href="#sobre-nosotros"
+                  href="/sobre-nosotros"
                   style={{
                     fontSize: '0.875rem',
                     color: '#64748B',
@@ -269,7 +269,7 @@ export default function FooterSimple({
               </li>
               <li>
                 <a
-                  href="#faq"
+                  href="/faq"
                   style={{
                     fontSize: '0.875rem',
                     color: '#64748B',
