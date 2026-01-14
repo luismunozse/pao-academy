@@ -220,7 +220,7 @@ export default function SocialProofSimple({
               fontStyle: 'italic',
               margin: 0
             }}>
-              "{test.frase}"
+              &ldquo;{test.frase}&rdquo;
             </blockquote>
 
             {/* Author info */}

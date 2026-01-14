@@ -136,7 +136,7 @@ export default function SocialProofModern({
 
               {/* Quote */}
               <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed mb-4 font-medium">
-                "{test.frase}"
+                &ldquo;{test.frase}&rdquo;
               </blockquote>
 
               {/* Author info */}
