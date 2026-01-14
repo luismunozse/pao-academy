@@ -151,26 +151,74 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
 
   if (ok) {
     return (
-      <div className="p-2 text-center">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div style={{
+        padding: '2rem',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          width: '64px',
+          height: '64px',
+          background: '#D1FAE5',
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '0 auto 1rem'
+        }}>
+          <svg style={{
+            width: '32px',
+            height: '32px',
+            color: '#22C55E'
+          }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900">{t.success}</h3>
-        <p className="opacity-80 mt-1">{t.successMessage}</p>
+        <h3 style={{
+          fontSize: '1.25rem',
+          fontWeight: '700',
+          color: '#0F172A',
+          marginBottom: '0.5rem'
+        }}>{t.success}</h3>
+        <p style={{
+          fontSize: '0.9375rem',
+          color: '#64748B'
+        }}>{t.successMessage}</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
+    <form onSubmit={handleSubmit} style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '1rem'
+    }}>
       {/* Nombre */}
       <div>
-        <div className="relative">
-          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+        <div style={{ position: 'relative' }}>
+          <User style={{
+            position: 'absolute',
+            left: '12px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: '#94A3B8',
+            width: '16px',
+            height: '16px'
+          }} />
           <input
-            className={`input-neon input-with-icon w-full h-11 text-base ${fieldErrors.name ? 'border-red-500' : ''}`}
+            style={{
+              width: '100%',
+              height: '44px',
+              paddingLeft: '2.75rem',
+              paddingRight: '14px',
+              background: 'white',
+              border: `2px solid ${fieldErrors.name ? '#EF4444' : '#E5E7EB'}`,
+              borderRadius: '0.75rem',
+              fontSize: '1rem',
+              color: '#0F172A',
+              outline: 'none',
+              transition: 'all 0.2s'
+            }}
             placeholder={t.name}
             value={name}
             onChange={e => {
@@ -179,18 +227,54 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
                 setFieldErrors(prev => ({ ...prev, name: '' }));
               }
             }}
+            onFocus={(e) => {
+              if (!fieldErrors.name) {
+                e.currentTarget.style.borderColor = '#3B82F6';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!fieldErrors.name) {
+                e.currentTarget.style.borderColor = '#E5E7EB';
+                e.currentTarget.style.boxShadow = 'none';
+              }
+            }}
           />
         </div>
-        {fieldErrors.name && <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>}
+        {fieldErrors.name && <p style={{
+          color: '#EF4444',
+          fontSize: '0.75rem',
+          marginTop: '0.25rem'
+        }}>{fieldErrors.name}</p>}
       </div>
 
       {/* Email */}
       <div>
-        <div className="relative">
-          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+        <div style={{ position: 'relative' }}>
+          <Mail style={{
+            position: 'absolute',
+            left: '12px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: '#94A3B8',
+            width: '16px',
+            height: '16px'
+          }} />
           <input
-            className={`input-neon input-with-icon w-full h-11 text-base ${fieldErrors.email ? 'border-red-500' : ''}`}
             type="email"
+            style={{
+              width: '100%',
+              height: '44px',
+              paddingLeft: '2.75rem',
+              paddingRight: '14px',
+              background: 'white',
+              border: `2px solid ${fieldErrors.email ? '#EF4444' : '#E5E7EB'}`,
+              borderRadius: '0.75rem',
+              fontSize: '1rem',
+              color: '#0F172A',
+              outline: 'none',
+              transition: 'all 0.2s'
+            }}
             placeholder={t.email}
             value={email}
             onChange={e => {
@@ -199,18 +283,54 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
                 setFieldErrors(prev => ({ ...prev, email: '' }));
               }
             }}
+            onFocus={(e) => {
+              if (!fieldErrors.email) {
+                e.currentTarget.style.borderColor = '#3B82F6';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!fieldErrors.email) {
+                e.currentTarget.style.borderColor = '#E5E7EB';
+                e.currentTarget.style.boxShadow = 'none';
+              }
+            }}
           />
         </div>
-        {fieldErrors.email && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
+        {fieldErrors.email && <p style={{
+          color: '#EF4444',
+          fontSize: '0.75rem',
+          marginTop: '0.25rem'
+        }}>{fieldErrors.email}</p>}
       </div>
 
       {/* Teléfono */}
       <div>
-        <div className="relative">
-          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+        <div style={{ position: 'relative' }}>
+          <Phone style={{
+            position: 'absolute',
+            left: '12px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: '#94A3B8',
+            width: '16px',
+            height: '16px'
+          }} />
           <input
-            className={`input-neon input-with-icon w-full h-11 text-base ${fieldErrors.phone ? 'border-red-500' : ''}`}
             type="tel"
+            style={{
+              width: '100%',
+              height: '44px',
+              paddingLeft: '2.75rem',
+              paddingRight: '14px',
+              background: 'white',
+              border: `2px solid ${fieldErrors.phone ? '#EF4444' : '#E5E7EB'}`,
+              borderRadius: '0.75rem',
+              fontSize: '1rem',
+              color: '#0F172A',
+              outline: 'none',
+              transition: 'all 0.2s'
+            }}
             placeholder={t.phone}
             value={phone}
             onChange={e => {
@@ -219,31 +339,75 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
                 setFieldErrors(prev => ({ ...prev, phone: '' }));
               }
             }}
+            onFocus={(e) => {
+              if (!fieldErrors.phone) {
+                e.currentTarget.style.borderColor = '#3B82F6';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!fieldErrors.phone) {
+                e.currentTarget.style.borderColor = '#E5E7EB';
+                e.currentTarget.style.boxShadow = 'none';
+              }
+            }}
           />
         </div>
-        {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
+        {fieldErrors.phone && <p style={{
+          color: '#EF4444',
+          fontSize: '0.75rem',
+          marginTop: '0.25rem'
+        }}>{fieldErrors.phone}</p>}
       </div>
 
       {/* País */}
       <div>
         <Select value={country} onValueChange={setCountry}>
-          <SelectTrigger className="select-trigger-neon w-full h-11 text-base">
-            <div className="flex items-center gap-3">
-              <Globe className="w-4 h-4 text-[rgba(234,242,255,.55)]" />
+          <SelectTrigger style={{
+            width: '100%',
+            height: '44px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            padding: '0 14px',
+            background: 'white',
+            border: '2px solid #E5E7EB',
+            borderRadius: '0.75rem',
+            fontSize: '1rem',
+            color: '#0F172A',
+            outline: 'none',
+            transition: 'all 0.2s'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem'
+            }}>
+              <Globe style={{
+                width: '16px',
+                height: '16px',
+                color: '#94A3B8'
+              }} />
               <SelectValue placeholder={t.country} />
             </div>
           </SelectTrigger>
-          <SelectContent className="select-content-neon">
-            <SelectItem value="AR" className="select-item-neon">Argentina</SelectItem>
-            <SelectItem value="MX" className="select-item-neon">México</SelectItem>
-            <SelectItem value="CO" className="select-item-neon">Colombia</SelectItem>
-            <SelectItem value="PE" className="select-item-neon">Perú</SelectItem>
-            <SelectItem value="CL" className="select-item-neon">Chile</SelectItem>
-            <SelectItem value="UY" className="select-item-neon">Uruguay</SelectItem>
-            <SelectItem value="BR" className="select-item-neon">Brasil</SelectItem>
-            <SelectItem value="US" className="select-item-neon">Estados Unidos</SelectItem>
-            <SelectItem value="ES" className="select-item-neon">España</SelectItem>
-            <SelectItem value="other" className="select-item-neon">Otro</SelectItem>
+          <SelectContent style={{
+            background: 'white',
+            border: '1px solid #E5E7EB',
+            borderRadius: '0.75rem',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+            overflow: 'hidden'
+          }}>
+            <SelectItem value="AR" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Argentina</SelectItem>
+            <SelectItem value="MX" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>México</SelectItem>
+            <SelectItem value="CO" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Colombia</SelectItem>
+            <SelectItem value="PE" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Perú</SelectItem>
+            <SelectItem value="CL" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Chile</SelectItem>
+            <SelectItem value="UY" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Uruguay</SelectItem>
+            <SelectItem value="BR" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Brasil</SelectItem>
+            <SelectItem value="US" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Estados Unidos</SelectItem>
+            <SelectItem value="ES" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>España</SelectItem>
+            <SelectItem value="other" style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Otro</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -252,29 +416,98 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
       {/* Mensaje */}
       <div>
         <textarea
-          className="textarea-neon input-with-icon w-full min-h-[100px] text-base bg-[rgba(255,255,255,0.04)]"
+          style={{
+            width: '100%',
+            minHeight: '100px',
+            padding: '14px',
+            background: 'white',
+            border: '2px solid #E5E7EB',
+            borderRadius: '0.75rem',
+            fontSize: '1rem',
+            color: '#0F172A',
+            outline: 'none',
+            transition: 'all 0.2s',
+            resize: 'vertical',
+            lineHeight: '1.5'
+          }}
           placeholder={t.message}
           value={message}
           onChange={e => setMessage(e.target.value)}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = '#3B82F6';
+            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = '#E5E7EB';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
         />
       </div>
 
-      {error && <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">{error}</div>}
-      
+      {error && <div style={{
+        color: '#DC2626',
+        fontSize: '0.875rem',
+        background: '#FEE2E2',
+        padding: '0.75rem',
+        borderRadius: '0.5rem'
+      }}>{error}</div>}
+
       <button
         type="submit"
         disabled={!isValid || loading}
-        className="btn-accent w-full h-12 text-center disabled:opacity-60 flex items-center justify-center gap-2 rounded-xl"
+        style={{
+          width: '100%',
+          height: '48px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.5rem',
+          fontSize: '1rem',
+          fontWeight: '600',
+          color: 'white',
+          background: (!isValid || loading) ? '#94A3B8' : 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+          border: 'none',
+          borderRadius: '0.75rem',
+          cursor: (!isValid || loading) ? 'not-allowed' : 'pointer',
+          boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.3)',
+          transition: 'all 0.2s',
+          opacity: (!isValid || loading) ? 0.6 : 1
+        }}
+        onMouseEnter={(e) => {
+          if (isValid && !loading) {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(59, 130, 246, 0.4)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (isValid && !loading) {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(59, 130, 246, 0.3)';
+          }
+        }}
       >
         {loading ? (
           <>
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div style={{
+              width: '16px',
+              height: '16px',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              borderTop: '2px solid white',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite'
+            }}></div>
             {t.submitting}
           </>
         ) : (
           t.submit
         )}
       </button>
+
+      <style jsx>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </form>
   );
 }
