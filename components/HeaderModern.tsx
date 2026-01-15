@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { X, Globe, GraduationCap, BookOpen, Users, Target, Info, Phone, ChevronRight, ChevronDown, Video, FileText, Menu } from 'lucide-react';
+import { X, Globe, GraduationCap, BookOpen, Users, Phone, ChevronRight, ChevronDown, Video, FileText, Menu } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -190,26 +190,6 @@ export default function HeaderModern({
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Corporate Training */}
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="#corporate-training"
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
-                  >
-                    Corporate Training
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                {/* Sobre Nosotros */}
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="#sobre-nosotros"
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
-                  >
-                    {t('aboutUs')}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
                 {/* Contacto */}
                 <NavigationMenuItem>
                   <NavigationMenuLink
@@ -362,26 +342,6 @@ export default function HeaderModern({
               </div>
             )}
           </div>
-
-          {/* Corporate Training */}
-          <a
-            href="#corporate-training"
-            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
-            onClick={() => setOpen(false)}
-          >
-            <Target className="w-5 h-5 text-blue-600" />
-            <span className="font-medium">Corporate Training</span>
-          </a>
-
-          {/* Sobre Nosotros */}
-          <a
-            href="#sobre-nosotros"
-            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-all text-gray-900"
-            onClick={() => setOpen(false)}
-          >
-            <Info className="w-5 h-5 text-blue-600" />
-            <span className="font-medium">{t('aboutUs')}</span>
-          </a>
 
           {/* Contacto */}
           <a

@@ -17,9 +17,6 @@ import { copy, cursosBase, microcursos, type Lang } from '../lib/i18n';
 import './globals.css';
 
 // Lazy load components below the fold for better performance
-const CorporateTrainingSimple = dynamic(() => import('../components/CorporateTrainingSimple'), {
-  loading: () => <LoadingSpinner size="lg" />,
-});
 const BenefitsSimple = dynamic(() => import('../components/BenefitsSimple'), {
   loading: () => <LoadingSpinner size="lg" />,
 });
@@ -196,6 +193,7 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
           lang={lang}
           onCourseClick={(title)=>{ setInteres(title); setModalOpen(true); }}
           onCatalogClick={()=>{ setInteres(lang==='es'?'programas':'programs'); setModalOpen(true); }}
+          onCorporateCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
         />
 
       <LazyMotion features={domAnimation} strict>
@@ -211,12 +209,6 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
         {/* Beneficios diferenciales - Diseño moderno claro */}
         <BenefitsSimple t={t} />
 
-        {/* Formación corporativa - Sección consolidada sin TrainingOptions redundante */}
-        <CorporateTrainingSimple
-          t={t}
-          onClickCTA={()=>{ setInteres('formación corporativa'); setModalOpen(true); }}
-        />
-
         {/* FAQ */}
         <FAQSimple t={t} />
 
@@ -230,10 +222,10 @@ ${lang==='es'?'Vengo desde la web de':'I come from the website of'} ${brandName}
 
       {/* Modal + CTA flotante */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="bg-gradient-to-br from-[#0d172a]/95 to-[#0b1224]/95 border-white/12 text-white max-w-xl">
+        <DialogContent className="bg-white border-[#E2E8F0] max-w-xl">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-white">Reserva tu lugar</DialogTitle>
-            <DialogDescription className="text-white/80">
+            <DialogTitle className="text-xl font-semibold text-[#0F172A]">Reserva tu lugar</DialogTitle>
+            <DialogDescription className="text-[#64748B]">
               Completa tus datos y te contactamos para confirmar la inscripción.
             </DialogDescription>
           </DialogHeader>

@@ -49,7 +49,7 @@ export default function CorporateTrainingSimple({
   ];
 
   return (
-    <section style={{
+    <section id="corporate-training" style={{
       background: 'white',
       padding: '4rem 1rem'
     }}>
