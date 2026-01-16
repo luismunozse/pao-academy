@@ -71,7 +71,7 @@ export default function HeroModern({
               className="text-xl mb-8 leading-relaxed"
               style={{ color: '#475569' }}
             >
-              Cursos en vivo con mentores expertos. Proyectos reales que suman a tu portfolio. Certificación válida en el mercado. Empieza gratis hoy.
+              Cursos en vivo con mentores expertos. Certificación válida en el mercado.
             </m.p>
 
             {/* CTAs - Dual Strategy Platzi */}

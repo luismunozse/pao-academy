@@ -37,7 +37,7 @@ export default function HeroSimple({
               borderRadius: '50%',
               display: 'inline-block'
             }}></span>
-            🚀 +10,000 profesionales ya avanzaron su carrera
+            Únete a nuestra comunidad de aprendizaje
           </div>
 
           {/* Headline */}
@@ -60,18 +60,36 @@ export default function HeroSimple({
             </span>
           </h1>
 
-          {/* Description */}
-          <p style={{
-            fontSize: '1.25rem',
-            color: '#475569',
-            marginBottom: '2rem',
-            lineHeight: '1.75',
-            maxWidth: '700px',
-            margin: '0 auto 2rem'
+          {/* Description - Feature highlights */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: '1.5rem',
+            justifyContent: 'center',
+            marginBottom: '2rem'
           }}>
-            Cursos en vivo con mentores expertos. Proyectos reales que suman a tu portfolio.
-            Certificación válida en el mercado. Empieza gratis hoy.
-          </p>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontSize: '1.1rem',
+              color: '#334155'
+            }}>
+              <span style={{ color: '#10B981', fontSize: '1.25rem' }}>✓</span>
+              Cursos en vivo con mentores expertos
+            </div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontSize: '1.1rem',
+              color: '#334155'
+            }}>
+              <span style={{ color: '#10B981', fontSize: '1.25rem' }}>✓</span>
+              Certificación válida en el mercado
+            </div>
+          </div>
 
           {/* CTAs */}
           <div style={{
@@ -109,7 +127,7 @@ export default function HeroSimple({
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              <span>Prueba 7 días gratis</span>
+              <span>Inscribirme Ahora</span>
               <ArrowRight size={20} />
             </button>
 
@@ -144,39 +162,6 @@ export default function HeroSimple({
               <span>Ver todos los cursos</span>
               <Play size={20} />
             </button>
-          </div>
-
-          {/* Trust Signals */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '2rem',
-            fontSize: '0.875rem',
-            color: '#64748B'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div style={{ display: 'flex', gap: '2px' }}>
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} fill="#FBBF24" color="#FBBF24" />
-                ))}
-              </div>
-              <span style={{ fontWeight: '600', color: '#0F172A' }}>4.9/5</span>
-              <span>en Google</span>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <CheckCircle size={16} color="#22C55E" />
-              <span style={{ fontWeight: '600', color: '#0F172A' }}>10,000+</span>
-              <span>graduados</span>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <CheckCircle size={16} color="#3B82F6" />
-              <span style={{ fontWeight: '600', color: '#0F172A' }}>95%</span>
-              <span>consigue trabajo</span>
-            </div>
           </div>
 
         </div>
