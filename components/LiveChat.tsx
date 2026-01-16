@@ -1,19 +1,18 @@
 import Script from 'next/script';
 
-// Integración ligera con Crisp. Define NEXT_PUBLIC_CRISP_WEBSITE_ID.
-const CRISP_ID = process.env.NEXT_PUBLIC_CRISP_WEBSITE_ID;
-
+// Zoho SalesIQ - Chat en vivo integrado con Zoho CRM
 export default function LiveChat(){
-  if (!CRISP_ID) return null;
   return (
-    <Script id="crisp-chat" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
-      window.$crisp=[];window.CRISP_WEBSITE_ID='${CRISP_ID}';
-      (function(){
-        var d=document,s=d.createElement('script');
-        s.src='https://client.crisp.chat/l.js';s.async=1;
-        d.getElementsByTagName('head')[0].appendChild(s);
-      })();
-    ` }} />
+    <>
+      <Script id="zoho-salesiq-init" strategy="beforeInteractive">
+        {`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
+      </Script>
+      <Script
+        id="zsiqscript"
+        src="https://salesiq.zohopublic.com/widget?wc=siq2f60b37af4e352c434418ffb5325a6bb169d87f9a417b33e30d25703cb6137f6"
+        strategy="afterInteractive"
+      />
+    </>
   );
 }
 
