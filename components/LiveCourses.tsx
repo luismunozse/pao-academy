@@ -132,7 +132,7 @@ export default function LiveCourses({
           <div className="relative w-full h-48 overflow-hidden rounded-t-xl">
             <img
               src={course.image}
-              alt={course.title}
+              alt={`Imagen del curso: ${course.title}`}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

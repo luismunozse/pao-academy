@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import {
   GraduationCap,
   Users,
@@ -63,41 +64,19 @@ export default function BenefitsSimple({ t }: { t: (k: string) => string }) {
               borderRadius: '1.5rem',
               overflow: 'hidden',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)',
-              position: 'relative'
+              position: 'relative',
+              aspectRatio: '4/3'
             }}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&auto=format&q=80"
                 alt="Estudiantes colaborando en un ambiente de aprendizaje moderno"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  aspectRatio: '4/3',
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                style={{ objectFit: 'cover' }}
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAQMDBAMBAAAAAAAAAAAAAQIDBAAFEQYSITFBUWFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAZEQADAAMAAAAAAAAAAAAAAAAAAQIRITH/2gAMAwEAAhEDEEQA/wDNtO6ouFmhIhxXI6WkqKgFRgSSTz3VH+qul0dqcW4ynL1/aUoTXIqKp//Z"
               />
-              {/* Fallback */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                aspectRatio: '4/3',
-                background: 'linear-gradient(135deg, #DBEAFE 0%, #E9D5FF 50%, #FEF3C7 100%)',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <div style={{ textAlign: 'center' }}>
-                  <GraduationCap size={80} color="#3B82F6" style={{ opacity: 0.6, margin: '0 auto 1rem' }} />
-                  <p style={{ fontSize: '1.25rem', fontWeight: '600', color: '#1E40AF', margin: 0 }}>
-                    Tu futuro empieza aquí
-                  </p>
-                </div>
-              </div>
             </div>
 
             {/* Floating Badge */}

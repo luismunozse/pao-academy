@@ -1,18 +1,8 @@
 'use client';
-import { useState, useMemo } from 'react';
-import { ArrowRight, Calendar, Clock, Star, UserCheck, Award, Play, BookOpen, Building2, Users, TrendingUp, Target, BarChart } from 'lucide-react';
-import { cursosBase } from '../lib/i18n';
+import { useState, useMemo, useEffect } from 'react';
+import { ArrowRight, Calendar, Clock, Star, UserCheck, Award, Play, BookOpen, Building2, Users, TrendingUp, Target, BarChart, Loader2 } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
-
-// Mapeo de IDs de cursos a slugs de URL
-const courseSlugMap: Record<string, string> = {
-  'ventas360': 'ventas-consultivas',
-  'liderazgo': 'liderazgo-agil',
-  'habitos': 'motivacion-habitos',
-  'marcaPro': 'marca-personal',
-  'powerbi': 'power-bi-desde-cero',
-  'analytics': 'data-analytics',
-};
 
 // Mapeo de categorías async a cursos destacados de cada categoría
 const asyncCategoryCoursesMap: Record<string, string[]> = {
@@ -37,6 +27,31 @@ type TabType = 'live' | 'async' | 'corporate';
 export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogClick, onCorporateCTA }: Props) {
   const [selectedTag, setSelectedTag] = useState<string>('All');
   const [activeTab, setActiveTab] = useState<TabType>('live');
+  const [dbCourses, setDbCourses] = useState<any[]>([]);
+  const [loadingCourses, setLoadingCourses] = useState(true);
+
+  // Fetch courses from Supabase
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from('courses')
+          .select('*')
+          .eq('is_published', true)
+          .order('created_at', { ascending: false });
+
+        if (!error && data) {
+          setDbCourses(data);
+        }
+      } catch (err) {
+        console.error('Error fetching courses:', err);
+      }
+      setLoadingCourses(false);
+    };
+
+    fetchCourses();
+  }, []);
 
   // Corporate Training data
   const corporateMetrics = [
@@ -142,22 +157,31 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
     });
   }, [lang, asyncCoursesData]);
 
+  // Map database courses to display format
   const courses = useMemo(() => {
-    return cursosBase.map((c) => {
-      const data = c[lang as 'es' | 'en'];
-      return {
-        id: c.id,
-        title: data.titulo,
-        tag: c.tag,
-        duration: data.duracion,
-        level: 'Intermedio',
-        nextStart: data.inicio,
-        rating: 4.9,
-        students: 250,
-        image: c.image,
-      };
-    });
-  }, [lang]);
+    // Map category to tag for display
+    const categoryToTag: Record<string, string> = {
+      'Ventas': 'Comercial',
+      'Liderazgo': 'Liderazgo',
+      'Marketing': 'Branding',
+      'Productividad': 'Datos',
+      'Datos': 'Datos',
+      'Mindset': 'Mindset',
+    };
+
+    return dbCourses.map((c) => ({
+      id: c.id,
+      slug: c.slug,
+      title: c.title,
+      tag: categoryToTag[c.category] || c.category || 'General',
+      duration: c.duration_hours ? `${c.duration_hours} horas` : '4 semanas',
+      level: c.level === 'beginner' ? 'Principiante' : c.level === 'intermediate' ? 'Intermedio' : 'Avanzado',
+      nextStart: 'Febrero 2026',
+      rating: 4.9,
+      students: 250,
+      image: c.thumbnail_url || null,
+    }));
+  }, [dbCourses]);
 
   const tags = ['All', ...Array.from(new Set(courses.map((c) => c.tag)))];
   const filteredCourses = selectedTag === 'All' ? courses : courses.filter((c) => c.tag === selectedTag);
@@ -431,7 +455,7 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                 {course.image ? (
                   <img
                     src={course.image}
-                    alt={course.title}
+                    alt={`Imagen del curso: ${course.title}`}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -592,7 +616,18 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
         )}
 
         {/* Course Cards Grid - Only for live courses */}
-        {activeTab === 'live' && (
+        {activeTab === 'live' && loadingCourses && (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem' }}>
+            <Loader2 size={40} className="animate-spin" style={{ color: '#3B82F6' }} />
+          </div>
+        )}
+        {activeTab === 'live' && !loadingCourses && filteredCourses.length === 0 && (
+          <div style={{ textAlign: 'center', padding: '3rem', color: '#64748B' }}>
+            <BookOpen size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
+            <p>No hay cursos publicados aún.</p>
+          </div>
+        )}
+        {activeTab === 'live' && !loadingCourses && filteredCourses.length > 0 && (
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
@@ -636,7 +671,7 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                 {course.image ? (
                   <img
                     src={course.image}
-                    alt={course.title}
+                    alt={`Imagen del curso: ${course.title}`}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -772,7 +807,7 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
 
                 {/* CTA */}
                 <Link
-                  href={`/cursos/${courseSlugMap[course.id] || course.id}`}
+                  href={`/cursos/${course.slug || course.id}`}
                   style={{
                     width: '100%',
                     display: 'inline-flex',

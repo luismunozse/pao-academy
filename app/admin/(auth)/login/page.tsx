@@ -36,15 +36,24 @@ export default function AdminLoginPage() {
     }
 
     // Verificar que el usuario sea admin
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('role')
       .eq('id', data.user.id)
       .single<Profile>();
 
+    console.log('Profile query result:', { profile, profileError, userId: data.user.id });
+
+    if (profileError) {
+      await supabase.auth.signOut();
+      setError(`Error al verificar perfil: ${profileError.message}`);
+      setLoading(false);
+      return;
+    }
+
     if (profile?.role !== 'admin') {
       await supabase.auth.signOut();
-      setError('Acceso denegado. Solo administradores.');
+      setError(`Acceso denegado. Rol actual: ${profile?.role || 'sin perfil'}`);
       setLoading(false);
       return;
     }

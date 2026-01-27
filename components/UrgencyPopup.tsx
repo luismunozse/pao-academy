@@ -260,7 +260,7 @@ export default function UrgencyPopup({
               <div className="flex items-center gap-3">
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
-                  alt="Testimonio"
+                  alt="Foto de Mariana Pérez, Líder Comercial"
                   className="w-10 h-10 rounded-full"
                 />
                 <div>

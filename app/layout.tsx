@@ -2,7 +2,7 @@
 import "./globals.css";
 import "./modern-theme.css";
 import "./accessibility.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
 import BackToTop from "../components/BackToTop";
@@ -11,6 +11,14 @@ import LiveChat from "../components/LiveChat";
 import { defaultMetadata } from "../lib/metadata";
 
 export const metadata: Metadata = defaultMetadata;
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  themeColor: '#3B82F6',
+};
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

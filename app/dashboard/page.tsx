@@ -50,7 +50,7 @@ export default async function DashboardPage() {
                 {enrollment.course?.thumbnail_url ? (
                   <img
                     src={enrollment.course.thumbnail_url}
-                    alt={enrollment.course.title}
+                    alt={`Imagen del curso: ${enrollment.course.title}`}
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
                   {course.thumbnail_url ? (
                     <img
                       src={course.thumbnail_url}
-                      alt={course.title}
+                      alt={`Imagen del curso: ${course.title}`}
                       className="w-full h-full object-cover"
                     />
                   ) : (

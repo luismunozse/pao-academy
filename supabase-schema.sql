@@ -1,5 +1,5 @@
 -- =====================================================
--- SCHEMA DE BASE DE DATOS - PAO ACADEMY
+-- SCHEMA DE BASE DE DATOS - GLOMIND360
 -- =====================================================
 -- Ejecutar este SQL en Supabase SQL Editor
 

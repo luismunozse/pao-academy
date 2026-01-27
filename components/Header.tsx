@@ -303,14 +303,36 @@ export default function Header({
             </div>
 
             {/* Mobile actions */}
-            <div className="flex items-center gap-2 lg:hidden">
-              {/* CTA reducido en mobile (opcional) */}
-              <button
-                onClick={onClickCTA}
-                className="hidden xs:inline-flex px-3 py-1.5 rounded-lg bg-gradient-to-r from-[color:var(--neon-accent)] to-[color:var(--neon-cyan)] text-white font-bold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                {t('knowMore')}
-              </button>
+            <div className="flex items-center gap-1.5 lg:hidden">
+              {/* Auth buttons visible en mobile */}
+              {!loadingUser && (
+                user ? (
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all text-white text-xs font-semibold"
+                  >
+                    <Users className="w-3.5 h-3.5" />
+                    <span className="hidden xs:inline">Panel</span>
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 transition-all text-white text-xs font-medium border border-white/20"
+                    >
+                      <LogIn className="w-3.5 h-3.5" />
+                      <span className="hidden xs:inline">Ingresar</span>
+                    </Link>
+                    <Link
+                      href="/registro"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 transition-all text-white text-xs font-semibold"
+                    >
+                      <UserPlus className="w-3.5 h-3.5" />
+                      <span className="hidden xs:inline">Registro</span>
+                    </Link>
+                  </>
+                )
+              )}
 
               {/* Hamburger */}
               <button

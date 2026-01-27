@@ -38,6 +38,7 @@ export default function HeaderModern({
   const [mobileNestedOpen, setMobileNestedOpen] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [liveCourses, setLiveCourses] = useState<{ name: string; tag: string; href: string }[]>([]);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -54,6 +55,40 @@ export default function HeaderModern({
     checkUser();
   }, []);
 
+  // Fetch courses from database
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from('courses')
+          .select('title, slug, category')
+          .eq('is_published', true)
+          .order('created_at', { ascending: false })
+          .limit(6);
+
+        if (!error && data) {
+          const categoryToTag: Record<string, string> = {
+            'Ventas': 'Comercial',
+            'Liderazgo': 'Liderazgo',
+            'Marketing': 'Branding',
+            'Productividad': 'Datos',
+            'Datos': 'Datos',
+            'Mindset': 'Mindset',
+          };
+          setLiveCourses(data.map((c: any) => ({
+            name: c.title,
+            tag: categoryToTag[c.category] || c.category || 'General',
+            href: `/cursos/${c.slug}`,
+          })));
+        }
+      } catch (err) {
+        // Supabase not configured yet
+      }
+    };
+    fetchCourses();
+  }, []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
@@ -67,14 +102,8 @@ export default function HeaderModern({
     return () => { document.body.style.overflow = orig; };
   }, [open]);
 
-  const liveCoursesList = [
-    { name: 'Ventas Consultivas', tag: 'Comercial', href: '#cursos-en-vivo' },
-    { name: 'Liderazgo Ágil', tag: 'Liderazgo', href: '#cursos-en-vivo' },
-    { name: 'Motivación y Hábitos', tag: 'Mindset', href: '#cursos-en-vivo' },
-    { name: 'Marca Personal', tag: 'Branding', href: '#cursos-en-vivo' },
-    { name: 'Power BI desde Cero', tag: 'Datos', href: '#cursos-en-vivo' },
-    { name: 'Data Analytics Bootcamp', tag: 'Datos', href: '#cursos-en-vivo' },
-  ];
+  // Use courses from database, or fallback to empty
+  const liveCoursesList = liveCourses.length > 0 ? liveCourses : [];
 
   const asyncCoursesCategories: { name: string; href: string; tag?: string }[] = [
     { name: '📊 Análisis de Datos', href: 'https://wa.me/5493517601441?text=¡Hola! Me interesa información sobre cursos de Análisis de Datos asincrónicos.' },

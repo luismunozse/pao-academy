@@ -1,131 +1,47 @@
 'use client';
-import { Star, CheckCircle, ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 
 export default function HeroSimple({
   brandName, t, cta
 }:{ brandName:string; t:(k:string)=>string; cta:()=>void; }){
 
   return (
-    <section
-      style={{
-        background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
-        padding: '8rem 1rem 2rem',
-        minHeight: '600px',
-        marginTop: '0'
-      }}
-    >
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center' }}>
+    <section className="bg-gradient-to-br from-blue-50 to-blue-100 pt-32 pb-8 px-4 min-h-[600px]">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center">
 
           {/* Trust Badge */}
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.5rem 1rem',
-            background: '#D1FAE5',
-            color: '#065F46',
-            borderRadius: '9999px',
-            fontSize: '0.875rem',
-            fontWeight: '600',
-            marginBottom: '2rem'
-          }}>
-            <span style={{
-              width: '8px',
-              height: '8px',
-              background: '#10B981',
-              borderRadius: '50%',
-              display: 'inline-block'
-            }}></span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold mb-8">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full inline-block"></span>
             Únete a nuestra comunidad de aprendizaje
           </div>
 
           {/* Headline */}
-          <h1 style={{
-            fontSize: 'clamp(2rem, 5vw, 3.75rem)',
-            fontWeight: '700',
-            color: '#0F172A',
-            marginBottom: '1.5rem',
-            lineHeight: '1.2'
-          }}>
+          <h1 className="text-[clamp(2rem,5vw,3.75rem)] font-bold text-slate-900 mb-6 leading-tight">
             Aprende las habilidades que{' '}
-            <span style={{
-              background: 'linear-gradient(90deg, #3B82F6, #06B6D4)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              display: 'inline-block'
-            }}>
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
               demandan las empresas
             </span>
           </h1>
 
           {/* Description - Feature highlights */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: '1.5rem',
-            justifyContent: 'center',
-            marginBottom: '2rem'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontSize: '1.1rem',
-              color: '#334155'
-            }}>
-              <span style={{ color: '#10B981', fontSize: '1.25rem' }}>✓</span>
+          <div className="flex flex-row flex-wrap gap-6 justify-center mb-8">
+            <div className="flex items-center gap-2 text-lg text-slate-700">
+              <span className="text-emerald-500 text-xl">✓</span>
               Cursos en vivo con mentores expertos
             </div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontSize: '1.1rem',
-              color: '#334155'
-            }}>
-              <span style={{ color: '#10B981', fontSize: '1.25rem' }}>✓</span>
+            <div className="flex items-center gap-2 text-lg text-slate-700">
+              <span className="text-emerald-500 text-xl">✓</span>
               Certificación válida en el mercado
             </div>
           </div>
 
           {/* CTAs */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '1rem',
-            justifyContent: 'center',
-            marginBottom: '2rem',
-            flexWrap: 'wrap'
-          }}>
+          <div className="flex flex-row gap-4 justify-center mb-8 flex-wrap">
             {/* Primary Button */}
             <button
               onClick={cta}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '1rem 2rem',
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                color: 'white',
-                background: '#22C55E',
-                border: 'none',
-                borderRadius: '0.5rem',
-                cursor: 'pointer',
-                boxShadow: '0 10px 15px -3px rgba(34, 197, 94, 0.3)',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#16A34A';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#22C55E';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-green-500 border-none rounded-lg cursor-pointer shadow-lg shadow-green-500/30 transition-all duration-200 hover:bg-green-600 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
             >
               <span>Inscribirme Ahora</span>
               <ArrowRight size={20} />
@@ -136,28 +52,7 @@ export default function HeroSimple({
               onClick={() => {
                 document.getElementById('cursos-en-vivo')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '1rem 2rem',
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                color: '#0F172A',
-                background: 'white',
-                border: '2px solid #E5E7EB',
-                borderRadius: '0.5rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#3B82F6';
-                e.currentTarget.style.background = '#F9FAFB';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#E5E7EB';
-                e.currentTarget.style.background = 'white';
-              }}
+              className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-slate-900 bg-white border-2 border-gray-200 rounded-lg cursor-pointer transition-all duration-200 hover:border-blue-500 hover:bg-gray-50 active:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
             >
               <span>Ver todos los cursos</span>
               <Play size={20} />

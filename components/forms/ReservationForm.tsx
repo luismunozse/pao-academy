@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useMemo, useState } from 'react';
-import { Phone, User, Mail, Globe } from 'lucide-react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import { Phone, User, Mail, Globe, Check } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -43,7 +43,8 @@ const texts = {
     error: 'Error al enviar el formulario',
     required: 'Este campo es obligatorio',
     invalidEmail: 'Email inválido',
-    invalidPhone: 'Teléfono inválido'
+    invalidPhone: 'Teléfono inválido',
+    minLength: 'Mínimo 2 caracteres'
   },
   en: {
     name: 'Full Name',
@@ -60,9 +61,12 @@ const texts = {
     error: 'Error sending form',
     required: 'This field is required',
     invalidEmail: 'Invalid email',
-    invalidPhone: 'Invalid phone'
+    invalidPhone: 'Invalid phone',
+    minLength: 'Minimum 2 characters'
   }
 };
+
+type FieldStatus = 'idle' | 'valid' | 'invalid';
 
 export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' }: Props){
   const [name, setName] = useState('');
@@ -76,63 +80,93 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
   const [error, setError] = useState<string | null>(null);
   const [ok, setOk] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const t = texts[lang];
 
   useEffect(() => { if (defaultCourse) setCourse(defaultCourse); }, [defaultCourse]);
 
-  const validateField = (field: string, value: string): string | null => {
+  const validateField = useCallback((field: string, value: string): { error: string | null; status: FieldStatus } => {
     switch (field) {
       case 'name':
-        return value.trim().length < 2 ? t.required : null;
+        if (!value.trim()) return { error: null, status: 'idle' };
+        if (value.trim().length < 2) return { error: t.minLength, status: 'invalid' };
+        return { error: null, status: 'valid' };
       case 'email':
-        return !/@/.test(value) ? t.invalidEmail : null;
+        if (!value.trim()) return { error: null, status: 'idle' };
+        if (!/@/.test(value)) return { error: t.invalidEmail, status: 'invalid' };
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return { error: t.invalidEmail, status: 'invalid' };
+        return { error: null, status: 'valid' };
       case 'phone':
-        return value && !/^[\+]?[1-9][\d]{0,15}$/.test(value.replace(/\s/g, '')) ? t.invalidPhone : null;
+        if (!value.trim()) return { error: null, status: 'idle' };
+        if (!/^[\+]?[1-9][\d]{0,15}$/.test(value.replace(/\s/g, ''))) return { error: t.invalidPhone, status: 'invalid' };
+        return { error: null, status: 'valid' };
       case 'course':
-        return value.trim().length < 2 ? t.required : null;
+        if (!value.trim()) return { error: null, status: 'idle' };
+        if (value.trim().length < 2) return { error: t.required, status: 'invalid' };
+        return { error: null, status: 'valid' };
       default:
-        return null;
+        return { error: null, status: 'idle' };
     }
-  };
+  }, [t]);
+
+  // Validación en tiempo real
+  const nameValidation = useMemo(() => validateField('name', name), [name, validateField]);
+  const emailValidation = useMemo(() => validateField('email', email), [email, validateField]);
+  const phoneValidation = useMemo(() => validateField('phone', phone), [phone, validateField]);
 
   const isValid = useMemo(() => {
-    return name.trim().length >= 2 && /@/.test(email) && course.trim().length >= 2;
-  }, [name, email, course]);
+    return nameValidation.status === 'valid' &&
+           emailValidation.status === 'valid' &&
+           course.trim().length >= 2;
+  }, [nameValidation.status, emailValidation.status, course]);
+
+  const handleBlur = (field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+  };
+
+  const getFieldClasses = (field: string, validation: { status: FieldStatus }) => {
+    const base = 'input-modern input-with-icon transition-all duration-200';
+    if (!touched[field]) return base;
+    if (validation.status === 'valid') return `${base} border-green-500 focus:border-green-500 focus:ring-green-500/20`;
+    if (validation.status === 'invalid') return `${base} border-red-500 focus:border-red-500 focus:ring-red-500/20`;
+    return base;
+  };
 
   async function handleSubmit(e: React.FormEvent){
     e.preventDefault();
+
+    // Marcar todos los campos como tocados
+    setTouched({ name: true, email: true, phone: true, course: true });
+
     if (!isValid) return;
-    
+
     // Validar todos los campos
     const errors: Record<string, string> = {};
-    const fields = { name, email, phone, course };
-    
-    Object.entries(fields).forEach(([field, value]) => {
-      const error = validateField(field, value);
-      if (error) errors[field] = error;
-    });
-    
+    if (nameValidation.error) errors.name = nameValidation.error;
+    if (emailValidation.error) errors.email = emailValidation.error;
+    if (phoneValidation.error) errors.phone = phoneValidation.error;
+
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       return;
     }
-    
-    setLoading(true); 
+
+    setLoading(true);
     setError(null);
     setFieldErrors({});
-    
+
     try{
       const referralCode = typeof window !== 'undefined' ? (localStorage.getItem('ref_code') || sessionStorage.getItem('ref_code')) : null;
-      const payload: ReservationPayload = { 
-        name, 
-        email, 
-        phone: phone || undefined, 
+      const payload: ReservationPayload = {
+        name,
+        email,
+        phone: phone || undefined,
         country: country || undefined,
-        course, 
-        date, 
-        message, 
-        referralCode 
+        course,
+        date,
+        message,
+        referralCode
       };
       const res = await fetch('/api/reservas', {
         method: 'POST',
@@ -166,62 +200,71 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
       {/* Nombre */}
-      <div className={fieldErrors.name ? 'field-error' : ''}>
-        <div className="input-group">
+      <div className={touched.name && nameValidation.status === 'invalid' ? 'field-error' : ''}>
+        <div className="input-group relative">
           <User className="input-icon" />
           <input
-            className="input-modern input-with-icon"
+            className={getFieldClasses('name', nameValidation)}
             placeholder={t.name}
             value={name}
-            onChange={e => {
-              setName(e.target.value);
-              if (fieldErrors.name) {
-                setFieldErrors(prev => ({ ...prev, name: '' }));
-              }
-            }}
+            onChange={e => setName(e.target.value)}
+            onBlur={() => handleBlur('name')}
+            aria-invalid={touched.name && nameValidation.status === 'invalid'}
+            aria-describedby={nameValidation.error ? 'name-error' : undefined}
           />
+          {touched.name && nameValidation.status === 'valid' && (
+            <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+          )}
         </div>
-        {fieldErrors.name && <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>}
+        {touched.name && nameValidation.error && (
+          <p id="name-error" className="text-red-500 text-xs mt-1" role="alert">{nameValidation.error}</p>
+        )}
       </div>
 
       {/* Email */}
-      <div className={fieldErrors.email ? 'field-error' : ''}>
-        <div className="input-group">
+      <div className={touched.email && emailValidation.status === 'invalid' ? 'field-error' : ''}>
+        <div className="input-group relative">
           <Mail className="input-icon" />
           <input
             type="email"
-            className="input-modern input-with-icon"
+            className={getFieldClasses('email', emailValidation)}
             placeholder={t.email}
             value={email}
-            onChange={e => {
-              setEmail(e.target.value);
-              if (fieldErrors.email) {
-                setFieldErrors(prev => ({ ...prev, email: '' }));
-              }
-            }}
+            onChange={e => setEmail(e.target.value)}
+            onBlur={() => handleBlur('email')}
+            aria-invalid={touched.email && emailValidation.status === 'invalid'}
+            aria-describedby={emailValidation.error ? 'email-error' : undefined}
           />
+          {touched.email && emailValidation.status === 'valid' && (
+            <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+          )}
         </div>
-        {fieldErrors.email && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
+        {touched.email && emailValidation.error && (
+          <p id="email-error" className="text-red-500 text-xs mt-1" role="alert">{emailValidation.error}</p>
+        )}
       </div>
 
       {/* Teléfono */}
-      <div className={fieldErrors.phone ? 'field-error' : ''}>
-        <div className="input-group">
+      <div className={touched.phone && phoneValidation.status === 'invalid' ? 'field-error' : ''}>
+        <div className="input-group relative">
           <Phone className="input-icon" />
           <input
             type="tel"
-            className="input-modern input-with-icon"
+            className={getFieldClasses('phone', phoneValidation)}
             placeholder={t.phone}
             value={phone}
-            onChange={e => {
-              setPhone(e.target.value);
-              if (fieldErrors.phone) {
-                setFieldErrors(prev => ({ ...prev, phone: '' }));
-              }
-            }}
+            onChange={e => setPhone(e.target.value)}
+            onBlur={() => handleBlur('phone')}
+            aria-invalid={touched.phone && phoneValidation.status === 'invalid'}
+            aria-describedby={phoneValidation.error ? 'phone-error' : undefined}
           />
+          {touched.phone && phoneValidation.status === 'valid' && (
+            <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+          )}
         </div>
-        {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
+        {touched.phone && phoneValidation.error && (
+          <p id="phone-error" className="text-red-500 text-xs mt-1" role="alert">{phoneValidation.error}</p>
+        )}
       </div>
 
       {/* País */}
@@ -259,7 +302,7 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
       </div>
 
       {error && (
-        <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+        <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg" role="alert">
           {error}
         </div>
       )}
@@ -281,6 +324,3 @@ export default function ReservationForm({ defaultCourse, onSuccess, lang = 'es' 
     </form>
   );
 }
-
-
-

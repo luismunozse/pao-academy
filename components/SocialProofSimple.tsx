@@ -1,5 +1,6 @@
 'use client';
-import { Quote, Star, Award, TrendingUp, Users, CheckCircle, Briefcase, Building2 } from 'lucide-react';
+import Image from 'next/image';
+import { Quote, Star, Award, TrendingUp, Users, Briefcase, Building2 } from 'lucide-react';
 
 export default function SocialProofSimple({
   t,
@@ -187,21 +188,23 @@ export default function SocialProofSimple({
             gap: '1.5rem'
           }}>
             {/* Avatar */}
-            <img
-              src={test.imagen}
-              alt={test.autor}
-              style={{
-                width: '96px',
-                height: '96px',
-                borderRadius: '50%',
-                border: '4px solid #DBEAFE',
-                objectFit: 'cover'
-              }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-              }}
-            />
+            <div style={{
+              width: '96px',
+              height: '96px',
+              borderRadius: '50%',
+              border: '4px solid #DBEAFE',
+              overflow: 'hidden',
+              position: 'relative'
+            }}>
+              <Image
+                src={test.imagen}
+                alt={`Foto de ${test.autor}, ${test.rol}`}
+                fill
+                sizes="96px"
+                style={{ objectFit: 'cover' }}
+                loading="lazy"
+              />
+            </div>
 
             {/* Stars */}
             <div style={{ display: 'flex', gap: '4px' }}>

@@ -82,7 +82,7 @@ export default async function CourseDetailPage({
           {courseData.thumbnail_url && (
             <img
               src={courseData.thumbnail_url}
-              alt={courseData.title}
+              alt={`Portada del curso: ${courseData.title}`}
               className="w-full h-full object-cover opacity-50"
             />
           )}
