@@ -13,7 +13,7 @@ export default function FAQSimple({ t }: { t: (k: string) => string }) {
   return (
     <section style={{
       background: '#F8FAFC',
-      padding: '4rem 1rem'
+      padding: '2rem 1rem 4rem'
     }}>
       <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
 

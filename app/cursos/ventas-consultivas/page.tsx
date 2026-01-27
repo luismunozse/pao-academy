@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
-import { m } from 'framer-motion';
-import { ArrowLeft, Clock, Users, Award, CheckCircle2, Star, TrendingUp, Sparkles, Megaphone } from 'lucide-react';
+import { ArrowLeft, Clock, Award, CheckCircle2, Star, TrendingUp, Users, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { copy, type Lang } from '../../../lib/i18n';
 
@@ -13,55 +12,55 @@ export default function VentasConsultivasPage() {
     es: {
       title: 'Ventas Consultivas',
       category: 'Comercial',
-      description: 'Aprendé a detectar necesidades, generar confianza y cerrar acuerdos de alto valor con clientes.',
+      description: 'Aprende a detectar necesidades, generar confianza y cerrar acuerdos de alto valor con clientes.',
       objectives: [
         'Detectar necesidades del cliente',
-        'Aplicar técnicas modernas de prospección',
-        'Diseñar propuestas con foco en valor'
+        'Aplicar tecnicas modernas de prospeccion',
+        'Disenar propuestas con foco en valor'
       ],
       methodology: [
-        'Clases en vivo con ejercicios prácticos',
+        'Clases en vivo con ejercicios practicos',
         'Casos reales y role plays',
         'Material complementario on-demand'
       ],
-      duration: '6 semanas – 2 encuentros semanales en vivo',
+      duration: '6 semanas - 2 encuentros semanales en vivo',
       certification: 'Certificado de Glomind360 validando horas y contenidos',
       testimonials: [
         {
           name: 'Sofia M.',
-          quote: 'Duplicamos la tasa de cierre en 90 días aplicando el método de Ventas Consultivas.',
-          role: 'Líder Comercial, Grupo Andino'
+          quote: 'Duplicamos la tasa de cierre en 90 dias aplicando el metodo de Ventas Consultivas.',
+          role: 'Lider Comercial, Grupo Andino'
         },
         {
           name: 'Javier R.',
-          quote: 'Las técnicas de discovery me ayudaron a entender mejor a mis clientes y cerrar más ventas.',
+          quote: 'Las tecnicas de discovery me ayudaron a entender mejor a mis clientes y cerrar mas ventas.',
           role: 'Ejecutivo de Ventas, TechCorp'
         },
         {
           name: 'Lucia G.',
-          quote: 'El programa transformó completamente mi enfoque comercial. Ahora vendo soluciones, no productos.',
+          quote: 'El programa transformo completamente mi enfoque comercial. Ahora vendo soluciones, no productos.',
           role: 'Directora Comercial, InnovateLab'
         }
       ],
       partners: ['Austin & Bates', 'Highsoft', 'Pibinet'],
       recommendedCourses: [
         {
-          id: 'marca-personal',
+          id: 'marca',
+          slug: 'marca-personal',
           title: 'Marca Personal',
-          description: 'Complementa tu perfil comercial con una marca sólida',
-          icon: <Megaphone className="size-5" />
+          description: 'Complementa tu perfil comercial con una marca solida'
         },
         {
-          id: 'motivacion-habitos',
-          title: 'Motivación y Hábitos',
-          description: 'Fortalece tu mentalidad de ventas',
-          icon: <Sparkles className="size-5" />
+          id: 'habitos',
+          slug: 'motivacion-habitos',
+          title: 'Motivacion y Habitos',
+          description: 'Fortalece tu mentalidad de ventas'
         },
         {
-          id: 'liderazgo-agil',
-          title: 'Liderazgo Ágil',
-          description: 'Lidera equipos comerciales de alto rendimiento',
-          icon: <Users className="size-5" />
+          id: 'liderazgo',
+          slug: 'liderazgo-agil',
+          title: 'Liderazgo Agil',
+          description: 'Lidera equipos comerciales de alto rendimiento'
         }
       ]
     },
@@ -79,7 +78,7 @@ export default function VentasConsultivasPage() {
         'Real cases and role plays',
         'On-demand supplementary material'
       ],
-      duration: '6 weeks – 2 weekly live sessions',
+      duration: '6 weeks - 2 weekly live sessions',
       certification: 'Glomind360 certificate validating hours and content',
       testimonials: [
         {
@@ -101,61 +100,85 @@ export default function VentasConsultivasPage() {
       partners: ['Austin & Bates', 'Highsoft', 'Pibinet'],
       recommendedCourses: [
         {
-          id: 'personal-branding',
+          id: 'marca',
+          slug: 'marca-personal',
           title: 'Personal Branding',
-          description: 'Complement your commercial profile with a solid brand',
-          icon: <Megaphone className="size-5" />
+          description: 'Complement your commercial profile with a solid brand'
         },
         {
-          id: 'motivation-habits',
+          id: 'habitos',
+          slug: 'motivacion-habitos',
           title: 'Motivation & Habits',
-          description: 'Strengthen your sales mindset',
-          icon: <Sparkles className="size-5" />
+          description: 'Strengthen your sales mindset'
         },
         {
-          id: 'agile-leadership',
+          id: 'liderazgo',
+          slug: 'liderazgo-agil',
           title: 'Agile Leadership',
-          description: 'Lead high-performance commercial teams',
-          icon: <Users className="size-5" />
+          description: 'Lead high-performance commercial teams'
         }
       ]
     }
   };
 
   const course = courseData[lang];
+  const categoryColor = '#22C55E'; // Green for Commercial/Sales
 
   return (
-    <div className="min-h-screen bg-[color:var(--neon-bg)] text-white">
+    <div style={{ minHeight: '100vh', background: '#FFFFFF' }}>
       {/* Header */}
-      <header className="relative z-50 header-responsive">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <Link 
-              href="/" 
-              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm sm:text-base"
+      <header style={{
+        background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+        padding: '1rem 0',
+        position: 'sticky',
+        top: 0,
+        zIndex: 50
+      }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Link
+              href="/"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                color: 'rgba(255,255,255,0.8)',
+                textDecoration: 'none',
+                fontSize: '0.875rem'
+              }}
             >
-              <ArrowLeft className="size-4 sm:size-5" />
-              <span>Volver al catálogo</span>
+              <ArrowLeft size={20} />
+              <span>{lang === 'es' ? 'Volver al catalogo' : 'Back to catalog'}</span>
             </Link>
-            
-            <div className="flex items-center gap-3 sm:gap-4">
+
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
               <button
                 onClick={() => setLang('es')}
-                className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
-                  lang === 'es' 
-                    ? 'bg-[color:var(--neon-cyan)] text-[color:var(--neon-bg)]' 
-                    : 'text-white/60 hover:text-white'
-                }`}
+                style={{
+                  padding: '0.375rem 0.75rem',
+                  borderRadius: '9999px',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: lang === 'es' ? '#3B82F6' : 'rgba(255,255,255,0.1)',
+                  color: lang === 'es' ? 'white' : 'rgba(255,255,255,0.6)'
+                }}
               >
                 ES
               </button>
               <button
                 onClick={() => setLang('en')}
-                className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-colors ${
-                  lang === 'en' 
-                    ? 'bg-[color:var(--neon-cyan)] text-[color:var(--neon-bg)]' 
-                    : 'text-white/60 hover:text-white'
-                }`}
+                style={{
+                  padding: '0.375rem 0.75rem',
+                  borderRadius: '9999px',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: lang === 'en' ? '#3B82F6' : 'rgba(255,255,255,0.1)',
+                  color: lang === 'en' ? 'white' : 'rgba(255,255,255,0.6)'
+                }}
               >
                 EN
               </button>
@@ -165,224 +188,366 @@ export default function VentasConsultivasPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative hero-responsive">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8">
-            <div className="flex-1 w-full lg:w-auto">
-              {/* Badge de categoría */}
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-[color:var(--neon-cyan)]/20 border border-[color:var(--neon-cyan)]/30 mb-4 sm:mb-6">
-                <TrendingUp className="size-3 sm:size-4" />
-                <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider">{course.category}</span>
-              </div>
-
-              {/* Título */}
-              <h1 className="course-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-                {course.title}
-              </h1>
-
-              {/* Descripción */}
-              <p className="course-hero-desc text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 max-w-2xl">
-                {course.description}
-              </p>
-            </div>
-
-            {/* CTA Button */}
-            <div className="w-full lg:w-auto lg:ml-8">
-              <button className="btn-aqua btn-responsive-full text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4">
-                {t('enrollNow')}
-              </button>
-            </div>
+      <section style={{
+        background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+        padding: '4rem 1rem',
+        color: 'white'
+      }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.5rem 1rem',
+            borderRadius: '9999px',
+            background: `${categoryColor}22`,
+            border: `1px solid ${categoryColor}44`,
+            marginBottom: '1.5rem'
+          }}>
+            <TrendingUp size={16} color={categoryColor} />
+            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: categoryColor }}>
+              {course.category}
+            </span>
           </div>
+
+          <h1 style={{
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontWeight: 700,
+            marginBottom: '1.5rem',
+            lineHeight: 1.2
+          }}>
+            {course.title}
+          </h1>
+
+          <p style={{
+            fontSize: '1.25rem',
+            color: 'rgba(255,255,255,0.8)',
+            maxWidth: '700px',
+            marginBottom: '2rem',
+            lineHeight: 1.6
+          }}>
+            {course.description}
+          </p>
+
+          <button style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '1rem 2rem',
+            fontSize: '1.125rem',
+            fontWeight: 700,
+            color: 'white',
+            background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+            border: 'none',
+            borderRadius: '0.75rem',
+            cursor: 'pointer',
+            boxShadow: '0 10px 25px rgba(59, 130, 246, 0.3)'
+          }}>
+            {lang === 'es' ? 'Quiero inscribirme' : 'I want to enroll'}
+            <ArrowRight size={20} />
+          </button>
         </div>
       </section>
 
-      {/* Imagen principal */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 mb-12 sm:mb-16">
-        <div className="relative rounded-xl sm:rounded-2xl overflow-hidden image-responsive">
-          <div className="aspect-[16/9] bg-gradient-to-br from-[color:var(--neon-blue)]/20 to-[color:var(--neon-cyan)]/20 flex items-center justify-center">
-            <div className="text-center px-4">
-              <Users className="size-16 sm:size-20 lg:size-24 text-[color:var(--neon-cyan)]/50 mx-auto mb-3 sm:mb-4" />
-              <p className="text-white/60 text-sm sm:text-base lg:text-lg">Imagen del curso en acción</p>
-            </div>
+      {/* Imagen del curso */}
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1rem' }}>
+        <div style={{
+          borderRadius: '1rem',
+          overflow: 'hidden',
+          background: `linear-gradient(135deg, ${categoryColor}15, ${categoryColor}08)`,
+          aspectRatio: '16/9',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: `1px solid ${categoryColor}22`
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <Users size={80} color={categoryColor} style={{ opacity: 0.4, marginBottom: '1rem' }} />
+            <p style={{ color: '#64748B', fontSize: '1.125rem' }}>
+              {lang === 'es' ? 'Cierra mas ventas con tecnicas consultivas' : 'Close more sales with consultative techniques'}
+            </p>
           </div>
         </div>
       </section>
 
       {/* Detalles del curso */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 mb-12 sm:mb-16 section-responsive">
-        <div className="course-details-grid grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Columna izquierda */}
-          <div className="space-y-8">
-            <m.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-2xl font-bold mb-4">Qué vas a lograr</h2>
-              <ul className="space-y-3">
-                {course.objectives.map((objective, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="size-5 text-[color:var(--neon-cyan)] flex-shrink-0 mt-0.5" />
-                    <span className="text-white/90">{objective}</span>
-                  </li>
-                ))}
-              </ul>
-            </m.div>
-
-            <m.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <h2 className="text-2xl font-bold mb-4">Metodología</h2>
-              <ul className="space-y-3">
-                {course.methodology.map((method, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="size-5 text-[color:var(--neon-cyan)] flex-shrink-0 mt-0.5" />
-                    <span className="text-white/90">{method}</span>
-                  </li>
-                ))}
-              </ul>
-            </m.div>
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem 4rem' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '3rem'
+        }}>
+          <div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '1.5rem' }}>
+              {lang === 'es' ? 'Que vas a lograr' : 'What you will achieve'}
+            </h2>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {course.objectives.map((objective, index) => (
+                <li key={index} style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '0.75rem',
+                  marginBottom: '1rem'
+                }}>
+                  <CheckCircle2 size={20} color={categoryColor} style={{ flexShrink: 0, marginTop: 2 }} />
+                  <span style={{ color: '#475569', lineHeight: 1.6 }}>{objective}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Columna derecha */}
-          <div className="space-y-8">
-            <m.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <h2 className="text-2xl font-bold mb-4">Duración</h2>
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-                <Clock className="size-6 text-[color:var(--neon-cyan)]" />
-                <span className="text-white/90">{course.duration}</span>
-              </div>
-            </m.div>
+          <div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '1.5rem' }}>
+              {lang === 'es' ? 'Metodologia' : 'Methodology'}
+            </h2>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {course.methodology.map((method, index) => (
+                <li key={index} style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '0.75rem',
+                  marginBottom: '1rem'
+                }}>
+                  <CheckCircle2 size={20} color={categoryColor} style={{ flexShrink: 0, marginTop: 2 }} />
+                  <span style={{ color: '#475569', lineHeight: 1.6 }}>{method}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
-            <m.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
-              <h2 className="text-2xl font-bold mb-4">Certificación</h2>
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-                <Award className="size-6 text-[color:var(--neon-cyan)]" />
-                <span className="text-white/90">{course.certification}</span>
-              </div>
-            </m.div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1.5rem',
+          marginTop: '3rem'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '1.5rem',
+            background: '#F8FAFC',
+            borderRadius: '0.75rem',
+            border: '1px solid #E2E8F0'
+          }}>
+            <Clock size={24} color={categoryColor} />
+            <div>
+              <p style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '0.25rem' }}>
+                {lang === 'es' ? 'Duracion' : 'Duration'}
+              </p>
+              <p style={{ fontWeight: 600, color: '#0F172A' }}>{course.duration}</p>
+            </div>
+          </div>
+
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '1.5rem',
+            background: '#F8FAFC',
+            borderRadius: '0.75rem',
+            border: '1px solid #E2E8F0'
+          }}>
+            <Award size={24} color={categoryColor} />
+            <div>
+              <p style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '0.25rem' }}>
+                {lang === 'es' ? 'Certificacion' : 'Certification'}
+              </p>
+              <p style={{ fontWeight: 600, color: '#0F172A' }}>{course.certification}</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Testimonios */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 mb-12 sm:mb-16 section-responsive">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Lo que dicen nuestros alumnos</h2>
-          <div className="course-testimonials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
+      <section style={{ background: '#F8FAFC', padding: '4rem 1rem' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <h2 style={{
+            fontSize: '2rem',
+            fontWeight: 700,
+            color: '#0F172A',
+            textAlign: 'center',
+            marginBottom: '3rem'
+          }}>
+            {lang === 'es' ? 'Lo que dicen nuestros alumnos' : 'What our students say'}
+          </h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '1.5rem'
+          }}>
             {course.testimonials.map((testimonial, index) => (
-              <m.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="card-neon testimonial-responsive p-4 sm:p-6"
+                style={{
+                  background: 'white',
+                  borderRadius: '1rem',
+                  padding: '1.5rem',
+                  border: '1px solid #E2E8F0'
+                }}
               >
-                <div className="flex items-center gap-1 mb-3 stars">
+                <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1rem' }}>
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="size-3 sm:size-4 text-yellow-400 fill-current" />
+                    <Star key={i} size={16} fill="#FBBF24" color="#FBBF24" />
                   ))}
                 </div>
-                <p className="text-white/90 mb-4 italic quote text-sm sm:text-base">&ldquo;{testimonial.quote}&rdquo;</p>
+                <p style={{
+                  color: '#475569',
+                  fontStyle: 'italic',
+                  marginBottom: '1rem',
+                  lineHeight: 1.6
+                }}>
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
                 <div>
-                  <p className="font-semibold text-white author text-sm sm:text-base">{testimonial.name}</p>
-                  <p className="text-xs sm:text-sm text-white/70 role">{testimonial.role}</p>
+                  <p style={{ fontWeight: 600, color: '#0F172A' }}>{testimonial.name}</p>
+                  <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{testimonial.role}</p>
                 </div>
-              </m.div>
+              </div>
             ))}
           </div>
-        </m.div>
+        </div>
       </section>
 
       {/* Partners */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 mb-12 sm:mb-16 section-responsive">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8">Empresas que confían en nosotros</h2>
-          <div className="course-partners-flex flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8">
+      <section style={{ padding: '4rem 1rem' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            color: '#0F172A',
+            marginBottom: '2rem'
+          }}>
+            {lang === 'es' ? 'Empresas que confian en nosotros' : 'Companies that trust us'}
+          </h2>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '1rem'
+          }}>
             {course.partners.map((partner, index) => (
               <div
                 key={index}
-                className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-white/60 hover:text-white transition-colors text-sm sm:text-base"
+                style={{
+                  padding: '0.75rem 1.5rem',
+                  background: '#F8FAFC',
+                  borderRadius: '0.5rem',
+                  border: '1px solid #E2E8F0',
+                  color: '#64748B',
+                  fontWeight: 500
+                }}
               >
                 {partner}
               </div>
             ))}
           </div>
-        </m.div>
+        </div>
       </section>
 
       {/* Cursos recomendados */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 mb-12 sm:mb-16 section-responsive">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">{t('alsoInterested')}</h2>
-          <div className="course-recommendations-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {course.recommendedCourses.map((recCourse, index) => (
-              <m.div
+      <section style={{ background: '#F8FAFC', padding: '4rem 1rem' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <h2 style={{
+            fontSize: '2rem',
+            fontWeight: 700,
+            color: '#0F172A',
+            textAlign: 'center',
+            marginBottom: '3rem'
+          }}>
+            {lang === 'es' ? 'Tambien te puede interesar' : 'You might also be interested in'}
+          </h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {course.recommendedCourses.map((recCourse) => (
+              <Link
                 key={recCourse.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="card-neon card-responsive p-4 sm:p-6 group cursor-pointer hover:transform hover:-translate-y-2 transition-all duration-300"
+                href={`/cursos/${recCourse.slug}`}
+                style={{
+                  background: 'white',
+                  borderRadius: '1rem',
+                  padding: '1.5rem',
+                  border: '1px solid #E2E8F0',
+                  textDecoration: 'none',
+                  display: 'block'
+                }}
               >
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                  {recCourse.icon}
-                  <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-[color:var(--neon-cyan)] transition-colors">
-                    {recCourse.title}
-                  </h3>
-                </div>
-                <p className="text-white/80 mb-4 text-sm sm:text-base">{recCourse.description}</p>
-                <button className="btn-neon btn-responsive-full w-full text-sm sm:text-base">
-                  {t('wantToKnowMore')}
-                </button>
-              </m.div>
+                <h3 style={{
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  color: '#0F172A',
+                  marginBottom: '0.5rem'
+                }}>
+                  {recCourse.title}
+                </h3>
+                <p style={{
+                  color: '#64748B',
+                  fontSize: '0.875rem',
+                  marginBottom: '1rem'
+                }}>
+                  {recCourse.description}
+                </p>
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  color: '#3B82F6',
+                  fontWeight: 600,
+                  fontSize: '0.875rem'
+                }}>
+                  {lang === 'es' ? 'Ver curso' : 'View course'}
+                  <ArrowRight size={16} />
+                </span>
+              </Link>
             ))}
           </div>
-        </m.div>
+        </div>
       </section>
 
       {/* CTA Final */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-12 sm:pb-16 section-responsive">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">¿Listo para transformar tu carrera comercial?</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Únete a cientos de profesionales que ya aplican las técnicas de Ventas Consultivas en su día a día.
+      <section style={{
+        background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+        padding: '4rem 1rem',
+        textAlign: 'center',
+        color: 'white'
+      }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem' }}>
+            {lang === 'es' ? 'Listo para transformar tu carrera comercial?' : 'Ready to transform your commercial career?'}
+          </h2>
+          <p style={{
+            fontSize: '1.125rem',
+            color: 'rgba(255,255,255,0.8)',
+            marginBottom: '2rem'
+          }}>
+            {lang === 'es'
+              ? 'Unete a cientos de profesionales que ya aplican las tecnicas de Ventas Consultivas en su dia a dia.'
+              : 'Join hundreds of professionals who already apply Consultative Sales techniques in their daily work.'}
           </p>
-          <button className="btn-aqua btn-responsive-full text-lg sm:text-xl px-8 sm:px-12 py-3 sm:py-4">
-            {t('enrollNow')}
+          <button style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '1rem 2.5rem',
+            fontSize: '1.125rem',
+            fontWeight: 700,
+            color: 'white',
+            background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+            border: 'none',
+            borderRadius: '0.75rem',
+            cursor: 'pointer',
+            boxShadow: '0 10px 25px rgba(59, 130, 246, 0.3)'
+          }}>
+            {lang === 'es' ? 'Inscribirme ahora' : 'Enroll now'}
+            <ArrowRight size={20} />
           </button>
-        </m.div>
+        </div>
       </section>
     </div>
   );

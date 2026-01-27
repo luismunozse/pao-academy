@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { X, Globe, GraduationCap, BookOpen, Users, Phone, ChevronRight, ChevronDown, Video, FileText, Menu } from 'lucide-react';
+import Link from 'next/link';
+import { X, Globe, GraduationCap, BookOpen, Users, Phone, ChevronRight, ChevronDown, Video, FileText, Menu, LogIn, UserPlus } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,6 +10,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { createClient } from '@/lib/supabase/client';
 
 export default function HeaderModern({
   brandName,
@@ -34,6 +36,23 @@ export default function HeaderModern({
   const [showPromo, setShowPromo] = useState(showPromoBar);
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [mobileNestedOpen, setMobileNestedOpen] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (error) {
+        // Supabase not configured yet
+        setUser(null);
+      }
+      setLoadingUser(false);
+    };
+    checkUser();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -216,12 +235,36 @@ export default function HeaderModern({
                   <span className="text-gray-900 text-sm font-semibold">{lang?.toUpperCase()}</span>
                 </button>
               )}
-              <button
-                onClick={onClickCTA}
-                className="btn-modern-primary btn-modern-sm"
-              >
-                {t('enrollNow')}
-              </button>
+
+              {/* Auth buttons */}
+              {!loadingUser && (
+                user ? (
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-blue-500 bg-blue-50 hover:bg-blue-100 transition-all duration-200 text-blue-600 text-sm font-medium"
+                  >
+                    <Users className="w-4 h-4" />
+                    Mi Panel
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200 text-gray-700 text-sm font-medium"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      Ingresar
+                    </Link>
+                    <Link
+                      href="/registro"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-green-500 hover:bg-green-600 transition-all duration-200 text-white text-sm font-semibold"
+                    >
+                      <UserPlus className="w-4 h-4" />
+                      Registrarse
+                    </Link>
+                  </>
+                )
+              )}
             </div>
 
             {/* Mobile: Hamburger */}
@@ -356,6 +399,39 @@ export default function HeaderModern({
         </nav>
 
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white space-y-3">
+          {/* Auth buttons mobile */}
+          {!loadingUser && (
+            user ? (
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all text-white font-semibold"
+              >
+                <Users className="w-4 h-4" />
+                Mi Panel
+              </Link>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-gray-300 hover:bg-gray-50 transition-all text-gray-700 font-medium"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Ingresar
+                </Link>
+                <Link
+                  href="/registro"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-green-500 hover:bg-green-600 transition-all text-white font-semibold"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Registrarse
+                </Link>
+              </div>
+            )
+          )}
+
           {setLang && (
             <button
               onClick={() => {
@@ -370,12 +446,6 @@ export default function HeaderModern({
               </span>
             </button>
           )}
-          <button
-            onClick={onClickCTA}
-            className="btn-modern-primary w-full"
-          >
-            {t('enrollNow')}
-          </button>
         </div>
       </div>
 

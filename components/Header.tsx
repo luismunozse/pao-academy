@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Menu, X, Globe, GraduationCap, Library, Users, Briefcase, Info, MessageCircle, ChevronRight, ChevronDown, Video, PlayCircle, Target } from 'lucide-react';
+import Link from 'next/link';
+import { Menu, X, Globe, GraduationCap, Library, Users, Briefcase, Info, MessageCircle, ChevronRight, ChevronDown, Video, PlayCircle, Target, LogIn, UserPlus } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -36,6 +38,23 @@ export default function Header({
   const [showPromo, setShowPromo] = useState(showPromoBar);
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [mobileNestedOpen, setMobileNestedOpen] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (error) {
+        // Supabase not configured yet
+        setUser(null);
+      }
+      setLoadingUser(false);
+    };
+    checkUser();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setElevated(window.scrollY > 6);
@@ -247,6 +266,37 @@ export default function Header({
                   <span className="text-white text-sm font-semibold">{lang?.toUpperCase()}</span>
                 </button>
               )}
+
+              {/* Auth buttons */}
+              {!loadingUser && (
+                user ? (
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-all duration-200 border border-white/20 hover:border-white/30 text-white text-sm font-medium"
+                  >
+                    <Users className="w-3.5 h-3.5" />
+                    Mi Panel
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-all duration-200 border border-white/20 hover:border-white/30 text-white text-sm font-medium"
+                    >
+                      <LogIn className="w-3.5 h-3.5" />
+                      Ingresar
+                    </Link>
+                    <Link
+                      href="/registro"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 transition-all duration-200 text-white text-sm font-semibold"
+                    >
+                      <UserPlus className="w-3.5 h-3.5" />
+                      Registrarse
+                    </Link>
+                  </>
+                )
+              )}
+
               <button onClick={onClickCTA} className="btn-primary btn-sm">
                 {t('enrollNow')}
               </button>
@@ -405,6 +455,39 @@ export default function Header({
         </nav>
 
         <div className="mt-8 pt-6 border-t border-white/10 space-y-4">
+          {/* Auth buttons mobile */}
+          {!loadingUser && (
+            user ? (
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all text-white font-semibold"
+              >
+                <Users className="w-4 h-4" />
+                Mi Panel
+              </Link>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition-all text-white font-medium"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Ingresar
+                </Link>
+                <Link
+                  href="/registro"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 transition-all text-white font-semibold"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Registrarse
+                </Link>
+              </div>
+            )
+          )}
+
           {setLang && (
             <button
               onClick={() => {

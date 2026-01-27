@@ -45,7 +45,7 @@ export default function BenefitsSimple({ t }: { t: (k: string) => string }) {
   return (
     <section style={{
       background: '#F8FAFC',
-      padding: '5rem 1rem'
+      padding: '2rem 1rem 2rem'
     }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 

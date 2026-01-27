@@ -9,8 +9,8 @@ export default function HeroSimple({
     <section
       style={{
         background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
-        padding: '10rem 1rem 4rem',
-        minHeight: '700px',
+        padding: '8rem 1rem 2rem',
+        minHeight: '600px',
         marginTop: '0'
       }}
     >

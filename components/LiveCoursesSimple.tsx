@@ -2,6 +2,27 @@
 import { useState, useMemo } from 'react';
 import { ArrowRight, Calendar, Clock, Star, UserCheck, Award, Play, BookOpen, Building2, Users, TrendingUp, Target, BarChart } from 'lucide-react';
 import { cursosBase } from '../lib/i18n';
+import Link from 'next/link';
+
+// Mapeo de IDs de cursos a slugs de URL
+const courseSlugMap: Record<string, string> = {
+  'ventas360': 'ventas-consultivas',
+  'liderazgo': 'liderazgo-agil',
+  'habitos': 'motivacion-habitos',
+  'marcaPro': 'marca-personal',
+  'powerbi': 'power-bi-desde-cero',
+  'analytics': 'data-analytics',
+};
+
+// Mapeo de categorías async a cursos destacados de cada categoría
+const asyncCategoryCoursesMap: Record<string, string[]> = {
+  'analisis-datos': ['excel-pro', 'powerbi-express'],
+  'negocios-finanzas': ['finanzas-smart', 'excel-finanzas', 'inversiones-principiantes', 'contabilidad-sin-complicaciones'],
+  'gestion-procesos': ['notion-productividad', 'trello-asana'],
+  'desarrollo-personal': ['productividad-10x', 'comunicacion-asertiva'],
+  'tecnologia': ['python-desde-cero', 'ia-generativa'],
+  'marketing-digital': ['marketing-digital-express', 'redes-sociales-pro', 'email-marketing-ia'],
+};
 
 type Props = {
   t: (k: string) => string;
@@ -173,7 +194,7 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
   };
 
   return (
-    <section style={{ background: 'white', padding: '4rem 1rem' }}>
+    <section style={{ background: 'white', padding: '2rem 1rem 2rem' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
         {/* Tabs Navigation */}
@@ -535,8 +556,8 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                 </div>
 
                 {/* CTA */}
-                <button
-                  onClick={() => onCourseClick(course.title)}
+                <Link
+                  href={`/cursos-async/${asyncCategoryCoursesMap[course.id]?.[0] || course.id}`}
                   style={{
                     width: '100%',
                     display: 'inline-flex',
@@ -551,7 +572,8 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                     border: 'none',
                     borderRadius: '0.5rem',
                     cursor: 'pointer',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    textDecoration: 'none'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = '#7C3AED';
@@ -560,9 +582,9 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                     e.currentTarget.style.background = '#8B5CF6';
                   }}
                 >
-                  <span>Ver contenido</span>
+                  <span>Ver cursos</span>
                   <ArrowRight size={20} />
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -749,8 +771,8 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                 </div>
 
                 {/* CTA */}
-                <button
-                  onClick={() => onCourseClick(course.title)}
+                <Link
+                  href={`/cursos/${courseSlugMap[course.id] || course.id}`}
                   style={{
                     width: '100%',
                     display: 'inline-flex',
@@ -765,7 +787,8 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                     border: 'none',
                     borderRadius: '0.5rem',
                     cursor: 'pointer',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    textDecoration: 'none'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = '#2563EB';
@@ -774,9 +797,9 @@ export default function LiveCoursesSimple({ t, lang, onCourseClick, onCatalogCli
                     e.currentTarget.style.background = '#3B82F6';
                   }}
                 >
-                  <span>Quiero saber más</span>
+                  <span>Ver curso</span>
                   <ArrowRight size={20} />
-                </button>
+                </Link>
               </div>
             </div>
           ))}
