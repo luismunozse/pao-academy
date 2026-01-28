@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
+import { getOrCreateLearner } from '@/lib/trainercentral/learners';
+import { enrollLearnerInCourse } from '@/lib/trainercentral/enrollments';
 
 // Create supabase admin client lazily
 const getSupabaseAdmin = () => {
@@ -123,6 +125,71 @@ async function handleCheckoutComplete(supabaseAdmin: any, session: Stripe.Checko
   }
 
   console.log(`Enrollment created for user ${userId} in course ${courseId}`);
+
+  // =====================================================
+  // TRAINERCENTRAL: Inscripción automática
+  // =====================================================
+  try {
+    // Verificar si el curso tiene mapping con TrainerCentral
+    const { data: courseMapping } = await supabaseAdmin
+      .from('tc_course_mappings')
+      .select('tc_course_id')
+      .eq('local_course_id', courseId)
+      .single();
+
+    if (courseMapping?.tc_course_id) {
+      // Obtener datos del usuario
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('full_name')
+        .eq('id', userId)
+        .single();
+
+      const userEmail = session.customer_email || session.customer_details?.email;
+
+      if (userEmail) {
+        const nameParts = (profile?.full_name || 'Usuario').trim().split(' ');
+        const firstName = nameParts[0] || 'Usuario';
+        const lastName = nameParts.slice(1).join(' ') || '-';
+
+        // Obtener o crear learner en TrainerCentral
+        const learner = await getOrCreateLearner({
+          email: userEmail,
+          firstName,
+          lastName,
+        });
+
+        // Guardar mapping del learner
+        await supabaseAdmin
+          .from('tc_learner_mappings')
+          .upsert({
+            user_id: userId,
+            tc_learner_id: learner.learner_id,
+            tc_email: userEmail,
+            last_synced_at: new Date().toISOString(),
+          }, { onConflict: 'user_id' });
+
+        // Inscribir en el curso de TrainerCentral
+        await enrollLearnerInCourse(learner.learner_id, courseMapping.tc_course_id);
+
+        console.log(`User ${userId} enrolled in TC course ${courseMapping.tc_course_id}`);
+      }
+    }
+  } catch (tcError) {
+    // Log el error pero no fallar - el enrollment local ya existe
+    console.error('TrainerCentral enrollment error:', tcError);
+
+    // Guardar para retry posterior
+    await supabaseAdmin
+      .from('tc_pending_enrollments')
+      .upsert({
+        user_id: userId,
+        course_id: courseId,
+        error: tcError instanceof Error ? tcError.message : 'Unknown error',
+        retry_count: 0,
+        created_at: new Date().toISOString(),
+      }, { onConflict: 'user_id,course_id' });
+  }
 }
 
 async function handlePaymentFailed(supabaseAdmin: any, paymentIntent: Stripe.PaymentIntent) {

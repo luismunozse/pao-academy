@@ -1,12 +1,46 @@
 'use client';
-import React from 'react';
-import { ArrowLeft, Clock, Award, CheckCircle2, Star, Brain, Sparkles, Target, Users, ArrowRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowLeft, Clock, Award, CheckCircle2, Star, Brain, Sparkles, Target, Users, ArrowRight, Play } from 'lucide-react';
 import Link from 'next/link';
 import { copy, type Lang } from '../../../lib/i18n';
+import { createClient } from '@/lib/supabase/client';
+
+function getEmbedUrl(url: string): string {
+  const youtubePatterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+  ];
+  for (const pattern of youtubePatterns) {
+    const match = url.match(pattern);
+    if (match) {
+      return `https://www.youtube.com/embed/${match[1]}`;
+    }
+  }
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  }
+  return url;
+}
 
 export default function MotivacionHabitosPage() {
   const [lang, setLang] = React.useState<Lang>('es');
+  const [promoVideoUrl, setPromoVideoUrl] = useState<string | null>(null);
   const t = (k: string) => copy[lang][k] || k;
+  const supabase = createClient();
+
+  useEffect(() => {
+    const loadCourseVideo = async () => {
+      const { data } = await (supabase
+        .from('courses') as any)
+        .select('promo_video_url')
+        .eq('slug', 'motivacion-habitos')
+        .single();
+      if (data?.promo_video_url) {
+        setPromoVideoUrl(data.promo_video_url);
+      }
+    };
+    loadCourseVideo();
+  }, [supabase]);
 
   const courseData = {
     es: {
@@ -254,24 +288,33 @@ export default function MotivacionHabitosPage() {
         </div>
       </section>
 
-      {/* Imagen del curso */}
+      {/* Video promocional o imagen del curso */}
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1rem' }}>
         <div style={{
           borderRadius: '1rem',
           overflow: 'hidden',
-          background: `linear-gradient(135deg, ${categoryColor}15, ${categoryColor}08)`,
+          background: promoVideoUrl ? '#000' : `linear-gradient(135deg, ${categoryColor}15, ${categoryColor}08)`,
           aspectRatio: '16/9',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: `1px solid ${categoryColor}22`
+          border: promoVideoUrl ? 'none' : `1px solid ${categoryColor}22`
         }}>
-          <div style={{ textAlign: 'center' }}>
-            <Brain size={80} color={categoryColor} style={{ opacity: 0.4, marginBottom: '1rem' }} />
-            <p style={{ color: '#64748B', fontSize: '1.125rem' }}>
-              {lang === 'es' ? 'Desarrolla tu potencial mental y crea habitos duraderos' : 'Develop your mental potential and create lasting habits'}
-            </p>
-          </div>
+          {promoVideoUrl ? (
+            <iframe
+              src={getEmbedUrl(promoVideoUrl)}
+              style={{ width: '100%', height: '100%', border: 'none' }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <div style={{ textAlign: 'center' }}>
+              <Brain size={80} color={categoryColor} style={{ opacity: 0.4, marginBottom: '1rem' }} />
+              <p style={{ color: '#64748B', fontSize: '1.125rem' }}>
+                {lang === 'es' ? 'Desarrolla tu potencial mental y crea habitos duraderos' : 'Develop your mental potential and create lasting habits'}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

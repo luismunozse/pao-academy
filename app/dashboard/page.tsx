@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { BookOpen, Clock, ArrowRight, Play } from 'lucide-react';
+import { SSOButton, TCCourseProgress } from '@/components/trainercentral';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -29,6 +30,15 @@ export default async function DashboardPage() {
 
   const enrolledCourseIds = enrollmentsList.map((e: any) => e.course_id);
   const availableCourses = coursesList.filter((c: any) => !enrolledCourseIds.includes(c.id));
+
+  // Obtener mappings de TrainerCentral para saber qué cursos tienen integración
+  const { data: tcMappings } = await (supabase
+    .from('tc_course_mappings') as any)
+    .select('local_course_id, tc_course_key');
+
+  const tcMappingsMap = new Map(
+    (tcMappings || []).map((m: any) => [m.local_course_id, m.tc_course_key])
+  );
 
   return (
     <div className="space-y-8">
@@ -77,19 +87,38 @@ export default async function DashboardPage() {
                   </div>
                 </div>
 
+                {/* TrainerCentral Progress */}
+                {tcMappingsMap.has(enrollment.course_id) && (
+                  <div className="mb-3 pb-3 border-b border-gray-100">
+                    <TCCourseProgress courseId={enrollment.course_id} showSyncButton={true} />
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-500">
                     <Clock size={16} />
                     <span>{enrollment.course?.duration_hours || 0}h</span>
                   </div>
 
-                  <Link
-                    href={`/dashboard/curso/${enrollment.course?.slug}`}
-                    className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
-                  >
-                    {enrollment.progress > 0 ? 'Continuar' : 'Comenzar'}
-                    <Play size={16} />
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    {tcMappingsMap.has(enrollment.course_id) ? (
+                      <SSOButton
+                        courseId={enrollment.course_id}
+                        variant="primary"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Acceder
+                      </SSOButton>
+                    ) : (
+                      <Link
+                        href={`/dashboard/curso/${enrollment.course?.slug}`}
+                        className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
+                      >
+                        {enrollment.progress > 0 ? 'Continuar' : 'Comenzar'}
+                        <Play size={16} />
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

@@ -17,6 +17,29 @@ interface Lesson {
   course_id: string;
 }
 
+function getEmbedUrl(url: string): string {
+  // YouTube: watch?v=ID, youtu.be/ID, embed/ID
+  const youtubePatterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+  ];
+
+  for (const pattern of youtubePatterns) {
+    const match = url.match(pattern);
+    if (match) {
+      return `https://www.youtube.com/embed/${match[1]}`;
+    }
+  }
+
+  // Vimeo: vimeo.com/ID
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  }
+
+  // Si ya es una URL embed o de otra plataforma, devolverla tal cual
+  return url;
+}
+
 interface Course {
   slug: string;
   title: string;
@@ -142,7 +165,7 @@ export default function LessonPage({
         {lesson.video_url && (
           <div className="aspect-video bg-black">
             <iframe
-              src={lesson.video_url}
+              src={getEmbedUrl(lesson.video_url)}
               className="w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
